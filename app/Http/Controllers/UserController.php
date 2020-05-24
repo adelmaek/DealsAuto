@@ -18,12 +18,20 @@ class UserController extends Controller
        if(Auth::attempt(['username' => $username, 'password' => $password]))
        {
            print("authenticated\n");
-           return redirect()->route('dashboard');
+           return redirect()->route('home');
        }
        return redirect()->back();
     }
-    public function getDashboard()
+    public function getHome()
     {
-        return view('dashboard');
+
+        return view('home');
+    }
+
+
+    public function postLogout(Request $request)
+    {
+        Auth::logout();
+        return redirect() ->route('welcome');
     }
 }

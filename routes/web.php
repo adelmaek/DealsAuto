@@ -17,15 +17,19 @@ Route::group(['middleware'=>['web']],function(){
         return view('welcome');
     })->name('welcome');
     
-    Route::get('/dashboard',[
-        'uses' => 'UserController@getDashboard',
-        'as' => 'dashboard',
+    Route::get('/home',[
+        'uses' => 'UserController@getHome',
+        'as' => 'home',
         'middleware' => 'auth'
     ]);
     
     Route::post('/signin',[
         'uses' => 'UserController@postSignin',
         'as' => 'signin'
+    ]);
+    Route::post('/logout',[
+        'uses' => '\App\Http\Controllers\Auth\LoginController@logout',
+        'as' => 'logout'
     ]);
 });
 
