@@ -31,5 +31,15 @@ Route::group(['middleware'=>['web']],function(){
         'uses' => '\App\Http\Controllers\Auth\LoginController@logout',
         'as' => 'logout'
     ]);
+
+    Route::get('/addBank', function () {
+        return view('banks/addBank');
+    })->name('addBank');
+
+    Route::post('/add',[
+        'uses' => 'BankController@postInsertBank',
+        'as' => 'insertBank'
+    ]);
+
 });
 

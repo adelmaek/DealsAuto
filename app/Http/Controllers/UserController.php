@@ -25,7 +25,7 @@ class UserController extends Controller
     public function getHome()
     {
 
-        return view('layouts/app');
+        return view('home');
     }
 
 

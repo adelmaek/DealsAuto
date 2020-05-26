@@ -13,7 +13,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/js/all.min.js"></script>
     <link rel="stylesheet" href="{{ asset('css/sideNavBar.css') }}">
     {{-- end of styles and scripts for sidenavbar --}}
-
+    @yield('extraStyling')
 </head>
 <body>
     <div class="wrapper">
@@ -24,13 +24,16 @@
             <ul class="lisst-unstyled components">
                 <p>The Providers</p>
                 <li class="active">
-                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" >Unused Button</a>
+                    <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" >حسابات البنوك</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu" >
                         <li>
-                            <a href="#">Unused Button 1</a>
+                            <a href="addBank">اضافة حساب بنكي</a>
                         </li>
                         <li>
-                            <a href="#">Unused Button 2</a>
+                            <a href="#">عرض الحسابات</a>
+                        </li>
+                        <li>
+                            <a href="#">عرض التعاملات</a>
                         </li>
                     </ul>
                     
@@ -88,6 +91,9 @@
                     </ul> 
                 </div>
             </nav>
+            <main class="py-4">
+                @yield('content')
+            </main>
         </div>
 
     </div>
