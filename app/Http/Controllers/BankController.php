@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Bank;
 use Illuminate\Http\Request;
 use DB;
-
 class BankController extends Controller
 {
     //Create and store new bank account
@@ -25,6 +24,7 @@ class BankController extends Controller
     }
     public function getAddBank()
     {
-        return view('banks/addBank');
+        $banks = Bank::all();
+        return view('banks/addBank',['banks'=>$banks]);
     }
 }

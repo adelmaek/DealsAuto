@@ -27,7 +27,7 @@
                     <a href="#homeSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle" >حسابات البنوك</a>
                     <ul class="collapse list-unstyled" id="homeSubmenu" >
                         <li>
-                            <a href="addBank">اضافة حساب بنكي</a>
+                            <a href="addBank">اضافة و عرض الحسابات بنكية</a>
                         </li>
                         <li>
                             <a href="#">عرض الحسابات</a>

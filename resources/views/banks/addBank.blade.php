@@ -29,10 +29,37 @@
                     <label for="balanceInput" class="arabicLabel">الحساب الحالي</label>
                     <input type="number" class="form-control" id="balanceInput" name="balanceInput" placeholder="ادخل الحساب الحالي" required>
                 </div>
-                <input type="submit" name="submit" class="btn btn-info btn-md" value="submit">
+                <input type="submit" name="submit" class="btn btn-info btn-md" value="اضف الحساب">
                 <input type="hidden" name="_token" value="{{Session::token()}}">
-              </form>
-              
+            </form>
+            <br>
+            @if(count($banks)>0 )
+                <div class="table-responsive-sm">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                              <th scope="col">رقم الحساب</th>
+                              <th scope="col">اسم البنك</th>
+                              <th scope="col">الحساب الحالي</th>
+                              <th scope="col">العملة</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                        @foreach ($banks as $bank)
+                            <tr>
+                                <th scope="row">{{$bank->accountNumber}}</th>
+                                <td>{{$bank->bankName}}</td>
+                                <td>{{$bank->currentBalance}}</td>
+                                <td>{{$bank->currency}}</td>
+                            </tr>
+                        @endforeach
+                    </tbody>
+                    </table>
+                </div>
+            @else
+                <p>لا يوجد حسابات بنكية</p>
+            @endif
+             
         </div>
     </div>
 </div>
