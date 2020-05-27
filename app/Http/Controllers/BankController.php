@@ -19,4 +19,8 @@ class BankController extends Controller
         ]);
         return redirect()->back();
     }
+    public function getAddBank()
+    {
+        return view('banks/addBank');
+    }
 }

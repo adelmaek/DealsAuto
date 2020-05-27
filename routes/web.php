@@ -32,13 +32,16 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'logout'
     ]);
 
-    Route::get('/addBank', function () {
-        return view('banks/addBank');
-    })->name('addBank');
+    Route::get('/addBank', [
+        'uses' => 'BankController@getAddBank',
+        'as' => 'addBank',
+        'middleware' => 'auth'
+    ]);
 
-    Route::post('/add',[
+    Route::post('/addBank',[
         'uses' => 'BankController@postInsertBank',
-        'as' => 'insertBank'
+        'as' => 'insertBank',
+        'middleware' => 'auth'
     ]);
 
 });
