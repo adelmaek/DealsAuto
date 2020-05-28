@@ -27,4 +27,5 @@ class BankController extends Controller
         $banks = Bank::all();
         return view('banks/addBank',['banks'=>$banks]);
     }
+ 
 }

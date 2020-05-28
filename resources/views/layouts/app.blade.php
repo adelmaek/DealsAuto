@@ -30,7 +30,7 @@
                             <a href="addBank">اضافة و عرض الحسابات بنكية</a>
                         </li>
                         <li>
-                            <a href="#">عرض الحسابات</a>
+                            <a href="addTransaction">اضافة تعامل بنكي</a>
                         </li>
                         <li>
                             <a href="#">عرض التعاملات</a>

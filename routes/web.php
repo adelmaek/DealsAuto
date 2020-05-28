@@ -43,6 +43,21 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'insertBank',
         'middleware' => 'auth'
     ]);
+    Route::get('/addTransaction', [
+        'uses' => 'BankTransactionController@getCreateTransaction',
+        'as' => 'addTransaction',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/addTransaction', [
+        'uses' => 'BankTransactionController@postCreateTransaction',
+        'as' => 'insertTransaction',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/delTransaction/{transaction_id},{accNumber}', [
+        'uses' => 'BankTransactionController@getDelTransaction',
+        'as' => 'delTransaction',
+        'middleware' => 'auth'
+    ]);
 
 });
 
