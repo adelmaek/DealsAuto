@@ -10,7 +10,7 @@ class BankTransactionController extends Controller
     public function getCreateTransaction()
     {
         $banks = Bank::all();
-        $bankTransactions = BankTransaction::all();
+        $bankTransactions = BankTransaction::orderBy('date', 'DESC')->get();;
         return view('transactions/addTransaction',['banks'=>$banks,'transactions'=>$bankTransactions]);
     }
     public function postCreateTransaction (Request $request)
