@@ -5,12 +5,13 @@ use App\Bank;
 use App\BankTransaction;
 use Illuminate\Http\Request;
 use DB;
+use Log;
 class BankTransactionController extends Controller
 {
     public function getCreateTransaction()
     {
         $banks = Bank::all();
-        $bankTransactions = BankTransaction::orderBy('date', 'DESC')->get();;
+        $bankTransactions = BankTransaction::orderBy('date', 'DESC')->get();
         return view('transactions/addTransaction',['banks'=>$banks,'transactions'=>$bankTransactions]);
     }
     public function postCreateTransaction (Request $request)
@@ -51,4 +52,62 @@ class BankTransactionController extends Controller
         
         return redirect()->back();
     }
+    public function getQueryTransaction()
+    {
+        $banks = Bank::all();
+        return view('transactions/queryTransaction',['banks'=>$banks]);
+    }
+    public function getQueriedTransaction($bank, $fromDate, $toDate)
+    {
+        // $transaction = BankTransaction::all();
+        // Log::debug("here");
+        if(!strcmp($fromDate,"empty")&&!strcmp($toDate,"empty"))
+        { 
+            if(!strcmp($bank,"all"))
+            {
+                $transaction = BankTransaction::orderBy('date', 'DESC')->get();
+            }
+            else
+            {
+                // Log::debug($bank);
+                $transaction = BankTransaction::where('accountNumber',$bank)->get();
+                // Log::debug($transaction);
+            }
+        }
+        elseif (!strcmp($toDate,"empty"))
+        {
+            if(!strcmp($bank,"all"))
+            {
+                $transaction = BankTransaction::whereDate('date','>=',$fromDate)->orderBy('date', 'DESC')->get();
+            }
+            else
+            {
+                $transaction = BankTransaction::where('accountNumber',$bank)->whereDate('date','>=',$fromDate)->orderBy('date', 'DESC')->get();
+            }
+        }
+        elseif (!strcmp($fromDate,"empty"))
+        {
+            if(!strcmp($bank,"all"))
+            {
+                $transaction = BankTransaction::whereDate('date','<=',$toDate)->orderBy('date', 'DESC')->get();
+            }
+            else
+            {
+                $transaction = BankTransaction::where('accountNumber',$bank)->whereDate('date','<=',$toDate)->orderBy('date', 'DESC')->get();
+            }
+        }
+        else
+        {
+            if(!strcmp($bank,"all"))
+            {
+                $transaction = BankTransaction::whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'DESC')->get();
+            }
+            else
+            {
+                $transaction = BankTransaction::where('accountNumber',$bank)->whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'DESC')->get();
+            }
+        }
+        return json_encode($transaction);
+    }
+
 }

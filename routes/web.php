@@ -58,6 +58,19 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'delTransaction',
         'middleware' => 'auth'
     ]);
-
+    
+    Route::get('/queryTrans',[
+        'uses' => 'BankTransactionController@getQueryTransaction',
+        'as' => 'queryTransaction',
+        'middleware' => 'auth'
+    ]);
+    
+    
+    Route::get('/getQueriedTrans/{bank},{fromDate},{toDate}',[
+        'uses' => 'BankTransactionController@getQueriedTransaction',
+        'as' => 'queriedTransaction',
+        'middleware' => 'auth'
+    ]);
+    
 });
 
