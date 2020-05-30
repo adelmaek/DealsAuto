@@ -41,7 +41,7 @@
                                 <td>
                                     {{-- <input type="number" class="form-control" id="accountNumberInput" name="accountNumberInput" placeholder="نوع المعملة" required style="min-width: 100px;"> --}}
                                     <select class="browser-default" style="height: 38px;" id="typeInput" name="typeInput" required>
-                                        <option value="" disabled selected>نوع المعملة</option>
+                                        <option value="" disabled selected>نوع المعاملة</option>
                                         <option value="add">ايداع</option>
                                         <option value="sub">سحب</option>
                                     </select>
