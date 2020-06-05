@@ -21,7 +21,7 @@ class CreateBankTransactionsTable extends Migration
             $table->double('value');
             $table->string('note');
             $table->integer('bank_id');
-            $table->timestamps();
+            // $table->timestamps();
         });
     }
 

@@ -6,6 +6,7 @@ use App\BankTransaction;
 use Illuminate\Http\Request;
 use DB;
 use Log;
+use DataTables;
 class BankTransactionController extends Controller
 {
     public function getCreateTransaction()
@@ -17,20 +18,28 @@ class BankTransactionController extends Controller
     public function postCreateTransaction (Request $request)
     {
         $bank = DB::table('banks')->where('accountNumber', $request-> accountNumberInput)->first();
-        DB::table('bank_transactions')->insert([
-            'accountNumber' => $request['accountNumberInput'],
-            'date' => $request['dateInput'],
-            'type' => $request['typeInput'],
-            'value'=> $request['valueInput'],
-            'note' => $request['noteInput'],
-            'bank_id'=> $bank->id
-        ]);
         if(!strcmp($request['typeInput'],"add") )
         {
+            DB::table('bank_transactions')->insert([
+                'accountNumber' => $request['accountNumberInput'],
+                'date' => $request['dateInput'],
+                'type' => "ايداع",
+                'value'=> $request['valueInput'],
+                'note' => $request['noteInput'],
+                'bank_id'=> $bank->id
+            ]);
             DB::table('banks')->where('id', $bank-> id)->increment('currentBalance',$request['valueInput']);
         }
         else if(!strcmp($request['typeInput'],"sub"))
         {
+            DB::table('bank_transactions')->insert([
+                'accountNumber' => $request['accountNumberInput'],
+                'date' => $request['dateInput'],
+                'type' => "سحب",
+                'value'=> $request['valueInput'],
+                'note' => $request['noteInput'],
+                'bank_id'=> $bank->id
+            ]);
             DB::table('banks')->where('id', $bank-> id)->decrement('currentBalance',$request['valueInput']);
         }
         return redirect()->back();
@@ -107,7 +116,7 @@ class BankTransactionController extends Controller
                 $transaction = BankTransaction::where('accountNumber',$bank)->whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'DESC')->get();
             }
         }
-        return json_encode($transaction);
+        return Datatables::of($transaction)->make(true);
     }
 
 }

@@ -16,6 +16,9 @@ Route::group(['middleware'=>['web']],function(){
     Route::get('/', function () {
         return view('welcome');
     })->name('welcome');
+    Route::get('/temp', function () {
+        return view('temp');
+    })->name('temp');
     
     Route::get('/home',[
         'uses' => 'UserController@getHome',
