@@ -121,6 +121,13 @@
                                 <li><a href="queryTrans">عرض التعاملات</a></li>
                             </ul>
                         </li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-login"></i><span class="hide-menu">الخزينة </span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="cashContent">محتوى الخزنة</a></li>
+                                <li><a href="addRemoveCash">اضافة معاملة</a></li>
+                                <li><a href="queryCashTrans">عرض التعاملات</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
@@ -216,6 +223,6 @@
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.html5.min.js"></script>
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
     <!-- end - This is for export functionality only -->
-
+     @yield('extraJS')
 </body>
 </html>

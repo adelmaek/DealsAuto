@@ -61,7 +61,9 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'delTransaction',
         'middleware' => 'auth'
     ]);
-    
+    //================================================================================================
+    // Query bankTransactions 
+    //================================================================================================
     Route::get('/queryTrans',[
         'uses' => 'BankTransactionController@getQueryTransaction',
         'as' => 'queryTransaction',
@@ -74,6 +76,49 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'queriedTransaction',
         'middleware' => 'auth'
     ]);
+    //================================================================================================
+    // END Query bankTransactions 
+    //================================================================================================
     
+    
+    //================================================================================================
+    // cashTransactions 
+    //================================================================================================
+    Route::get('/cashContent',[
+        'uses' => 'CashTransactionController@getCashContent',
+        'as' => 'cashContent',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/addRemoveCash',[
+        'uses' => 'CashTransactionController@getAddRemoveCash',
+        'as' => 'addRemoveCash',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/addRemoveCash',[
+        'uses' => 'CashTransactionController@postAddRemoveCash',
+        'as' => 'addRemoveCash',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/delCashTransaction/{cashTransaction_id}', [
+        'uses' => 'CashTransactionController@getDelCashTransaction',
+        'as' => 'delCashTransaction',
+        'middleware' => 'auth'
+    ]);
+
+    Route::get('/queryCashTrans',[
+        'uses' => 'CashTransactionController@getQueryCashTransaction',
+        'as' => 'queryCashTransaction',
+        'middleware' => 'auth'
+    ]);
+
+    Route::get('/getCashQueriedTrans/{currency},{fromDate},{toDate}',[
+        'uses' => 'cashTransactionController@getQueriedTransaction',
+        'as' => 'queriedTransaction',
+        'middleware' => 'auth'
+    ]);
+    //================================================================================================
+    // Query cashTransactions 
+    //================================================================================================
 });
+
 
