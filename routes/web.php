@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use App\Bank;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -12,10 +12,19 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+view()->composer(['layouts/main'], function ($view) {
+    $banks = Bank::all();
+    $view->with('banks',$banks);
+});
 Route::group(['middleware'=>['web']],function(){
+
+
+
     Route::get('/', function () {
         return view('welcome');
     })->name('welcome');
+
     Route::get('/temp', function () {
         return view('temp');
     })->name('temp');
@@ -34,7 +43,14 @@ Route::group(['middleware'=>['web']],function(){
         'uses' => '\App\Http\Controllers\Auth\LoginController@logout',
         'as' => 'logout'
     ]);
-
+    //================================================================================================
+    // bank accounts
+    //================================================================================================
+    Route::get('/showBank,{accountNumber}', [
+        'uses' => 'BankController@getShowBank',
+        'as' => 'showBank',
+        'middleware' => 'auth'
+    ]);
     Route::get('/addBank', [
         'uses' => 'BankController@getAddBank',
         'as' => 'addBank',
@@ -61,6 +77,9 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'delTransaction',
         'middleware' => 'auth'
     ]);
+    //================================================================================================
+    // end of bank accounts
+    //================================================================================================
     //================================================================================================
     // Query bankTransactions 
     //================================================================================================

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Bank;
+use App\BankTransaction;
 use Illuminate\Http\Request;
 use DB;
 class BankController extends Controller
@@ -26,6 +27,11 @@ class BankController extends Controller
     {
         $banks = Bank::all();
         return view('banks/addBank',['banks'=>$banks]);
+    }
+    public function getShowBank($accountNumber)
+    {
+        $transaction = BankTransaction::where('accountNumber',$accountNumber)->get();
+        return view('banks/showBank',['transactions'=>$transaction]);
     }
  
 }

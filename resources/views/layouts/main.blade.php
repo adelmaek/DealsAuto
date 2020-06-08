@@ -119,6 +119,14 @@
                                 <li><a href="addBank">اضافة و عرض الحسابات بنكية </a></li>
                                 <li><a href="addTransaction">اضافة تعامل بنكي</a></li>
                                 <li><a href="queryTrans">عرض التعاملات</a></li>
+                                <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><span class="hide-menu">الحسابات البنكية </span></a>
+                                    <ul aria-expanded="false" class="collapse">
+                                        @foreach ($banks as $bank)
+                                        <li><a href="{{route('showBank',['accountNumber'=>$bank->accountNumber])}}">{{$bank->bankName}} </a></li>    
+                                        
+                                        @endforeach
+                                    </ul>
+                                </li>
                             </ul>
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-login"></i><span class="hide-menu">الخزينة </span></a>
@@ -126,6 +134,7 @@
                                 <li><a href="cashContent">محتوى الخزنة</a></li>
                                 <li><a href="addRemoveCash">اضافة معاملة</a></li>
                                 <li><a href="queryCashTrans">عرض التعاملات</a></li>
+
                             </ul>
                         </li>
                     </ul>
