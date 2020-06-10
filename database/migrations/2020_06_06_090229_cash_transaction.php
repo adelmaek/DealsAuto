@@ -19,7 +19,7 @@ class CashTransaction extends Migration
             $table->double('value',20,3)->default(0);
             $table->string('currency');
             $table->string('type');
-            $table->date('date');
+            $table->date('date',40,3);
             $table->string('note');
             $table->double('currentTotal',20,3)->default(0);
             

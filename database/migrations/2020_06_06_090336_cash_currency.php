@@ -16,7 +16,7 @@ class CashCurrency extends Migration
         Schema::create('cash_currency', function (Blueprint $table) {
 
             $table->bigIncrements('id');
-            $table->double('value',20,3)->default(0);
+            $table->double('value',40,3)->default(0);
             $table->string('currency')->unique();
             });
     }

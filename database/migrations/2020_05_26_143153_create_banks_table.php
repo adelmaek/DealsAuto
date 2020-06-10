@@ -17,7 +17,7 @@ class CreateBanksTable extends Migration
             $table->bigIncrements('id');
             $table->string('accountNumber')->unique();
             $table->string('bankName');
-            $table->double('currentBalance',20,3)->default(0);
+            $table->double('currentBalance',40,3)->default(0);
             $table->string('currency')->default('egp');
             $table->timestamps();
         });
