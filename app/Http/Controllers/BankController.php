@@ -19,6 +19,7 @@ class BankController extends Controller
             'accountNumber' => $request['accountNumberInput'],
             'bankName' => $request['bankNameInput'],
             'currentBalance' => $request['balanceInput'],
+            'intialBalance' => $request['balanceInput'],
             'currency' => $request['currencyInput']
         ]);
         return redirect()->back();

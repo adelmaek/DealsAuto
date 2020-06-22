@@ -23,7 +23,7 @@
                                 <th scope="col" class="text-center" >العملة</th>
                                 <th scope="col" class="text-center" >التاريخ</th>
                                 <th scope="col" class="text-center" >البيان</th>
-                                <th scope="col" class="text-center">اجمالي العملة </th>
+                                <th scope="col" class="text-center">اضافة </th>
                             </tr>
                         </thead>
                         <tbody>

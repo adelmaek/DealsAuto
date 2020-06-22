@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Bank;
+use App\Supplier;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -15,7 +16,8 @@ use App\Bank;
 
 view()->composer(['layouts/main'], function ($view) {
     $banks = Bank::all();
-    $view->with('banks',$banks);
+    $suppliers = Supplier::all();
+    $view->with(['banks'=>$banks,'suppliers'=>$suppliers]);
 });
 Route::group(['middleware'=>['web']],function(){
 
@@ -136,7 +138,95 @@ Route::group(['middleware'=>['web']],function(){
         'middleware' => 'auth'
     ]);
     //================================================================================================
-    // Query cashTransactions 
+    // end cashTransactions
+    //================================================================================================
+
+    //================================================================================================
+    // Suppliers
+    //================================================================================================
+        Route::get('/suppliers',[
+            'uses' => 'SupplierController@getSuppliers',
+            'as'=> 'suppliers',
+            'middleware' => 'auth'
+        ]);
+        Route::post('/suppliers',[
+            'uses' => 'SupplierController@postSuppliers',
+            'as'=> 'insertSupplier',
+            'middleware' => 'auth'
+        ]);
+        Route::get('/delSupplier/{supplier_id}',[
+            'uses' => 'SupplierController@getDelSupplier',
+            'as'=> 'delSupplier',
+            'middleware' => 'auth'
+        ]);
+       Route::get('addRemoveSupplierTrans',[
+           "uses" => 'SupplierTransactionController@getInsertTransaction',
+           'as' => 'addRemoveSupplierTrans',
+           'middleware' => 'auth'
+       ]);
+       Route::post('addRemoveSupplierTrans',[
+            "uses" => 'SupplierTransactionController@postInsertTransaction',
+            'as' => 'insertSupplierTrans',
+            'middleware' => 'auth'
+       ]);
+       Route::get('delSupplierTrans/{transaction_id}',[
+        "uses" => 'SupplierTransactionController@getDelTransaction',
+        'as' => 'delSupplierTrans',
+        'middleware' => 'auth'
+        ]);
+        Route::get('querySupplierTrans',[
+            "uses" => 'SupplierTransactionController@getQueryTransaction',
+            'as' => 'querySupplierTrans',
+            'middleware' => 'auth'
+        ]);
+        Route::get('/getQueriedSupplierTrans/{supplier},{fromDate},{toDate}',[
+            'uses' => 'SupplierTransactionController@getQueriedTransactions',
+            'as' => 'getQueriedSupplierTrans',
+            'middleware' => 'auth'
+        ]);
+    //================================================================================================
+    // end Suppliers
+    //================================================================================================
+    
+
+ 
+    //================================================================================================
+    // bills
+    //================================================================================================
+      Route::get('/newinvoice',[
+          'uses' => 'BillController@getAddNewInvoice',
+          'as' => 'addNewInvoice',
+          'middleware' => 'auth'
+      ]);
+
+      Route::any('/addNewInvoice',[
+          'uses' => 'BillController@postAddNewInvoice',
+          'as' => 'addNewInvoice',
+          'middleware' => 'auth'
+      ]);
+      Route::get('/showInvoices',[
+        'uses' => 'BillController@getShowInvoices',
+        'as' => 'showInvoices',
+        'middleware' => 'auth'
+        ]);
+      Route::get('/delInvoice/{bill_number}',[
+          'uses'=>'BillController@getDelInvoice',
+          'as' => 'delInvoice',
+          'middleware' => 'auth'
+      ]);
+        
+      Route::get('/showInvoice,{bill_number}',[
+        'uses'=>'BillController@getShowInvoice',
+        'as' => 'showInvoice',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/queryInvoices',[
+        'uses'=>'BillController@getQueryInvoice',
+        'as' => 'queryInvoices',
+        'middleware' => 'auth'
+    ]);
+    //================================================================================================
+    // end bills
     //================================================================================================
 });
 

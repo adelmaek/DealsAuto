@@ -137,6 +137,19 @@
 
                             </ul>
                         </li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">الموردين</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="suppliers">اضافة مورد</a></li>
+                                <li><a href="addRemoveSupplierTrans">اضافة معاملة</a></li>
+                                <li><a href="querySupplierTrans">عرض التعاملات</a></li>
+                            </ul>
+                        </li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-files"></i><span class="hide-menu">الفواتير</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="newinvoice">اضافة فاتورة</a></li>
+                                <li><a href="queryInvoices">عرض الفواتير</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

@@ -58,22 +58,49 @@
                                         <input type="submit" name="submit" class="btn btn-info btn-md" value="اضف المعاملة">
                                         <input type="hidden" name="_token" value="{{Session::token()}}">
                                     </td>
-                                    @if(count($transactions)>0 )
-                                        @foreach ($transactions as $transaction)
-                                            <tr>
-                                                    <td style="text-align:center">{{$transaction->accountNumber}}</td>
-                                                    <td style="text-align:center">{{$transaction->date}}</td>                                                    
-                                                    <td style="text-align:center">{{$transaction->type}}</td>
-                                                    <td style="text-align:center">{{$transaction->value}}</td>
-                                                    <td style="text-align:center">{{$transaction->note}}</td>
-                                                    <td style="text-align:center">
-                                                        <a class="btn btn-danger" href="{{route('delTransaction',['transaction_id'=>$transaction->id, 'accNumber'=>$transaction->accountNumber])}}" role="button">Delete</a>
-                                                    </td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
                                 </form>
                             </tr>
+                        </tbody>   
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row justify-content-center">
+    <div class="col-md">
+        <br>
+        <div class="card">
+            <div class="card-body" style="overflow-x: scroll;
+            width: auto;
+            white-space: nowrap;">
+                <div class="table-responsive-sm">
+                    <table class="table ">
+                        <thead>
+                            <tr>
+                                <th scope="col" class="text-center" >رقم الحساب</th>
+                                <th scope="col" class="text-center" >التاريخ</th>
+                                <th scope="col" class="text-center" >نوع المعاملة</th>
+                                <th scope="col" class="text-center">القيمة</th>
+                                <th scope="col" class="text-center" >البيان</th>
+                                <th scope="col" class="text-center" >الحساب الحالي</th>
+                                <th scope="col" class="text-center">مسح</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($transactions as $transaction)
+                                <tr>
+                                        <td style="text-align:center">{{$transaction->accountNumber}}</td>
+                                        <td style="text-align:center">{{$transaction->date}}</td>                                                    
+                                        <td style="text-align:center">{{$transaction->type}}</td>
+                                        <td style="text-align:center">{{$transaction->value}}</td>
+                                        <td style="text-align:center">{{$transaction->note}}</td>
+                                        <td style="text-align:center">{{$transaction->currentBankBalance}}</td>
+                                        <td style="text-align:center">
+                                            <a class="btn btn-danger" href="{{route('delTransaction',['transaction_id'=>$transaction->id, 'accNumber'=>$transaction->accountNumber])}}" role="button">Delete</a>
+                                        </td>
+                                </tr>
+                            @endforeach
                         </tbody>   
                     </table>
                 </div>
