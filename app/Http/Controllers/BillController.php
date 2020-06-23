@@ -7,6 +7,7 @@ use App\SupplierTransaction;
 use DB;
 use Log;
 use Illuminate\Http\Request;
+use DataTables;
 
 class BillController extends Controller
 {
@@ -115,5 +116,69 @@ class BillController extends Controller
     {
         $suppliers = Supplier::all();
         return view('Invoices/queryInvoices',['suppliers'=>$suppliers]);
+    }
+
+
+    public function getQueiredInvoices ($supplier,$fromDate,$toDate)
+    {
+        Log::debug($supplier);
+        if(!strcmp($fromDate,"empty")&&!strcmp($toDate,"empty"))
+        { 
+            if(!strcmp($supplier,"all"))
+            {
+                $bills = Bill::orderBy('date', 'ASC')->get();
+            }
+            else
+            {   
+                $bills = Bill::where('supplier_name',$supplier)->get();
+            }
+                
+        }
+        elseif (!strcmp($toDate,"empty"))
+        {
+         
+            if(!strcmp($supplier,"all"))
+            {
+                $bills = Bill::whereDate('date','<=',$fromDate)->orderBy('date', 'ASC')->get();
+            }
+            else
+            {   
+                $bills = Bill::where('supplier_name',$supplier)->whereDate('date','>=',$fromDate)->orderBy('date', 'ASC')->get();
+            }
+        }
+        elseif (!strcmp($fromDate,"empty"))
+        {
+            if(!strcmp($supplier,"all"))
+            {
+                $bills = Bill::whereDate('date','>=',$fromDate)->orderBy('date', 'ASC')->get();
+            }
+            else
+            {   
+                $bills = Bill::where('supplier_name',$supplier)->whereDate('date','<=',$toDate)->orderBy('date', 'ASC')->get();
+            }
+            
+        }
+        else
+        {
+            if(!strcmp($supplier,"all"))
+            {
+                $bills = Bill::whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'ASC')->get();
+            }
+            else
+            {   
+                $bills = Bill::where('supplier_name',$supplier)->whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'ASC')->get();
+            }
+        }
+        foreach($bills as $bill)
+        {
+            $total_number_items = 0;
+            $items = DB::table('invoice_items')->where('invoice_number',$bill->number)->get();
+            foreach($items as $item)
+            {
+                $total_number_items = $total_number_items + $item->quantity;
+            }
+            $bill->setAttribute('total_items_number', $total_number_items);
+        }
+        return Datatables::of($bills)->make(true);
     }
 }

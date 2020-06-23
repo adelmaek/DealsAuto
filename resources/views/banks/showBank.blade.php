@@ -4,9 +4,11 @@
 <br>
 <div class="row">
     <div class="col-12">
-        <div class="card">
+        <div class="card border-dark">
+            <div class="card-header bg-info">
+                <h4 class="m-b-0 text-white">Bank Transactions</h4>
+            </div>
             <div class="card-body">
-                <h4 class="card-title">Bank Transactions</h4>
                 <div class="table-responsive m-t-40">
                     <table id="showBankTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>

@@ -10,9 +10,12 @@
 
 <div class="container">
     <div class="row justify-content-center">
-        <div class="col-md-8">
+        <div class="col-md-12">
             <br>
-            <div class="card">
+            <div class="card border-dark">
+                <div class="card-header bg-dark">
+                    <h4 class="m-b-0 text-white">Add Bank</h4>
+                </div>
                 <div class="card-body">
                     <form id="Bank-form" class="form"action="{{route('insertBank')}}" method="post" >
                         <div class="form-group">
@@ -42,7 +45,10 @@
     <br>
     <div class="row justify-content-center">
         <div class="col-md-12">
-            <div class="card">
+            <div class="card border-dark">
+                <div class="card-header bg-info">
+                    <h4 class="m-b-0 text-white">Banks</h4>
+                </div>
                 <div class="card-body">
                     @if(count($banks)>0 )
                         <div class="table-responsive-sm">

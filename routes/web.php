@@ -225,6 +225,11 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'queryInvoices',
         'middleware' => 'auth'
     ]);
+    Route::get('/queiredInvoices/{supplier_name},{fromDate},{toDate}',[
+        'uses' => 'BillController@getQueiredInvoices',
+        'as' => 'queiredInvoices',
+        'middleware' =>'auth'
+    ]);
     //================================================================================================
     // end bills
     //================================================================================================

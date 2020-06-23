@@ -10,14 +10,17 @@
 
 @section('content')
 <div class="row justify-content-center">
-    <div class="col-md-6">
+    <div class="col-md-12">
         <br>
-        <div class="card">
+        <div class="card border-dark">
+            <div class="card-header bg-dark">
+                <h4 class="m-b-0 text-white">Query Suppliers Transactions</h4>
+            </div>
             <div class="card-body">
                 <form id="queryTrans" class="form" action="" method="get">
                     <div class="row justify-content-center ">
                         <div class="col  ">
-                            <label for="supplierNameInput" class="arabicLabel" style="padding: 10px;">الحساب</label>
+                            <label for="supplierNameInput" class="arabicLabel" style="padding: 10px;">المورد</label>
                         </div>
                         <div class="col">
                             <label for="fromDateInput" class="arabicLabel" style="padding: 10px;">من تاريخ</label>
@@ -66,9 +69,11 @@
  <br>
  <div class="row">
     <div class="col-12">
-        <div class="card">
+        <div class="card border-dark">
+            <div class="card-header bg-info">
+                <h4 class="m-b-0 text-white">Suppliers Transactions</h4>
+            </div>
             <div class="card-body">
-                <h4 class="card-title">Suppliers Transactions</h4>
                 <div class="table-responsive m-t-40">
                     <table id="supplierTransTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>

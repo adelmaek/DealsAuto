@@ -18,21 +18,22 @@ $(document).ready(function(){
         }
 
        
-        if ( $.fn.dataTable.isDataTable( '#supplierTransTable' ) ) {
-            table = $('#supplierTransTable').DataTable();
+        if ( $.fn.dataTable.isDataTable( '#invoicesTransTable' ) ) {
+            table = $('#invoicesTransTable').DataTable();
             table.destroy();
         }
-       var table =  $('#supplierTransTable').DataTable({
+       var table =  $('#invoicesTransTable').DataTable({
             "displayLength": 25,
             "processing": true,
             "columns": [
+                { "data": "number" },
                 { "data": "supplier_name" },
                 { "data": "date" },
+                { "data": "total_items_number" },
                 { "data": "value" },
-                { "data": "currentSupplierTotal" },
                 { "data": "note" }
             ],
-            "ajax": "getQueriedSupplierTrans/"+ supplier + ',' + fromDate + ',' + toDate,
+            "ajax": "queiredInvoices/"+ supplier + ',' + fromDate + ',' + toDate,
 
             dom: 'Bfrtip',
             buttons: [

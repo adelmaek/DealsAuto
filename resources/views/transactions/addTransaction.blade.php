@@ -10,8 +10,11 @@
 <div class="row justify-content-center">
     <div class="col-md">
         <br>
-        <div class="card">
-            <div class="card-body" style="overflow-x: scroll;
+        <div class="card border-dark">
+            <div class="card-header bg-dark">
+                <h4 class="m-b-0 text-white">Add Bank Transaction</h4>
+            </div>
+            <div class="card-body" style="
             width: auto;
             white-space: nowrap;">
                 <div class="table-responsive-sm">
@@ -30,7 +33,7 @@
                             <tr>
                                 <form id="transaction-form" class="form"action="{{route('insertTransaction')}}" method="post">
                                     <td>
-                                        <select class="browser-default" style="height: 38px;" id="accountNumberInput" name="accountNumberInput" required>
+                                        <select class="custom-select custom-select-lg" style="height: 43px;" id="accountNumberInput" name="accountNumberInput" required>
                                             <option value="" disabled selected>رقم الحساب</option>
                                             @foreach($banks as $bank)
                                                 <option value="{{$bank->accountNumber}}">{{$bank->bankName}}:{{$bank->accountNumber}}</option>
@@ -39,10 +42,10 @@
                                                                                 
                                     </td>
                                     <td>
-                                        <input type="date" id="dateInput" name="dateInput" style="height: 38px;" required>
+                                        <input type="date" class= "custom-select custom-select-lg" id="dateInput" name="dateInput" style="height: 40px;" required>
                                     </td>
                                     <td>
-                                        <select class="browser-default" style="height: 38px;" id="typeInput" name="typeInput" required>
+                                        <select class="custom-select custom-select-lg" style="height: 40px;" id="typeInput" name="typeInput" required>
                                             <option value="" disabled selected>نوع المعاملة</option>
                                             <option value="add">ايداع</option>
                                             <option value="sub">سحب</option>
@@ -70,8 +73,11 @@
 <div class="row justify-content-center">
     <div class="col-md">
         <br>
-        <div class="card">
-            <div class="card-body" style="overflow-x: scroll;
+        <div class="card border-dark">
+            <div class="card-header bg-info">
+                <h4 class="m-b-0 text-white">Banks Transactions</h4>
+            </div>
+            <div class="card-body" style="
             width: auto;
             white-space: nowrap;">
                 <div class="table-responsive-sm">
@@ -89,17 +95,17 @@
                         </thead>
                         <tbody>
                             @foreach ($transactions as $transaction)
-                                <tr>
-                                        <td style="text-align:center">{{$transaction->accountNumber}}</td>
-                                        <td style="text-align:center">{{$transaction->date}}</td>                                                    
-                                        <td style="text-align:center">{{$transaction->type}}</td>
-                                        <td style="text-align:center">{{$transaction->value}}</td>
-                                        <td style="text-align:center">{{$transaction->note}}</td>
-                                        <td style="text-align:center">{{$transaction->currentBankBalance}}</td>
-                                        <td style="text-align:center">
-                                            <a class="btn btn-danger" href="{{route('delTransaction',['transaction_id'=>$transaction->id, 'accNumber'=>$transaction->accountNumber])}}" role="button">Delete</a>
-                                        </td>
-                                </tr>
+                            <tr>
+                                <td style="text-align:center">{{$transaction->accountNumber}}</td>
+                                <td style="text-align:center">{{$transaction->date}}</td>                                                    
+                                <td style="text-align:center">{{$transaction->type}}</td>
+                                <td style="text-align:center">{{$transaction->value}}</td>
+                                <td style="text-align:center">{{$transaction->note}}</td>
+                                <td style="text-align:center">{{$transaction->currentBankBalance}}</td>
+                                <td style="text-align:center">
+                                    <a class="btn btn-danger" href="{{route('delTransaction',['transaction_id'=>$transaction->id, 'accNumber'=>$transaction->accountNumber])}}" role="button">Delete</a>
+                                </td>
+                            </tr>
                             @endforeach
                         </tbody>   
                     </table>

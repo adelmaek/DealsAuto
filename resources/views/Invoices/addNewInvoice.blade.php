@@ -8,7 +8,10 @@
         <br>
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card border-dark">
+                    <div class="card-header bg-dark">
+                        <h4 class="m-b-0 text-white">Add Invoice</h4>
+                    </div>
                     <div class="card-body">
                         <div class="form-group">  
                             <form name="add_name" id="add_name" action="{{route('addNewInvoice')}}">
@@ -65,7 +68,10 @@
         <br>
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
+                <div class="card border-dark">
+                    <div class="card-header bg-info">
+                        <h4 class="m-b-0 text-white">Invoices</h4>
+                    </div>
                     <div class="card-body">
                         <div class="table-responsive-sm">
                             <table id="invoiceTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
