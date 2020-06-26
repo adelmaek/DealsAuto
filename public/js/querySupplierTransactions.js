@@ -29,6 +29,7 @@ $(document).ready(function(){
                 { "data": "supplier_name" },
                 { "data": "date" },
                 { "data": "value" },
+                { "data": "bill_number" },
                 { "data": "currentSupplierTotal" },
                 { "data": "note" }
             ],

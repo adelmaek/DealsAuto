@@ -81,7 +81,8 @@
                                 <th scope="col" class="text-left" >المورد</th> 
                                 <th scope="col" class="text-left">التاريخ</th>
                                 <th scope="col" class="text-left">القيمة</th>
-                                <th scope="col" class="text-left">الاجمالي الحالي للمورد</th>
+                                <th scope='col' class='text-left' >الفاتورة الملحقة</th>
+                                <th scope="col" class="text-left">الرصيد</th>
                                 <th scope="col" class="text-left">البيان</th>
                             </tr>
                         </thead>

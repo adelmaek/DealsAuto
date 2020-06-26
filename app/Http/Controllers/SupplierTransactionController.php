@@ -6,6 +6,7 @@ use App\SupplierTransaction;
 use DataTables;
 use Log;
 use DB;
+use App\Bill;
 use Illuminate\Http\Request;
 
 class SupplierTransactionController extends Controller
@@ -133,7 +134,15 @@ class SupplierTransactionController extends Controller
                 $transaction = SupplierTransaction::where('supplier_id',$supplier)->whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'ASC')->get();
             }
         }
-
+        Log::debug($transaction);
+        foreach($transaction as $trans)
+        {
+            if($trans->bill_id == -1)
+                $trans->setAttribute('bill_number','لا يوجد');
+            else
+                $trans->setAttribute('bill_number',Bill::where('supplier_name',$trans->supplier_name)->first()->number);
+        }
+        Log::debug($transaction);
         return Datatables::of($transaction)->make(true);
     }
 }
