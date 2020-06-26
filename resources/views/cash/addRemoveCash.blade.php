@@ -10,8 +10,11 @@
 <div class="row justify-content-center">
     <div class="col-md">
         <br>
-        <div class="card">
-            <div class="card-body" style="overflow-x: scroll;
+        <div class="card border-dark">
+            <div class="card-header bg-dark">
+                <h4 class="m-b-0 text-white">Add Cash Transaction</h4>
+            </div>
+            <div class="card-body" style="
             width: auto;
             white-space: nowrap;">
                 <div class="table-responsive-sm">
@@ -30,7 +33,7 @@
                             <tr>
                                 <form id="transaction-form" class="form"action="{{route('addRemoveCash')}}" method="post">
                                     <td>
-                                        <select class="browser-default" style="height: 38px;" id="typeInput" name="typeInput" required>
+                                        <select class="custom-select custom-select-lg" style="height: 42px;" id="typeInput" name="typeInput" required>
                                             <option value="" disabled selected>نوع المعاملة</option>
                                             <option value="add">ايداع</option>
                                             <option value="sub">سحب</option>
@@ -40,10 +43,7 @@
                                         <input type="number" class="form-control" id="valueInput" name="valueInput" placeholder="القيمة" required style="min-width: 100px;" >
                                     </td>
                                     <td>
-                                        <input type="text" class="form-control" id="currencyInput" name="currencyInput" placeholder="العملة" required style="min-width: 100px;" >
-                                    </td>
-                                    <td>
-                                        <input type="date" id="dateInput" name="dateInput" style="height: 38px;" required>     
+                                        <input type="date" class="custom-select custom-select-lg" id="dateInput" name="dateInput" style="height: 42px;" required>     
                                     <td>
                                         <input type="text" class="form-control" id="noteInput" name="noteInput" placeholder="البيان" required style="min-width: 100px;overflow:scroll;text-align: right;direction:RTL;">
                                     </td>
@@ -63,8 +63,11 @@
 </div>
 <div class="row">
     <div class="col">
-        <div class="card">
-            <div class="card-body" style="overflow-x: scroll;width: auto;white-space: nowrap;">
+        <div class="card border-dark">
+            <div class="card-header bg-dark">
+                <h4 class="m-b-0 text-white">Cash Transaction</h4>
+            </div>
+            <div class="card-body" style="width: auto;white-space: nowrap;">
                 <div class="table-responsive-sm">
                     <table id="cashTransTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>

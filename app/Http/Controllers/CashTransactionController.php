@@ -6,88 +6,106 @@ use DB;
 use Illuminate\Http\Request;
 use Log;
 use DataTables;
+
+
 class CashTransactionController extends Controller
 {
-    public function getCashContent()
-    {
-        $cashContent = DB::table('cash_currency')->get();
-        return view('cash/cashContent',['cashContent'=>$cashContent]);
-    }
+    // public function getCashContent()
+    // {
+    //     $cashContent = cashTransaction::orderBy('date','Asc')->get();
+    //     return view('cash/cashContent',['cashContent'=>$cashContent]);
+    // }
+
     public function getAddRemoveCash()
     {
-        $cashTransactions = cashTransaction::all();
+        $cashTransactions = cashTransaction::orderBy('date','Asc')->get();
         return view('cash/addRemoveCash',['cashTransactions'=>$cashTransactions]);
     }
 
     public function postAddRemoveCash(Request $request)
     {
-        $currencyTotal = DB::table('cash_currency')->where('currency', $request['currencyInput'])->first();
+        $allCashTrans =cashTransaction::all();
+        $prevTransaction = cashTransaction::whereDate('date','<=',$request['dateInput'])->orderBy('date','Desc')->first();
+        if(!empty($prevTransaction))
+            $prevTransaction = cashTransaction::whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
 
-        Log::debug($request->currnecyInput);
-        if($currencyTotal)
+        $followingTransactions = cashTransaction::whereDate('date','>',$request['dateInput'])->orderBy('date','Asc')->get();
+
+
+        if(!empty($prevTransaction))
         {
-            
-            if(!strcmp($request['typeInput'],"add") )
-            {
-                Log::debug("add cond");
-                DB::table('cash_transactions')->insert([
-                    'value' => $request['valueInput'],
-                    'date' => $request['dateInput'],
-                    'type' => 'ايداع',
-                    'currency'=> $request['currencyInput'],
-                    'note' => $request['noteInput'],
-                    'currentTotal' =>  $currencyTotal-> value + $request['valueInput']
-                ]);
-                DB::table('cash_currency')->where('currency', $request['currencyInput'])->increment('value',$request['valueInput']);
-            }
+            if(!strcmp($request['typeInput'],"add"))
+                $currentBalanceInput = $prevTransaction->currentTotal +  $request['valueInput'];
             else
-            {   
-                Log::debug("sub cond");
-                DB::table('cash_transactions')->insert([
-                'value' => $request['valueInput'],
-                'date' => $request['dateInput'],
-                'type' => 'سحب',
-                'currency'=> $request['currencyInput'],
-                'note' => $request['noteInput'],
-                'currentTotal' =>  $currencyTotal-> value - $request['valueInput']
-                 ]);
-                DB::table('cash_currency')->where('currency',  $request['currencyInput'])->decrement('value',$request['valueInput']);
-            }
+                $currentBalanceInput = $prevTransaction->currentTotal -  $request['valueInput'];
         }
         else
         {
-            Log::debug("first add");
+ 
+            $currentBalanceInput =  $request['valueInput'];
+        }
+        $accumulatedBalance = $currentBalanceInput;
+        foreach($followingTransactions as $trans)
+        {            
+            if(!strcmp($trans->type,"ايداع"))
+                $accumulatedBalance = $accumulatedBalance + $trans->value;
+            else
+                $accumulatedBalance = $accumulatedBalance - $trans->value;
+            cashTransaction::where('id', $trans->id)-> update(['currentTotal'=>$accumulatedBalance]);
+        }
+
+
+        if(!strcmp($request['typeInput'],"add") )
+        {
+            Log::debug("add cond");
             DB::table('cash_transactions')->insert([
                 'value' => $request['valueInput'],
                 'date' => $request['dateInput'],
                 'type' => 'ايداع',
-                'currency'=> $request['currencyInput'],
                 'note' => $request['noteInput'],
-                'currentTotal' =>   $request['valueInput']
+                'currentTotal' =>  $currentBalanceInput
             ]);
-            DB::table('cash_currency')->insert([
-                'value' => $request['valueInput'],
-                'currency'=> $request['currencyInput']
-            ]);
-
         }
+        else
+        {   
+            Log::debug("sub cond");
+            DB::table('cash_transactions')->insert([
+            'value' => $request['valueInput'],
+            'date' => $request['dateInput'],
+            'type' => 'سحب',
+            'note' => $request['noteInput'],
+            'currentTotal' =>  $currentBalanceInput
+                ]);
+        }
+        
         return redirect()->back();
     }
 
     public function getDelCashTransaction($cashTransaction_id)
     {
         $transaction = cashTransaction::where('id',$cashTransaction_id)->first();
-        if(!strcmp($transaction->type,"ايداع") )
-        {
-            DB::table('cash_currency')->where('currency', $transaction->currency)->decrement('value',$transaction->value);
-        }
-        else if(!strcmp($transaction->type,"سحب"))
-        {
-            DB::table('cash_currency')->where('currency', $transaction->currency)->increment('value',$transaction->value);
-        }
         
         $transaction->delete();
+
+        $prevTransaction = cashTransaction::whereDate('date','<',$transaction->date)->orderBy('date','Desc')->first();
+        if(!empty($prevTransaction))
+            $prevTransaction = cashTransaction::whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
+        $followingTransactions = cashTransaction::whereDate('date','>=',$transaction->date)->orderBy('date','Asc')->get();
         
+        if(!empty($prevTransaction))
+            $currentBalance = $prevTransaction->currentTotal;
+        else
+            $currentBalance =  0;
+        foreach($followingTransactions as  $trans)
+        {
+            if(!strcmp($trans->type,"ايداع"))
+                $currentBalance = $currentBalance + $trans->value;
+            else
+                $currentBalance = $currentBalance - $trans->value;
+            
+            cashTransaction::where('id', $trans->id)-> update(['currentTotal'=>$currentBalance]);
+        }
+
         return redirect()->back();
     }
     public function getQueryCashTransaction()
@@ -96,53 +114,29 @@ class CashTransactionController extends Controller
         return view('cash/queryCashTransactions',['currencies'=>$currencies]);
     }
 
-    public function getQueriedTransaction($currency, $fromDate, $toDate)
+    public function getQueriedTransaction( $fromDate, $toDate)
     {
         if(!strcmp($fromDate,"empty")&&!strcmp($toDate,"empty"))
         { 
-            if(!strcmp($currency,"all"))
-            {
-                $transaction = cashTransaction::all();
-            }
-            else
-            {
-                // Log::debug($bank);
-                $transaction = cashTransaction::where('currency',$currency)->get();
-                // Log::debug($transaction);
-            }
+            Log::debug('in getquered');
+            $transaction = cashTransaction::all();
+        
         }
         elseif (!strcmp($toDate,"empty"))
-        {
-            if(!strcmp($currency,"all"))
-            {
-                $transaction = cashTransaction::whereDate('date','>=',$fromDate)->orderBy('date', 'DESC')->get();
-            }
-            else
-            {
-                $transaction = cashTransaction::where('currency',$currency)->whereDate('date','>=',$fromDate)->orderBy('date', 'DESC')->get();
-            }
+        {            
+            $transaction = cashTransaction::whereDate('date','>=',$fromDate)->orderBy('date', 'DESC')->get();          
         }
         elseif (!strcmp($fromDate,"empty"))
         {
-            if(!strcmp($currency,"all"))
-            {
+
                 $transaction = cashTransaction::whereDate('date','<=',$toDate)->orderBy('date', 'DESC')->get();
-            }
-            else
-            {
-                $transaction = cashTransaction::where('currency',$currency)->whereDate('date','<=',$toDate)->orderBy('date', 'DESC')->get();
-            }
+           
         }
         else
         {
-            if(!strcmp($currency,"all"))
-            {
-                $transaction = cashTransaction::whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'DESC')->get();
-            }
-            else
-            {
-                $transaction = cashTransaction::where('currency',$currency)->whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'DESC')->get();
-            }
+
+            $transaction = cashTransaction::whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'DESC')->get();
+          
         }
         // Log::debug($transaction);
         return Datatables::of($transaction)->make(true);

@@ -137,7 +137,7 @@
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-login"></i><span class="hide-menu">الخزينة </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="cashContent">محتوى الخزنة</a></li>
+                                {{-- <li><a href="cashContent">محتوى الخزنة</a></li> --}}
                                 <li><a href="addRemoveCash">اضافة معاملة</a></li>
                                 <li><a href="queryCashTrans">عرض التعاملات</a></li>
 

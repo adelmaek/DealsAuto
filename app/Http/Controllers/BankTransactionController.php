@@ -117,9 +117,6 @@ class BankTransactionController extends Controller
             $prevTransaction = BankTransaction::where('bank_id', $transaction->bank_id)->whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
         $followingTransactions = BankTransaction::where('bank_id', $transaction->bank_id)->whereDate('date','>=',$transaction->date)->orderBy('date','Asc')->get();
         
-        Log::debug('------------------------------------------------------------');
-        Log::debug($prevTransaction);
-        Log::debug($followingTransactions);
         if(!empty($prevTransaction))
             $currentBalance = $prevTransaction->currentBankBalance;
         else

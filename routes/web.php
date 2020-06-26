@@ -105,11 +105,11 @@ Route::group(['middleware'=>['web']],function(){
     //================================================================================================
     // cashTransactions 
     //================================================================================================
-    Route::get('/cashContent',[
-        'uses' => 'CashTransactionController@getCashContent',
-        'as' => 'cashContent',
-        'middleware' => 'auth'
-    ]);
+    // Route::get('/cashContent',[
+    //     'uses' => 'CashTransactionController@getCashContent',
+    //     'as' => 'cashContent',
+    //     'middleware' => 'auth'
+    // ]);
     Route::get('/addRemoveCash',[
         'uses' => 'CashTransactionController@getAddRemoveCash',
         'as' => 'addRemoveCash',
@@ -132,7 +132,7 @@ Route::group(['middleware'=>['web']],function(){
         'middleware' => 'auth'
     ]);
 
-    Route::get('/getCashQueriedTrans/{currency},{fromDate},{toDate}',[
+    Route::get('/getCashQueriedTrans/{fromDate},{toDate}',[
         'uses' => 'cashTransactionController@getQueriedTransaction',
         'as' => 'queriedTransaction',
         'middleware' => 'auth'

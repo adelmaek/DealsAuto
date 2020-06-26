@@ -1,8 +1,6 @@
 @extends('layouts.queryPage')
 
-@section('queryJS')
-<script src="{{ asset('js\queryCashTransactions.js') }}" defer></script>
-@endsection
+
 
 @section('queryCardHead')
  Query Cash (الخزينة)  
@@ -11,29 +9,13 @@
 @section('queryCardBody')
 <form id="queryTrans" class="form" action="" method="get">
     <div class="row justify-content-center ">
-        <div class="col  ">
-            <label for="currencyInput" class="arabicLabel" style="padding: 10px;">العملة</label>
-        </div>
         <div class="col">
             <label for="currencyInput" class="arabicLabel" style="padding: 10px;">من تاريخ</label>
         </div>
     </div>
     <div class="row ">
-        <div class="col ">                     
-                <select class="custom-select custom-select-lg" style="height: 45px;float: right;" id="currencyInput" name="currencyInput" dir="rtl" required>
-                    @if(count($currencies)==0)
-                        <option value="" disabled selected dir="rtl">العملة</option>
-                    @endif
-                    @if(count($currencies)>0)
-                        <option value="all" selected dir="rtl">جميع العملات</option>
-                    @endif
-                    @foreach($currencies as $currency)
-                        <option value="{{$currency->currency}}">{{$currency->currency}}</option>
-                    @endforeach
-                </select>
-        </div>
         <div class="col  ">                                
-                <input type="date" class="custom-select custom-select-lg" id="fromDate" name="fromDate" style="height: 38px;float: right;">
+            <input type="date" class="custom-select custom-select-lg" id="fromDate" name="fromDate" style="width:665px;height: 38px;float: right;">
         </div>
     </div>
     <div class="row ">
@@ -42,12 +24,8 @@
         </div>
     </div>
     <div class="row ">
-        <div class="col ">
-            @if(count($currencies)>0)
-                <button type="button" class="btn waves-effect waves-light btn-dark" style="height: 38px;float: right;" id='applyQuery'>عرض</button>
-            @else
-            <button type="button" class="btn waves-effect waves-light btn-dark" style="height: 38px;float: right;" id='applyQuery' disabled>عرض</button>
-            @endif         
+        <div class="col ">            
+                <button type="button" class="btn waves-effect waves-light btn-dark" style="height: 38px;float: right;" id='applyCashQuery'>عرض</button>
         </div>
         <div class="col ">
                 <input type="date" class="custom-select custom-select-lg" id="toDate" name="toDate" style="height: 38px;float: right;">
@@ -69,7 +47,6 @@ Cash Transactions
                 <tr>
                     <th scope="col" class="text-left" >نوع المعاملة</th> 
                     <th scope="col" class="text-left">القيمة</th>
-                    <th scope="col" class="text-left" >العملة</th>
                     <th scope="col" class="text-left" >التاريخ</th>
                     <th scope="col" class="text-left" >البيان</th>
                     <th scope="col" class="text-left">اجمالي العملة </th>
@@ -80,4 +57,52 @@ Cash Transactions
         </table>
     </div>
 </div>
+@endsection
+
+@section('queryJS')
+<script >
+$(document).ready(function(){
+    //applyQuery    
+    $('#applyCashQuery').click(function(){
+
+        
+        var fromDate = $('#fromDate').val();
+        var toDate = $('#toDate').val();
+        if(!fromDate)
+        {
+            fromDate ='empty';
+        }
+        if(!toDate)
+        {
+            toDate ='empty';
+        }
+        
+        if ( $.fn.dataTable.isDataTable( '#cashTransTable' ) ) {
+            table = $('#cashTransTable').DataTable();
+            table.destroy();
+        }
+       var table =  $('#cashTransTable').DataTable({
+           
+            "displayLength": 25,
+            "processing": true,
+            "columns": [
+                { "data": "type" },
+                { "data": "value" },
+                { "data": "date" },
+                { "data": "note" },
+                { "data": "currentTotal" }
+            ],
+            "ajax": "getCashQueriedTrans/" + fromDate + ',' + toDate,
+            dom: 'Bfrtip',
+            buttons: [
+                 {
+                    extend: 'excel',
+                    title: 'Deals-Auto',
+                    footer: true,
+                }
+            ]   
+        });
+    });
+});
+</script>
 @endsection
