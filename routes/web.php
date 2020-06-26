@@ -233,6 +233,39 @@ Route::group(['middleware'=>['web']],function(){
     //================================================================================================
     // end bills
     //================================================================================================
+
+    //================================================================================================
+    // Purchases
+    //================================================================================================
+    Route::get('/purchases',[
+        'uses' => 'PurchaseTransactionController@getPurchasesTransactions',
+        'as'=> 'purchases',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/purchases',[
+        'uses' => 'PurchaseTransactionController@postPurchasesTransactions',
+        'as'=> 'insertPurchasesTransactions',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/delPurchaseTransaction/{trans_id}',[
+        'uses' => 'PurchaseTransactionController@getDelPurchaseTransaction',
+        'as'=> 'delPurchaseTransaction',
+        'middleware' => 'auth'
+    ]);
+   
+    Route::get('queryPurchaseTrans',[
+        "uses" => 'PurchaseTransactionController@getQueryPurchaseTransaction',
+        'as' => 'queryPurchaseTrans',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/getQueriedPurchaseTrans/{type},{fromDate},{toDate}',[
+        'uses' => 'PurchaseTransactionController@getQueriedPurchaseTransactions',
+        'as' => 'getQueriedPurchaseTrans',
+        'middleware' => 'auth'
+    ]);
+    //================================================================================================
+    // end Purchases
+    //================================================================================================
 });
 
 

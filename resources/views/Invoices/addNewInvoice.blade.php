@@ -29,6 +29,13 @@
                                             </select>
                                     </div>
                                     <div class="col">
+                                        <select class="browser-default form-control" style="height: 38px;width: 200px; margin-left: 0px;" id="typeInput" name="typeInput" required>
+                                            <option value="-1" disabled selected >النوع</option>                                            
+                                                <option value="local">محلي</option>
+                                                <option value="imported">مستورد</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
                                         <input class ="form-control" type="date" id="dateInput" name="dateInput" style="height: 38px;" required>
                                     </div>
                                     </div>

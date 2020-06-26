@@ -12,7 +12,7 @@
         <br>
         <div class="card border-dark">
             <div class="card-header bg-dark">
-                <h4 class="m-b-0 text-white">Add Cash Transaction</h4>
+                <h4 class="m-b-0 text-white">Add Purchase Transaction</h4>
             </div>
             <div class="card-body" style="
             width: auto;
@@ -21,9 +21,8 @@
                     <table class="table ">
                         <thead>
                             <tr>
-                                <th scope="col" class="text-center" >نوع المعاملة</th> 
+                                <th scope="col" class="text-center" >النوع</th> 
                                 <th scope="col" class="text-center">القيمة</th>
-                                {{-- <th scope="col" class="text-center" >العملة</th> --}}
                                 <th scope="col" class="text-center" >التاريخ</th>
                                 <th scope="col" class="text-center" >البيان</th>
                                 <th scope="col" class="text-center">اضافة </th>
@@ -31,19 +30,19 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <form id="transaction-form" class="form"action="{{route('addRemoveCash')}}" method="post">
+                                <form id="transaction-form" class="form"action="{{route('insertPurchasesTransactions')}}" method="post">
                                     <td>
-                                        <select class="custom-select custom-select-lg" style="height: 42px;" id="typeInput" name="typeInput" required>
-                                            <option value="" disabled selected>نوع المعاملة</option>
-                                            <option value="add">ايداع</option>
-                                            <option value="sub">سحب</option>
+                                        <select class="form-control" style="height: 42px;" id="typeInput" name="typeInput" required>
+                                            <option value="" disabled selected>النوع</option>
+                                            <option value="local">محلي</option>
+                                            <option value="imported">مستورد</option>
                                         </select>
                                     </td>
                                     <td>
                                         <input type="number" class="form-control" id="valueInput" name="valueInput" placeholder="القيمة" required style="min-width: 100px;" >
                                     </td>
                                     <td>
-                                        <input type="date" class="custom-select custom-select-lg" id="dateInput" name="dateInput" style="height: 42px;" required>     
+                                        <input type="date" class="form-control" id="dateInput" name="dateInput" style="height: 42px;" required>     
                                     <td>
                                         <input type="text" class="form-control" id="noteInput" name="noteInput" placeholder="البيان" required style="min-width: 100px;overflow:scroll;text-align: right;direction:RTL;">
                                     </td>
@@ -65,33 +64,42 @@
     <div class="col">
         <div class="card border-dark">
             <div class="card-header bg-dark">
-                <h4 class="m-b-0 text-white">Cash Transaction</h4>
+                <h4 class="m-b-0 text-white">Purchases Transaction</h4>
             </div>
             <div class="card-body" style="width: auto;white-space: nowrap;">
                 <div class="table-responsive-sm">
-                    <table id="cashTransTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
+                    <table id="purchaseTransTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
-                                <th scope="col" class="text-center" >نوع المعاملة</th> 
-                                <th scope="col" class="text-center">القيمة</th>
-                                {{-- <th scope="col" class="text-center" >العملة</th> --}}
+                                <th scope="col" class="text-center" >النوع</th> 
+                                <th scope="col" class="text-center">القيمة</th>    
                                 <th scope="col" class="text-center" >التاريخ</th>
                                 <th scope="col" class="text-center" >البيان</th>
                                 <th scope="col" class="text-center">الرصيد</th>
-                                <th scope="col" class="text-center">مسح</th>
+                                <th scope="col" class="text-center">الفاتورة الملحقة</th>
+                                <th scope="col" class="text-center">مسح</th>   
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($cashTransactions as $cashTransaction)
+                            @foreach ($purchaseTransactions as $trans)
                                 <tr>
-                                    <th scope="row" class="text-center">{{$cashTransaction->type}}</th>
-                                    <td class="text-center">{{$cashTransaction->value}}</td>
-                                    {{-- <td class="text-center">{{$cashTransaction->currency}}</td> --}}
-                                    <td class="text-center">{{$cashTransaction->date}}</td>
-                                    <td class="text-center">{{$cashTransaction->note}}</td>
-                                    <td class="text-center">{{$cashTransaction->currentTotal}}</td>
+                                    @if(!strcmp($trans->type,"local"))
+                                        <th scope="row" class="text-center">محلي</th>
+                                    @else
+                                        <th scope="row" class="text-center">مستورد</th>
+                                    @endif
+                                    <td class="text-center">{{$trans->value}}</td>
+                                    <td class="text-center">{{$trans->date}}</td>
+                                    <td class="text-center">{{$trans->note}}</td>
+                                    <td class="text-center">{{$trans->currentTotal}}</td>
+                                    @if ($trans->bill_number != -1)
+                                        <td class="text-center">{{$trans->bill_number}}</td>  
+                                    @endif
+                                    @if ($trans->bill_number == -1)
+                                        <td class="text-center">لا يوجد</td>  
+                                    @endif
                                     <td style="text-align:center">
-                                        <a class="btn btn-danger" href="{{route('delCashTransaction',['cashTransaction_id'=>$cashTransaction->id])}}" role="button">Delete</a>
+                                        <a class="btn btn-danger" href="{{route('delPurchaseTransaction',['trans_id'=>$trans->id])}}" role="button">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -107,7 +115,7 @@
 
 @section('extraJS')
 <script>
-$('#cashTransTable').DataTable({
+$('#purchaseTransTable').DataTable({
         "displayLength": 25,
         "processing": true,
         dom: 'frtip'
