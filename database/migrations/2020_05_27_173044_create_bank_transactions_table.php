@@ -17,6 +17,7 @@ class CreateBankTransactionsTable extends Migration
             $table->bigIncrements('id');
             $table->string('accountNumber');
             $table->date('date');
+            $table->date('valueDate');
             $table->string('type');
             $table->double('value',40,3);
             $table->string('note');

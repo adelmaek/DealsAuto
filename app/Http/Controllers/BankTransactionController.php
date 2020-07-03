@@ -28,6 +28,7 @@ class BankTransactionController extends Controller
             DB::table('bank_transactions')->insert([
                 'accountNumber' => $request['accountNumberInput'],
                 'date' => $request['dateInput'],
+                'valueDate' => $request['valueDateInput'],
                 'type' => "ايداع",
                 'value'=> $request['valueInput'],
                 'note' => $request['noteInput'],
@@ -42,6 +43,7 @@ class BankTransactionController extends Controller
             DB::table('bank_transactions')->insert([
                 'accountNumber' => $request['accountNumberInput'],
                 'date' => $request['dateInput'],
+                'valueDate' => $request['valueDateInput'],
                 'type' => "سحب",
                 'value'=> $request['valueInput'],
                 'note' => $request['noteInput'],

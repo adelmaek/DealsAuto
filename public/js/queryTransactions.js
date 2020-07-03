@@ -28,6 +28,7 @@ $(document).ready(function(){
             "columns": [
                 { "data": "accountNumber" },
                 { "data": "date" },
+                { "data": "valueDate" },
                 { "data": "type" },
                 { "data": "value" },
                 { "data": "currentBankBalance" },

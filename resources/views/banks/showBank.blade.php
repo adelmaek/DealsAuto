@@ -15,8 +15,11 @@
                             <tr>
                                 <th scope='col' class='text-center' >رقم الحساب</th>
                                 <th scope='col' class='text-center' >التاريخ</th>
+                                <th scope='col' class='text-center' >Value Date</th>
                                 <th scope='col' class='text-center' >نوع المعاملة</th>
                                 <th scope='col' class='text-center' >القيمة</th>
+                                <th scope='col' class='text-center' >رصيد الحساب</th>
+                                <th scope='col' class='text-center' >رصيد البنوك</th>
                                 <th scope='col' class='text-center' >البيان</th>
                             </tr>
                         </thead>
@@ -24,9 +27,12 @@
                             @foreach($transactions as $transaction)
                             <tr>
                                 <td style="text-align:center">{{$transaction->accountNumber}}</td>
-                                <td style="text-align:center">{{$transaction->date}}</td>                                                    
+                                <td style="text-align:center">{{$transaction->date}}</td>
+                                <td style="text-align:center">{{$transaction->valueDate}}</td>                                                     
                                 <td style="text-align:center">{{$transaction->type}}</td>
                                 <td style="text-align:center">{{$transaction->value}}</td>
+                                <td style="text-align:center">{{$transaction->currentBankBalance}}</td>
+                                <td style="text-align:center">{{$transaction->currentAllBanksBalance}}</td>
                                 <td style="text-align:center">{{$transaction->note}}</td>
                             </tr>
                             @endforeach

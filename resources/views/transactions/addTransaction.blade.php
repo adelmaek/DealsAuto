@@ -23,6 +23,7 @@
                             <tr>
                                 <th scope="col" class="text-center" >رقم الحساب</th>
                                 <th scope="col" class="text-center" >التاريخ</th>
+                                <th scope="col" class="text-center" >value Date</th>
                                 <th scope="col" class="text-center" >نوع المعاملة</th>
                                 <th scope="col" class="text-center">القيمة</th>
                                 <th scope="col" class="text-center" >البيان</th>
@@ -43,6 +44,9 @@
                                     </td>
                                     <td>
                                         <input type="date" class= "custom-select custom-select-lg" id="dateInput" name="dateInput" style="height: 40px;" required>
+                                    </td>
+                                    <td>
+                                        <input type="date" class= "custom-select custom-select-lg" id="valueDateInput" name="valueDateInput" style="height: 40px;" required>
                                     </td>
                                     <td>
                                         <select class="custom-select custom-select-lg" style="height: 40px;" id="typeInput" name="typeInput" required>
@@ -86,6 +90,7 @@
                             <tr>
                                 <th scope="col" class="text-center" >رقم الحساب</th>
                                 <th scope="col" class="text-center" >التاريخ</th>
+                                <th scope="col" class="text-center" >value Date</th>
                                 <th scope="col" class="text-center" >نوع المعاملة</th>
                                 <th scope="col" class="text-center">القيمة</th>
                                 <th scope="col" class="text-center" >البيان</th>
@@ -98,7 +103,8 @@
                             @foreach ($transactions as $transaction)
                             <tr>
                                 <td style="text-align:center">{{$transaction->accountNumber}}</td>
-                                <td style="text-align:center">{{$transaction->date}}</td>                                                    
+                                <td style="text-align:center">{{$transaction->date}}</td>
+                                <td style="text-align:center">{{$transaction->valueDate}}</td>                                                    
                                 <td style="text-align:center">{{$transaction->type}}</td>
                                 <td style="text-align:center">{{$transaction->value}}</td>
                                 <td style="text-align:center">{{$transaction->note}}</td>

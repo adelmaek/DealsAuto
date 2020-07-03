@@ -68,6 +68,7 @@ Banks Transactions
             <tr>
                 <th scope='col' class='text-left' >رقم الحساب</th>
                 <th scope='col' class='text-left' >التاريخ</th>
+                <th scope='col' class='text-left' >Value Date</th>
                 <th scope='col' class='text-left' >نوع المعاملة</th>
                 <th scope='col' class='text-left' >القيمة</th>
                 <th scope='col' class='text-left' >رصيد الحساب</th>
