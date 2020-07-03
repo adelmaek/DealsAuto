@@ -21,6 +21,12 @@ class CreateBillsTable extends Migration
             $table ->string('supplier_name');
             $table->date('date');
             $table->string('type');
+            $table->double('addValueTaxes',10,3);
+            $table->double('importedTaxes1',10,3)->default(0);
+            $table->double('importedTaxes2',10,3)->default(0);
+            $table->double('importedTaxes3',10,3)->default(0);
+            $table->double('importedTaxes4',10,3)->default(0);
+            $table->double('importedTaxes5',10,3)->default(0);
         });
     }
 

@@ -16,7 +16,7 @@ class InvoiceItems extends Migration
         Schema::create('invoice_items', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('name');
-            $table->double('quantity',40,3)->default(0);
+            $table->string('chassisNumber');
             $table->double('unitCost',40,3)->default(0);
             $table->bigInteger('invoice_number');
         });

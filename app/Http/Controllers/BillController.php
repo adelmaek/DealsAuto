@@ -27,20 +27,38 @@ class BillController extends Controller
 
             DB::table('invoice_items')->insert([
                 'name' => $request['item_name'][$i],
-                'quantity' => $request['item_quantity'][$i],
+                'chassisNumber' => $request['item_chassis_number'][$i],
                 'unitCost' =>$request['item_cost'][$i],
                 'invoice_number' => $request['invoiceNumberInput']
             ]);
-                $totalItemsCost = $totalItemsCost + $request['item_cost'][$i] * $request['item_quantity'][$i];
+                // $totalItemsCost = $totalItemsCost + $request['item_cost'][$i] * $request['item_quantity'][$i];
+                $totalItemsCost = $totalItemsCost + $request['item_cost'][$i] ;
         }
-        Bill::insert([
-            'number'=>$request['invoiceNumberInput'],
-            'supplier_name'=>$request['supplierInput'],
-            'value' =>$totalItemsCost,
-            'note' => $request['noteInput'],
-            'date' =>$request['dateInput'],
-            'type' =>$request['typeInput']
-        ]);
+        if(!strcmp($request['typeInput'],'local'))
+            Bill::insert([
+                'number'=>$request['invoiceNumberInput'],
+                'supplier_name'=>$request['supplierInput'],
+                'value' =>$totalItemsCost,
+                'note' => $request['noteInput'],
+                'date' =>$request['dateInput'],
+                'type' =>$request['typeInput'],
+                'addValueTaxes' =>$request['addedValueTaxesInput']
+            ]);
+        else
+            Bill::insert([
+                'number'=>$request['invoiceNumberInput'],
+                'supplier_name'=>$request['supplierInput'],
+                'value' =>$totalItemsCost,
+                'note' => $request['noteInput'],
+                'date' =>$request['dateInput'],
+                'type' =>$request['typeInput'],
+                'addValueTaxes' =>$request['addedValueTaxesInput'],
+                'importedTaxes1' =>$request['importedTaxes1Input'],
+                'importedTaxes2' =>$request['importedTaxes2Input'],
+                'importedTaxes3' =>$request['importedTaxes3Input'],
+                'importedTaxes4' =>$request['importedTaxes4Input'],
+                'importedTaxes5' =>$request['importedTaxes5Input']
+            ]);   
 
         //Adding a supplier Transaction
         $supplier = Supplier::where('name', $request['supplierInput'])->first();
@@ -119,7 +137,7 @@ class BillController extends Controller
         $transaction = SupplierTransaction::where('bill_id',$bill_id)->first();
         Supplier::where('id',$transaction->supplier_id)->increment('currentBalance',$transaction->value);
         $transaction->delete();
-        Log::debug($transaction);
+        // Log::debug($transaction);
 
         $prevTransaction = SupplierTransaction::where('supplier_id',$transaction->supplier_id)->whereDate('date','<',$transaction->date)->first();
         if(!empty($prevTransaction))
@@ -168,7 +186,11 @@ class BillController extends Controller
         $bill = Bill::where('number',$bill_number)->first();
         $items = DB::table('invoice_items')->where('invoice_number',$bill_number)->get();
         $supplier = Supplier::where('name',$bill->supplier_name)->first();
-        return view('Invoices/invoiceDetails',['bill'=>$bill,'billItems'=>$items,'supplier'=>$supplier]);
+        $totalWithTaxes = ($bill->value * (($bill->addValueTaxes + $bill->importedTaxes1 + $bill->importedTaxes2 + $bill->importedTaxes3
+        + $bill->importedTaxes4 + $bill->importedTaxes5)/100)) + $bill->value;
+        $totalTaxes = $bill->addValueTaxes + $bill->importedTaxes1 + $bill->importedTaxes2 + $bill->importedTaxes3
+        + $bill->importedTaxes4 + $bill->importedTaxes5;
+        return view('Invoices/invoiceDetails',['bill'=>$bill,'billItems'=>$items,'supplier'=>$supplier,'totalTaxes'=>$totalTaxes,'totalWithTaxes'=>$totalWithTaxes]);
     }
 
     public function getQueryInvoice()
@@ -194,10 +216,10 @@ class BillController extends Controller
         }
         elseif (!strcmp($toDate,"empty"))
         {
-         
+            Log::debug('here');
             if(!strcmp($supplier,"all"))
             {
-                $bills = Bill::whereDate('date','<=',$fromDate)->orderBy('date', 'ASC')->get();
+                $bills = Bill::whereDate('date','>=',$fromDate)->orderBy('date', 'ASC')->get();
             }
             else
             {   
@@ -208,7 +230,7 @@ class BillController extends Controller
         {
             if(!strcmp($supplier,"all"))
             {
-                $bills = Bill::whereDate('date','>=',$fromDate)->orderBy('date', 'ASC')->get();
+                $bills = Bill::whereDate('date','<=',$fromDate)->orderBy('date', 'ASC')->get();
             }
             else
             {   
@@ -233,9 +255,17 @@ class BillController extends Controller
             $items = DB::table('invoice_items')->where('invoice_number',$bill->number)->get();
             foreach($items as $item)
             {
-                $total_number_items = $total_number_items + $item->quantity;
+                // $total_number_items = $total_number_items + $item->quantity;
+                $total_number_items = $total_number_items + 1;
             }
+            $totalTaxesValue = $bill->totalTaxes();
+            $totalValueWithTaxes = $bill->totalValueWithTaxes();
+            // Log::debug('message');
+            // Log::debug($totalValueWithTaxes);
             $bill->setAttribute('total_items_number', $total_number_items);
+            $bill->setAttribute('totalTaxesValue', $totalTaxesValue);
+            $bill->setAttribute('totalValueWithTaxes', $totalValueWithTaxes);
+            
         }
         return Datatables::of($bills)->make(true);
     }

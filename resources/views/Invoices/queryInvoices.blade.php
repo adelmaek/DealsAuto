@@ -69,13 +69,18 @@ Suppliers Invoices
                 <th scope="col" class="text-left" >رقم الفاتورة</th>
                 <th scope="col" class="text-left" >المورد</th> 
                 <th scope="col" class="text-left">التاريخ</th>
-                <th scope="col" class="text-left">العدد</th>
-                <th scope="col" class="text-left">الاجمالي</th>
+                <th scope="col" class="text-left">عدد السيارات</th>
                 <th scope="col" class="text-left">البيان</th>
+                <th scope="col" class="text-left">الاجمالي</th>
+                <th scope="col" class="text-left">اجمالي الضرائب</th>
+                <th scope="col" class="text-left">اجمالي الفاتورة</th>  
             </tr>
         </thead>
         <tbody>
         </tbody>
+        <tfoot >
+            <tr><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>
+        </tfoot>
     </table>
 </div>
 @endsection

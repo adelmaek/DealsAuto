@@ -39,6 +39,11 @@
                                         <input class ="form-control" type="date" id="dateInput" name="dateInput" style="height: 38px;" required>
                                     </div>
                                     </div>
+                                    <div class="row align-items-start" id="localTaxes" name="localTaxes" style="padding-top:10px;">
+                                        <div class="col">
+                                            <span class="valuePadding" style="font-weight: bold; "><input type="number" name="addedValueTaxesInput"  id="addedValueTaxesInput" style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المضافة" class="form-control " required />  %</span>  
+                                        </div>
+                                    </div>
                                     <div class="row align-items-start" style="padding-top:10px;">
                                         <div class="col">
                                             <input type="text" name="noteInput"  style="height: 38px;width: 500px; margin-left: 17px;" placeholder="Enter invoice note" class="form-control item_cost_list" required />
@@ -50,7 +55,7 @@
                                                 <table class="table table-borderless " id="dynamic_field" name="dynamic_field">  
                                                     <tr>  
                                                         <td><input type="text"  name="item_name[]" placeholder="Enter item name" class="form-control item_name_list" required /></td> 
-                                                        <td><input type="number" name="item_quantity[]" placeholder="Enter item quantity" class="form-control item_quantity_list" required /></td> 
+                                                        <td><input type="text" name="item_chassis_number[]" placeholder="Enter chassis number " class="form-control item_chassis_number_list" required /></td> 
                                                         <td><input type="number" name="item_cost[]" placeholder="Enter item cost" class="form-control item_cost_list" required /></td> 
                                                         <td><button type="button" name="add" id="add" class="btn btn-success" >+</button></td>  
                                                     </tr>  
@@ -119,12 +124,42 @@
          var i=1;  
          $('#add').click(function(){  
               i++;  
-              $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="item_name[]" placeholder="Enter your item name" class="form-control item_name_list" /></td><td><input type="text" name="item_quantity[]" placeholder="Enter item quantity" class="form-control item_quantity_list" /></td> <td><input type="number" name="item_cost[]" placeholder="Enter item cost" class="form-control item_cost_list" required /></td> <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+              $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="item_name[]" placeholder="Enter your item name" class="form-control item_name_list" /></td><td><input type="text" name="item_chassis_number[]" placeholder="Enter item chassis number" class="form-control item_chassis_number_list" /></td> <td><input type="number" name="item_cost[]" placeholder="Enter item cost" class="form-control item_cost_list" required /></td> <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
          });  
          $(document).on('click', '.btn_remove', function(){  
               var button_id = $(this).attr("id");   
               $('#row'+button_id+'').remove();  
-         });  
+         });
+         $('#typeInput').change(function(){
+            var selectedType = $(this).children("option:selected").val();
+            if(selectedType == 'imported')
+            {
+               $('<div class="row align-items-start" id="importedTaxes" name="importedTaxes" style="padding-top:10px;">'+
+                    '<div class="col">' +
+                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes1Input"  id="importedTaxes1Input" style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المقبولة" class="form-control " required />  %</span>'+
+                    '</div>'+
+                    '<div class="col">' +
+                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes2Input"  id="importedTaxes2Input"  style="height: 38px;width:130px; margin-left: 17px;" placeholder="مصروفات مشتريات" class="form-control " required />  %</span>'+
+                    '</div>'+
+                    '<div class="col">' +
+                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes3Input"  id="importedTaxes3Input"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="مصروفات بنكية" class="form-control " required />  %</span>'+
+                    '</div>'+
+                    '<div class="col">' +
+                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes4Input"  id="importedTaxes4Input"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="جمارك" class="form-control " required />  %</span>'+
+                    '</div>'+
+                    '<div class="col">' +
+                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes5Input"  id="importedTaxes5Input"  style="height: 38px;width:150px; margin-left: 17px;" placeholder="جاري مصلحة الضرائب" class="form-control " required />  %</span>'+
+                    '</div>'+
+                '</div>').insertAfter('#localTaxes');
+                $('#addedValueTaxesInput').val('');
+            }
+            else
+            {
+                $('#addedValueTaxesInput').val(14);
+                $('#importedTaxes').remove();
+            }
+            
+        });
     });  
 </script>
 <script>
@@ -135,3 +170,33 @@
         });
 </script>
 @endsection
+
+{{-- if(selectedType === "imported")
+            {
+                alert("You have selected the country - " + selectedType);
+                $(#localTaxes).after('
+                <div class="row align-items-start" style="padding-top:10px;">\
+                    <div class="col">\
+                        <span class="valuePadding" style="font-weight: bold; "><input type="number" name="addedTaxesInput"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المضافة" class="form-control " required />  %</span>\
+                    </div>\
+                    <div class="col">\
+                        <span class="valuePadding" style="font-weight: bold; "><input type="number" name="addedTaxesInput"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المضافة" class="form-control " required />  %</span>\
+                    </div>\
+                    <div class="col">\
+                        <span class="valuePadding" style="font-weight: bold; "><input type="number" name="addedTaxesInput"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المضافة" class="form-control " required />  %</span>\
+                    </div>\
+                    <div class="col">\
+                        <span class="valuePadding" style="font-weight: bold; "><input type="number" name="addedTaxesInput"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المضافة" class="form-control " required />  %</span>\
+                    </div>\
+                    <div class="col">\
+                        <span class="valuePadding" style="font-weight: bold; "><input type="number" name="addedTaxesInput"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المضافة" class="form-control " required />  %</span>\
+                    </div>\
+                    <div class="col">\
+                        <span class="valuePadding" style="font-weight: bold; "><input type="number" name="addedTaxesInput"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المضافة" class="form-control " required />  %</span>\
+                    </div>\
+                </div>\
+                ');
+            }
+            else{
+                alert("else - " + selectedType);
+            } --}}
