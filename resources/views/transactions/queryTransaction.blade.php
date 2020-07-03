@@ -66,11 +66,13 @@ Banks Transactions
     <table id="transTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
         <thead>
             <tr>
-                <th scope='col' class='text-center' >رقم الحساب</th>
-                <th scope='col' class='text-center' >التاريخ</th>
-                <th scope='col' class='text-center' >نوع المعاملة</th>
-                <th scope='col' class='text-center' >القيمة</th>
-                <th scope='col' class='text-center' >البيان</th>
+                <th scope='col' class='text-left' >رقم الحساب</th>
+                <th scope='col' class='text-left' >التاريخ</th>
+                <th scope='col' class='text-left' >نوع المعاملة</th>
+                <th scope='col' class='text-left' >القيمة</th>
+                <th scope='col' class='text-left' >رصيد الحساب</th>
+                <th scope='col' class='text-left' >رصيد البنوك</th>
+                <th scope='col' class='text-left' >البيان</th>
             </tr>
         </thead>
         <tbody>

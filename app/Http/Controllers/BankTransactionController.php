@@ -20,53 +20,9 @@ class BankTransactionController extends Controller
     public function postCreateTransaction (Request $request)
     {
         $bank = DB::table('banks')->where('accountNumber', $request-> accountNumberInput)->first();
-        // $prevTransaction = BankTransaction::where('bank_id', $bank->id)->whereDate('date','<=',$request['dateInput'])->orderBy('date','Desc')->orderBy('id','Desc')->first();
-        $prevTransaction = BankTransaction::where('bank_id', $bank->id)->whereDate('date','<=',$request['dateInput'])->orderBy('date','Desc')->first();
-        if(!empty($prevTransaction))
-            $prevTransaction = BankTransaction::where('bank_id', $bank->id)->whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
-
-
-        // Log::debug('previous');
-        // if(!empty($prevTransaction))
-        //     Log::debug($prevTransaction);
-        $followingTransactions = BankTransaction::where('bank_id', $bank->id)->whereDate('date','>',$request['dateInput'])->orderBy('date','Asc')->get();
-        // Log::debug('following');
-        // Log::debug($followingTransactions);
-
-
-        if(!empty($prevTransaction))
-        {
-            if(!strcmp($request['typeInput'],"add"))
-                $currentBalanceInput = $prevTransaction->currentBankBalance +  $request['valueInput'];
-            else
-                $currentBalanceInput = $prevTransaction->currentBankBalance -  $request['valueInput'];
-        }
-        else
-        {
-            if(!strcmp($request['typeInput'],"add"))
-                $currentBalanceInput = $bank->intialBalance + $request['valueInput'];
-            else
-                $currentBalanceInput = $bank->intialBalance - $request['valueInput'];
-        }
-            
-        // Log::debug('current');
-        // Log::debug($currentBalanceInput);
-
-        // if(!strcmp($request['typeInput'],"add"))
-        //     $accumulatedBalance = $currentBalanceInput + $request['valueInput'];
-        // else
-        //     $accumulatedBalance = $currentBalanceInput - $request['valueInput'];
-
-        $accumulatedBalance = $currentBalanceInput;
-
-        foreach($followingTransactions as $trans)
-        {            
-            if(!strcmp($trans->type,"ايداع"))
-                $accumulatedBalance = $accumulatedBalance + $trans->value;
-            else
-                $accumulatedBalance = $accumulatedBalance - $trans->value;
-            BankTransaction::where('id', $trans->id)-> update(['currentBankBalance'=>$accumulatedBalance]);
-        }
+        
+        $currentBalanceInput = BankTransaction::updateCurrentTotal_bank($bank, $request['dateInput'],$request['valueInput'], $request['typeInput']);
+        $currentAllBalanceInput = BankTransaction::updateCurrentTotal_AllBanks($request['dateInput'],$request['valueInput'], $request['typeInput']);
         if(!strcmp($request['typeInput'],"add") )
         {
             DB::table('bank_transactions')->insert([
@@ -76,7 +32,8 @@ class BankTransactionController extends Controller
                 'value'=> $request['valueInput'],
                 'note' => $request['noteInput'],
                 'bank_id'=> $bank->id,
-                'currentBankBalance' => $currentBalanceInput
+                'currentBankBalance' => $currentBalanceInput,
+                'currentAllBanksBalance' => $currentAllBalanceInput
             ]);
             DB::table('banks')->where('id', $bank-> id)->increment('currentBalance',$request['valueInput']);
         }
@@ -89,7 +46,8 @@ class BankTransactionController extends Controller
                 'value'=> $request['valueInput'],
                 'note' => $request['noteInput'],
                 'bank_id'=> $bank->id,
-                'currentBankBalance' => $currentBalanceInput
+                'currentBankBalance' => $currentBalanceInput,
+                'currentAllBanksBalance' => $currentAllBalanceInput
             ]);
             DB::table('banks')->where('id', $bank-> id)->decrement('currentBalance',$request['valueInput']);
         }

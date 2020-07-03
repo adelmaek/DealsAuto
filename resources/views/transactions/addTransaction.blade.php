@@ -89,7 +89,8 @@
                                 <th scope="col" class="text-center" >نوع المعاملة</th>
                                 <th scope="col" class="text-center">القيمة</th>
                                 <th scope="col" class="text-center" >البيان</th>
-                                <th scope="col" class="text-center" >الحساب الحالي</th>
+                                <th scope="col" class="text-center" >رصيد الحساب</th>
+                                <th scope="col" class="text-center" >رصيد البنوك</th>
                                 <th scope="col" class="text-center">مسح</th>
                             </tr>
                         </thead>
@@ -102,6 +103,7 @@
                                 <td style="text-align:center">{{$transaction->value}}</td>
                                 <td style="text-align:center">{{$transaction->note}}</td>
                                 <td style="text-align:center">{{$transaction->currentBankBalance}}</td>
+                                <td style="text-align:center">{{$transaction->currentAllBanksBalance}}</td>
                                 <td style="text-align:center">
                                     <a class="btn btn-danger" href="{{route('delTransaction',['transaction_id'=>$transaction->id, 'accNumber'=>$transaction->accountNumber])}}" role="button">Delete</a>
                                 </td>

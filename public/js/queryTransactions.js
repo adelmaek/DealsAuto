@@ -30,6 +30,8 @@ $(document).ready(function(){
                 { "data": "date" },
                 { "data": "type" },
                 { "data": "value" },
+                { "data": "currentBankBalance" },
+                { "data": "currentAllBanksBalance" },
                 { "data": "note" }
             ],
             "ajax": "getQueriedTrans/"+ bank + ',' + fromDate + ',' + toDate,
