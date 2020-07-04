@@ -24,6 +24,7 @@ class CreateBankTransactionsTable extends Migration
             $table->integer('bank_id');
             $table->double('currentBankBalance');
             $table->double('currentAllBanksBalance');
+            $table->string('action');
         });
     }
 

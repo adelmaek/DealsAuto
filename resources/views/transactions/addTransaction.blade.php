@@ -54,6 +54,8 @@
                                             <option value="add">ايداع</option>
                                             <option value="sub">سحب</option>
                                             <option value="addCash">ايداع كاش</option>
+                                            <option value="subToNormalCash">تمويل الخزنة</option>
+                                            <option value="subToCustodyCash">تمويل العهدة</option>
                                         </select>
                                     </td>
                                     <td>

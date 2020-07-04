@@ -23,6 +23,7 @@ class CashTransaction extends Migration
             $table->string('note');
             $table->double('currentCashNameTotal',40,3)->default(0);
             $table->double('currentAllCashTotal',40,3)->default(0);
+            $table->string('action');
             
             });
     }
