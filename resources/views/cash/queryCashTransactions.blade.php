@@ -45,7 +45,8 @@ Cash Transactions
         <table id="cashTransTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
             <thead>
                 <tr>
-                    <th scope="col" class="text-left" >نوع المعاملة</th> 
+                    <th scope="col" class="text-left" >نوع المعاملة</th>
+                    <th scope="col" class="text-left" >اسم الخزنة</th>
                     <th scope="col" class="text-left">القيمة</th>
                     <th scope="col" class="text-left" >التاريخ</th>
                     <th scope="col" class="text-left" >البيان</th>
@@ -88,6 +89,7 @@ $(document).ready(function(){
             "processing": true,
             "columns": [
                 { "data": "type" },
+                {"data" : "name"},
                 { "data": "value" },
                 { "data": "date" },
                 { "data": "note" },

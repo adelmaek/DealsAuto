@@ -141,7 +141,13 @@ class CashTransactionController extends Controller
             $transaction = cashTransaction::whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'DESC')->get();
           
         }
-        // Log::debug($transaction);
+        foreach($transaction as $trans)
+        {
+            if(!strcmp('normalCash', $trans->name))
+                $trans->name = 'الخزنة';
+            else
+                $trans->name = 'خزنة العهدة';
+        }
         return Datatables::of($transaction)->make(true);
     }
 }
