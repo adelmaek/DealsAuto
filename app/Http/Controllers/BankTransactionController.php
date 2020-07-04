@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use App\Bank;
 use App\BankTransaction;
+use App\CashTransaction;
 use Illuminate\Http\Request;
 use DB;
 use Log;
@@ -23,7 +24,11 @@ class BankTransactionController extends Controller
         
         $currentBalanceInput = BankTransaction::updateCurrentTotal_bank($bank, $request['dateInput'],$request['valueInput'], $request['typeInput']);
         $currentAllBalanceInput = BankTransaction::updateCurrentTotal_AllBanks($request['dateInput'],$request['valueInput'], $request['typeInput']);
-        if(!strcmp($request['typeInput'],"add") )
+        
+        if(!strcmp($request['typeInput'],'addCash'))
+            CashTransaction::insert_transaction($request['valueInput'],$request['dateInput'],'sub',$request['noteInput'],'normalCash');
+       
+        if(!strcmp($request['typeInput'],"add"))
         {
             DB::table('bank_transactions')->insert([
                 'accountNumber' => $request['accountNumberInput'],
@@ -52,6 +57,21 @@ class BankTransactionController extends Controller
                 'currentAllBanksBalance' => $currentAllBalanceInput
             ]);
             DB::table('banks')->where('id', $bank-> id)->decrement('currentBalance',$request['valueInput']);
+        }
+        elseif(!strcmp($request['typeInput'],'addCash'))
+        {
+            DB::table('bank_transactions')->insert([
+                'accountNumber' => $request['accountNumberInput'],
+                'date' => $request['dateInput'],
+                'valueDate' => $request['valueDateInput'],
+                'type' => "ايداع كاش",
+                'value'=> $request['valueInput'],
+                'note' => $request['noteInput'],
+                'bank_id'=> $bank->id,
+                'currentBankBalance' => $currentBalanceInput,
+                'currentAllBanksBalance' => $currentAllBalanceInput
+            ]);
+            DB::table('banks')->where('id', $bank-> id)->increment('currentBalance',$request['valueInput']);
         }
         return redirect()->back();
     }

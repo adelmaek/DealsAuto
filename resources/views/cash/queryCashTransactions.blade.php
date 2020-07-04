@@ -49,7 +49,8 @@ Cash Transactions
                     <th scope="col" class="text-left">القيمة</th>
                     <th scope="col" class="text-left" >التاريخ</th>
                     <th scope="col" class="text-left" >البيان</th>
-                    <th scope="col" class="text-left">اجمالي العملة </th>
+                    <th scope="col" class="text-left">رصيد الخزنة</th>
+                    <th scope="col" class="text-left">رصيد الخزن</th>
                 </tr>
             </thead>
             <tbody>
@@ -90,7 +91,8 @@ $(document).ready(function(){
                 { "data": "value" },
                 { "data": "date" },
                 { "data": "note" },
-                { "data": "currentTotal" }
+                { "data": "currentCashNameTotal" },
+                { "data": "currentAllCashTotal" }
             ],
             "ajax": "getCashQueriedTrans/" + fromDate + ',' + toDate,
             dom: 'Bfrtip',

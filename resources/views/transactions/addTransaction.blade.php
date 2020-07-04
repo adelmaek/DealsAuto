@@ -43,16 +43,17 @@
                                                                                 
                                     </td>
                                     <td>
-                                        <input type="date" class= "custom-select custom-select-lg" id="dateInput" name="dateInput" style="height: 40px;" required>
+                                        <input type="date" class= "custom-select custom-select-sm" id="dateInput" name="dateInput" style="height: 40px;" required>
                                     </td>
                                     <td>
-                                        <input type="date" class= "custom-select custom-select-lg" id="valueDateInput" name="valueDateInput" style="height: 40px;" required>
+                                        <input type="date" class= "custom-select custom-select-sm" id="valueDateInput" name="valueDateInput" style="height: 40px;" required>
                                     </td>
                                     <td>
-                                        <select class="custom-select custom-select-lg" style="height: 40px;" id="typeInput" name="typeInput" required>
+                                        <select class="custom-select custom-select-lg" style="height: 45px;width: 150px;" id="typeInput" name="typeInput" required>
                                             <option value="" disabled selected>نوع المعاملة</option>
                                             <option value="add">ايداع</option>
                                             <option value="sub">سحب</option>
+                                            <option value="addCash">ايداع كاش</option>
                                         </select>
                                     </td>
                                     <td>

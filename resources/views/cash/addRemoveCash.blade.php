@@ -21,7 +21,8 @@
                     <table class="table ">
                         <thead>
                             <tr>
-                                <th scope="col" class="text-center" >نوع المعاملة</th> 
+                                <th scope="col" class="text-center" >نوع المعاملة</th>
+                                <th scope="col" class="text-center" >اسم الخزنة</th>  
                                 <th scope="col" class="text-center">القيمة</th>
                                 {{-- <th scope="col" class="text-center" >العملة</th> --}}
                                 <th scope="col" class="text-center" >التاريخ</th>
@@ -37,6 +38,13 @@
                                             <option value="" disabled selected>نوع المعاملة</option>
                                             <option value="add">ايداع</option>
                                             <option value="sub">سحب</option>
+                                        </select>
+                                    </td>
+                                    <td>
+                                        <select class="custom-select custom-select-lg" style="height: 42px;" id="nameInput" name="nameInput" required>
+                                            <option value="" disabled selected>اسم الخزنة</option>
+                                            <option value="normalCash">الخزنة</option>
+                                            <option value="custodyCash">خزنة العهدة</option>
                                         </select>
                                     </td>
                                     <td>
@@ -72,12 +80,14 @@
                     <table id="cashTransTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
-                                <th scope="col" class="text-center" >نوع المعاملة</th> 
+                                <th scope="col" class="text-center" >نوع المعاملة</th>
+                                <th scope="col" class="text-center" >اسم الخزنة</th>  
                                 <th scope="col" class="text-center">القيمة</th>
                                 {{-- <th scope="col" class="text-center" >العملة</th> --}}
                                 <th scope="col" class="text-center" >التاريخ</th>
                                 <th scope="col" class="text-center" >البيان</th>
-                                <th scope="col" class="text-center">الرصيد</th>
+                                <th scope="col" class="text-center">رصيد الخزينة</th>
+                                <th scope="col" class="text-center">رصيد الخزن</th>
                                 <th scope="col" class="text-center">مسح</th>
                             </tr>
                         </thead>
@@ -85,11 +95,17 @@
                             @foreach ($cashTransactions as $cashTransaction)
                                 <tr>
                                     <th scope="row" class="text-center">{{$cashTransaction->type}}</th>
+                                    @if(!strcmp('normalCash', $cashTransaction->name))
+                                        <th scope="row" class="text-center">الخزنة</th>
+                                    @else
+                                        <th scope="row" class="text-center">خزنة العهدة</th>
+                                    @endif
                                     <td class="text-center">{{$cashTransaction->value}}</td>
                                     {{-- <td class="text-center">{{$cashTransaction->currency}}</td> --}}
                                     <td class="text-center">{{$cashTransaction->date}}</td>
                                     <td class="text-center">{{$cashTransaction->note}}</td>
-                                    <td class="text-center">{{$cashTransaction->currentTotal}}</td>
+                                    <td class="text-center">{{$cashTransaction->currentCashNameTotal}}</td>
+                                    <td class="text-center">{{$cashTransaction->currentAllCashTotal}}</td>
                                     <td style="text-align:center">
                                         <a class="btn btn-danger" href="{{route('delCashTransaction',['cashTransaction_id'=>$cashTransaction->id])}}" role="button">Delete</a>
                                     </td>

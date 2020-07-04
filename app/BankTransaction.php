@@ -22,14 +22,14 @@ class BankTransaction extends Model
 
         if(!empty($prevTransaction))
         {
-            if(!strcmp($typeInput,"add"))
+            if(!strcmp($typeInput,"add") || !strcmp($typeInput,"addCash"))
                 $currentBalanceInput = $prevTransaction->currentBankBalance +  $valueInput;
             else
                 $currentBalanceInput = $prevTransaction->currentBankBalance -  $valueInput;
         }
         else
         {
-            if(!strcmp($typeInput,"add"))
+            if(!strcmp($typeInput,"add") || !strcmp($typeInput,"addCash"))
                 $currentBalanceInput = $bank->intialBalance + $valueInput;
             else
                 $currentBalanceInput = $bank->intialBalance - $valueInput;
@@ -39,7 +39,7 @@ class BankTransaction extends Model
 
         foreach($followingTransactions as $trans)
         {            
-            if(!strcmp($trans->type,"ايداع"))
+            if(!strcmp($trans->type,"ايداع") || !strcmp($trans->type,"ايداع كاش"))
                 $accumulatedBalance = $accumulatedBalance + $trans->value;
             else
                 $accumulatedBalance = $accumulatedBalance - $trans->value;
@@ -66,14 +66,14 @@ class BankTransaction extends Model
 
         if(!empty($prevTransaction))
         {
-            if(!strcmp($typeInput,"add"))
+            if(!strcmp($typeInput,"add") || !strcmp($typeInput,"addCash"))
                 $currentBalanceInput = $prevTransaction->currentAllBanksBalance +  $valueInput;
             else
                 $currentBalanceInput = $prevTransaction->currentAllBanksBalance -  $valueInput;
         }
         else
         {
-            if(!strcmp($typeInput,"add"))
+            if(!strcmp($typeInput,"add") || !strcmp($typeInput,"addCash"))
                 $currentBalanceInput = $initialBanksBalance + $valueInput;
             else
                 $currentBalanceInput = $initialBanksBalance - $valueInput;
@@ -83,7 +83,7 @@ class BankTransaction extends Model
 
         foreach($followingTransactions as $trans)
         {            
-            if(!strcmp($trans->type,"ايداع"))
+            if(!strcmp($trans->type,"ايداع") || !strcmp($trans->type,"ايداع كاش"))
                 $accumulatedBalance = $accumulatedBalance + $trans->value;
             else
                 $accumulatedBalance = $accumulatedBalance - $trans->value;

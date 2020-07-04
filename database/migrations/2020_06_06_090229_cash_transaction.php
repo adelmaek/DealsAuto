@@ -16,11 +16,13 @@ class CashTransaction extends Migration
         Schema::create('cash_transactions', function (Blueprint $table) {
 
             $table->bigIncrements('id');
+            $table->string('name');
             $table->double('value',40,3)->default(0);
             $table->string('type');
             $table->date('date');
             $table->string('note');
-            $table->double('currentTotal',40,3)->default(0);
+            $table->double('currentCashNameTotal',40,3)->default(0);
+            $table->double('currentAllCashTotal',40,3)->default(0);
             
             });
     }

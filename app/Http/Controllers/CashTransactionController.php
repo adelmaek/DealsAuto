@@ -24,60 +24,63 @@ class CashTransactionController extends Controller
 
     public function postAddRemoveCash(Request $request)
     {
-        $allCashTrans =cashTransaction::all();
-        $prevTransaction = cashTransaction::whereDate('date','<=',$request['dateInput'])->orderBy('date','Desc')->first();
-        if(!empty($prevTransaction))
-            $prevTransaction = cashTransaction::whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
+        // $allCashTrans =cashTransaction::all();
+        // $currentBalanceInput = cashTransaction::insertion_update_currentAllCashTotal($request['dateInput'],$request['valueInput'],$request['typeInput']);
+        // // $prevTransaction = cashTransaction::whereDate('date','<=',$request['dateInput'])->orderBy('date','Desc')->first();
+        // // if(!empty($prevTransaction))
+        // //     $prevTransaction = cashTransaction::whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
 
-        $followingTransactions = cashTransaction::whereDate('date','>',$request['dateInput'])->orderBy('date','Asc')->get();
+        // // $followingTransactions = cashTransaction::whereDate('date','>',$request['dateInput'])->orderBy('date','Asc')->get();
 
 
-        if(!empty($prevTransaction))
-        {
-            if(!strcmp($request['typeInput'],"add"))
-                $currentBalanceInput = $prevTransaction->currentTotal +  $request['valueInput'];
-            else
-                $currentBalanceInput = $prevTransaction->currentTotal -  $request['valueInput'];
-        }
-        else
-        {
+        // // if(!empty($prevTransaction))
+        // // {
+        // //     if(!strcmp($request['typeInput'],"add"))
+        // //         $currentBalanceInput = $prevTransaction->currentTotal +  $request['valueInput'];
+        // //     else
+        // //         $currentBalanceInput = $prevTransaction->currentTotal -  $request['valueInput'];
+        // // }
+        // // else
+        // // {
  
-            $currentBalanceInput =  $request['valueInput'];
-        }
-        $accumulatedBalance = $currentBalanceInput;
-        foreach($followingTransactions as $trans)
-        {            
-            if(!strcmp($trans->type,"ايداع"))
-                $accumulatedBalance = $accumulatedBalance + $trans->value;
-            else
-                $accumulatedBalance = $accumulatedBalance - $trans->value;
-            cashTransaction::where('id', $trans->id)-> update(['currentTotal'=>$accumulatedBalance]);
-        }
+        // //     $currentBalanceInput =  $request['valueInput'];
+        // // }
+        // // $accumulatedBalance = $currentBalanceInput;
+        // // foreach($followingTransactions as $trans)
+        // // {            
+        // //     if(!strcmp($trans->type,"ايداع"))
+        // //         $accumulatedBalance = $accumulatedBalance + $trans->value;
+        // //     else
+        // //         $accumulatedBalance = $accumulatedBalance - $trans->value;
+        // //     cashTransaction::where('id', $trans->id)-> update(['currentTotal'=>$accumulatedBalance]);
+        // // }
 
 
-        if(!strcmp($request['typeInput'],"add") )
-        {
-            Log::debug("add cond");
-            DB::table('cash_transactions')->insert([
-                'value' => $request['valueInput'],
-                'date' => $request['dateInput'],
-                'type' => 'ايداع',
-                'note' => $request['noteInput'],
-                'currentTotal' =>  $currentBalanceInput
-            ]);
-        }
-        else
-        {   
-            Log::debug("sub cond");
-            DB::table('cash_transactions')->insert([
-            'value' => $request['valueInput'],
-            'date' => $request['dateInput'],
-            'type' => 'سحب',
-            'note' => $request['noteInput'],
-            'currentTotal' =>  $currentBalanceInput
-                ]);
-        }
-        
+        // if(!strcmp($request['typeInput'],"add") )
+        // {
+        //     Log::debug("add cond");
+        //     DB::table('cash_transactions')->insert([
+        //         'value' => $request['valueInput'],
+        //         'date' => $request['dateInput'],
+        //         'type' => 'ايداع',
+        //         'note' => $request['noteInput'],
+        //         'currentTotal' =>  $currentBalanceInput,
+        //         'name' => $request['nameInput']
+        //     ]);
+        // }
+        // else
+        // {   
+        //     Log::debug("sub cond");
+        //     DB::table('cash_transactions')->insert([
+        //         'value' => $request['valueInput'],
+        //         'date' => $request['dateInput'],
+        //         'type' => 'سحب',
+        //         'note' => $request['noteInput'],
+        //         'currentTotal' =>  $currentBalanceInput,
+        //         'name' => $request['nameInput']
+        //     ]);
+        // }
+        cashTransaction::insert_transaction($request['valueInput'],$request['dateInput'],$request['typeInput'], $request['noteInput'],$request['nameInput']);
         return redirect()->back();
     }
 
