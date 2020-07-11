@@ -341,6 +341,30 @@ Route::group(['middleware'=>['web']],function(){
     // end Partners
     //================================================================================================
 
+    //================================================================================================
+    // GeneralExpensesTransactions
+    //================================================================================================
+
+    Route::get('/generalExpenses',[
+        'uses' => 'GeneralExpensesTransactionController@getAddGenExpTrans',
+        'as'=> 'generalExpenses',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/generalExpenses',[
+        'uses' => 'GeneralExpensesTransactionController@postAddGenExpTrans',
+        'as'=> 'generalExpenses',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/delGeneralExpenses/{trans_id}',[
+        'uses' => 'GeneralExpensesTransactionController@getDelGenExpTrans',
+        'as'=> 'delGeneralExpenses',
+        'middleware' => 'auth'
+    ]);
+
+    //================================================================================================
+    // end GeneralExpensesTransactions
+    //================================================================================================
+
 });
 
 

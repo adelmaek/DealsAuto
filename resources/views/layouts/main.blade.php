@@ -176,7 +176,7 @@
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-directions"></i><span class="hide-menu">مصروفات عامة</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="#">اضافة معاملة</a></li>
+                                <li><a href="generalExpenses">اضافة معاملة</a></li>
                             </ul>
                         </li>
                     </ul>
