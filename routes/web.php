@@ -266,6 +266,81 @@ Route::group(['middleware'=>['web']],function(){
     //================================================================================================
     // end Purchases
     //================================================================================================
+
+    //================================================================================================
+    // MiscellaneousIncome
+    //================================================================================================
+    Route::get('/MITrans',[
+        'uses' => 'MiscellaneousIncomeController@getMITransactions',
+        'as'=> 'MITrans',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/MITrans',[
+        'uses' => 'MiscellaneousIncomeController@postMITransactions',
+        'as'=> 'insertMITrans',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/delMITrans/{MITransaction_id}',[
+        'uses' => 'MiscellaneousIncomeController@getDelMITransaction',
+        'as'=> 'delMITrans',
+        'middleware' => 'auth'
+    ]);
+   
+    //================================================================================================
+    // end MiscellaneousIncome
+    //================================================================================================
+
+     //================================================================================================
+    // Partners
+    //================================================================================================
+    Route::get('/addPartner',[
+        'uses' => 'PartnerController@getAddPartner',
+        'as'=> 'addPartner',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/addPartner',[
+        'uses' => 'PartnerController@postAddPartner',
+        'as'=> 'addPartner',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/delPartner/{partner_id}',[
+        'uses' => 'PartnerController@getDelPartner',
+        'as'=> 'delPartner',
+        'middleware' => 'auth'
+    ]);
+
+    Route::get('/addPartnerTrans',[
+        'uses' => 'PartnerTransactionController@getAddPartnerTransaction',
+        'as'=> 'addPartnerTrans',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/addPartnerTrans',[
+        'uses' => 'PartnerTransactionController@postAddPartnerTransaction',
+        'as'=> 'addPartnerTrans',
+        'middleware' => 'auth'
+    ]);
+
+    Route::get('/delPartnerTrans/{trans_id}',[
+        'uses' => 'PartnerTransactionController@getDelPartnerTransaction',
+        'as'=> 'delPartnerTrans',
+        'middleware' => 'auth'
+    ]);
+
+    Route::get('/queryPartnerTrans',[
+        "uses" => 'PartnerTransactionController@getQueryPartnerTransaction',
+        'as' => 'queryPartnerTrans',
+        'middleware' => 'auth'
+    ]);
+    
+    Route::get('/getQueriedPartnersTrans/{partner},{fromDate},{toDate}',[
+        'uses' => 'PartnerTransactionController@getQueriedPartnerTransactions',
+        'as' => 'getQueriedPartnerTrans',
+        'middleware' => 'auth'
+    ]);
+     //================================================================================================
+    // end Partners
+    //================================================================================================
+
 });
 
 

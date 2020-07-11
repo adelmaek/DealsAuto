@@ -162,6 +162,23 @@
                                 <li><a href="queryPurchaseTrans">عرض التعاملات</a></li>
                             </ul>
                         </li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-trophy"></i><span class="hide-menu">ايرادات متنوعة</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="MITrans">التعاملات</a></li>
+                            </ul>
+                        </li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-mustache"></i><span class="hide-menu">الشركاء</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="addPartner">اضافة شريك</a></li>
+                                <li><a href="addPartnerTrans">اضافة معاملة</a></li>
+                                <li><a href="queryPartnerTrans">عرض التعاملات</a></li>
+                            </ul>
+                        </li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-directions"></i><span class="hide-menu">مصروفات عامة</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="#">اضافة معاملة</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

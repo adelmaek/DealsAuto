@@ -5,6 +5,10 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use DB;
 use Log;
+use App\PartnerTransaction;
+use App\CashTransaction;
+use App\MiscellaneousIncome;
+
 class BankTransaction extends Model
 {
     public $timestamps = false;
@@ -154,7 +158,7 @@ class BankTransaction extends Model
     
     public static function del_transaction($transaction_id, $accNumber)
     {
-        $transaction = BankTransaction::where('id',$transaction_id,)->first();
+        $transaction = BankTransaction::where('id',$transaction_id)->first();
         if(!strcmp($transaction->action,"add") )
         {
             DB::table('banks')->where('accountNumber', $accNumber)->decrement('currentBalance',$transaction->value);
@@ -168,4 +172,164 @@ class BankTransaction extends Model
         BankTransaction::del_update_currentTotal($transaction, $accNumber);
         BankTransaction::del_update_currentTotal_AllBanks($transaction, $accNumber);
     }
+
+
+
+    public static function insert_transaction($accountNumberInput, $typeInput, $dateInput, $valueInput, $noteInput, $valueDateInput)
+    {
+        $bank = DB::table('banks')->where('accountNumber', $accountNumberInput)->first();    
+        
+        if(!strcmp($typeInput,'addCash'))
+        {
+            $currentBalanceInput = BankTransaction::updateCurrentTotal_bank($bank, $dateInput,$valueInput, 'add');
+            $currentAllBalanceInput = BankTransaction::updateCurrentTotal_AllBanks($dateInput,$valueInput, 'add');
+            CashTransaction::insert_transaction($valueInput,$dateInput,'sub',$noteInput,'normalCash');
+
+        }
+        elseif(!strcmp($typeInput,'subToNormalCash'))
+        {
+            $currentBalanceInput = BankTransaction::updateCurrentTotal_bank($bank, $dateInput,$valueInput, 'sub');
+            $currentAllBalanceInput = BankTransaction::updateCurrentTotal_AllBanks($dateInput,$valueInput, 'sub');
+            CashTransaction::insert_transaction($valueInput,$dateInput,'add',$noteInput,'normalCash');
+        }   
+        elseif(!strcmp($typeInput,'subToCustodyCash'))
+        {
+            $currentBalanceInput = BankTransaction::updateCurrentTotal_bank($bank, $dateInput,$valueInput, 'sub');
+            $currentAllBalanceInput = BankTransaction::updateCurrentTotal_AllBanks($dateInput,$valueInput, 'sub');
+            CashTransaction::insert_transaction($valueInput,$dateInput,'add',$noteInput,'custodyCash');
+        }
+        elseif(!strcmp($typeInput,'personalSub'))
+        {
+            $currentBalanceInput = BankTransaction::updateCurrentTotal_bank($bank, $dateInput,$valueInput, 'sub');
+            $currentAllBalanceInput = BankTransaction::updateCurrentTotal_AllBanks($dateInput,$valueInput, 'sub');
+            // PartnerTransaction::insert_transaction($valueInput,$dateInput,'add',$noteInput);
+        }
+        elseif(!strcmp($typeInput, 'debtorInterest'))
+        {
+            $currentBalanceInput = BankTransaction::updateCurrentTotal_bank($bank, $dateInput,$valueInput, 'sub');
+            $currentAllBalanceInput = BankTransaction::updateCurrentTotal_AllBanks($dateInput,$valueInput, 'sub');
+            MiscellaneousIncome::insert_transaction($valueInput,$dateInput,'add',$noteInput);
+        }
+        else
+        {
+            $currentBalanceInput = BankTransaction::updateCurrentTotal_bank($bank, $dateInput,$valueInput,  $typeInput);
+            $currentAllBalanceInput = BankTransaction::updateCurrentTotal_AllBanks($dateInput,$valueInput,  $typeInput);
+        }
+
+            
+       
+        if(!strcmp($typeInput,"add"))
+        {
+            DB::table('bank_transactions')->insert([
+                'accountNumber' => $accountNumberInput,
+                'date' => $dateInput,
+                'valueDate' => $valueDateInput,
+                'type' => "ايداع",
+                'value'=> $valueInput,
+                'note' => $noteInput,
+                'bank_id'=> $bank->id,
+                'currentBankBalance' => $currentBalanceInput,
+                'currentAllBanksBalance' => $currentAllBalanceInput,
+                'action' => 'add'
+            ]);
+            DB::table('banks')->where('id', $bank-> id)->increment('currentBalance',$valueInput);
+        }
+        else if(!strcmp($typeInput,"sub"))
+        {
+            DB::table('bank_transactions')->insert([
+                'accountNumber' => $accountNumberInput,
+                'date' => $dateInput,
+                'valueDate' => $valueDateInput,
+                'type' => "سحب",
+                'value'=> $valueInput,
+                'note' => $noteInput,
+                'bank_id'=> $bank->id,
+                'currentBankBalance' => $currentBalanceInput,
+                'currentAllBanksBalance' => $currentAllBalanceInput,
+                'action'=>'sub'
+            ]);
+            DB::table('banks')->where('id', $bank-> id)->decrement('currentBalance',$valueInput);
+        }
+        elseif(!strcmp($typeInput,'addCash'))
+        {
+            DB::table('bank_transactions')->insert([
+                'accountNumber' => $accountNumberInput,
+                'date' => $dateInput,
+                'valueDate' => $valueDateInput,
+                'type' => "ايداع كاش",
+                'value'=> $valueInput,
+                'note' => $noteInput,
+                'bank_id'=> $bank->id,
+                'currentBankBalance' => $currentBalanceInput,
+                'currentAllBanksBalance' => $currentAllBalanceInput,
+                'action' => 'add'
+            ]);
+            DB::table('banks')->where('id', $bank-> id)->increment('currentBalance',$valueInput);
+        }
+        elseif(!strcmp($typeInput,'subToNormalCash'))
+        {
+            DB::table('bank_transactions')->insert([
+                'accountNumber' => $accountNumberInput,
+                'date' => $dateInput,
+                'valueDate' => $valueDateInput,
+                'type' => "تمويل الخزنة",
+                'value'=> $valueInput,
+                'note' => $noteInput,
+                'bank_id'=> $bank->id,
+                'currentBankBalance' => $currentBalanceInput,
+                'currentAllBanksBalance' => $currentAllBalanceInput,
+                'action' => 'sub'
+            ]);
+            DB::table('banks')->where('id', $bank-> id)->decrement('currentBalance',$valueInput);
+        }
+        elseif(!strcmp($typeInput,'subToCustodyCash'))
+        {
+            DB::table('bank_transactions')->insert([
+                'accountNumber' => $accountNumberInput,
+                'date' => $dateInput,
+                'valueDate' => $valueDateInput,
+                'type' => "تمويل العهدة",
+                'value'=> $valueInput,
+                'note' => $noteInput,
+                'bank_id'=> $bank->id,
+                'currentBankBalance' => $currentBalanceInput,
+                'currentAllBanksBalance' => $currentAllBalanceInput,
+                'action' => 'sub'
+            ]);
+            DB::table('banks')->where('id', $bank-> id)->decrement('currentBalance',$valueInput);
+        }
+        elseif(!strcmp($typeInput,'personalSub'))
+        {
+            DB::table('bank_transactions')->insert([
+                'accountNumber' => $accountNumberInput,
+                'date' => $dateInput,
+                'valueDate' => $valueDateInput,
+                'type' => "مسحوبات شخصية",
+                'value'=> $valueInput,
+                'note' => $noteInput,
+                'bank_id'=> $bank->id,
+                'currentBankBalance' => $currentBalanceInput,
+                'currentAllBanksBalance' => $currentAllBalanceInput,
+                'action' => 'sub'
+            ]);
+            DB::table('banks')->where('id', $bank-> id)->decrement('currentBalance',$valueInput);
+        }
+        elseif(!strcmp($typeInput,'debtorInterest'))
+        {
+            DB::table('bank_transactions')->insert([
+                'accountNumber' => $accountNumberInput,
+                'date' => $dateInput,
+                'valueDate' => $valueDateInput,
+                'type' => "فايدة مدينة",
+                'value'=> $valueInput,
+                'note' => $noteInput,
+                'bank_id'=> $bank->id,
+                'currentBankBalance' => $currentBalanceInput,
+                'currentAllBanksBalance' => $currentAllBalanceInput,
+                'action' => 'add'
+            ]);
+            DB::table('banks')->where('id', $bank-> id)->increment('currentBalance',$valueInput);
+        }
+    }
+
 }

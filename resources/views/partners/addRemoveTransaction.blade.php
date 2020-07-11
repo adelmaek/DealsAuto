@@ -12,7 +12,7 @@
         <br>
         <div class="card border-dark">
             <div class="card-header bg-dark">
-                <h4 class="m-b-0 text-white">Add Bank Transaction</h4>
+                <h4 class="m-b-0 text-white">Add Partner Transaction</h4>
             </div>
             <div class="card-body" style="
             width: auto;
@@ -21,21 +21,32 @@
                     <table class="table ">
                         <thead>
                             <tr>
-                                <th scope="col" class="text-center" >رقم الحساب</th>
+                                <th scope="col" class="text-center" >اسم الشريك</th>
+                                <th scope="col" class="text-center" >المصدر\الوجهة</th>
                                 <th scope="col" class="text-center" >التاريخ</th>
-                                <th scope="col" class="text-center" >value Date</th>
                                 <th scope="col" class="text-center" >نوع المعاملة</th>
                                 <th scope="col" class="text-center">القيمة</th>
                                 <th scope="col" class="text-center" >البيان</th>
-                                <th scope="col" class="text-center">اضافة\تعديل</th>
+                                <th scope="col" class="text-center">اضافة</th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
-                                <form id="transaction-form" class="form"action="{{route('insertTransaction')}}" method="post">
+                                <form id="transaction-form" class="form"action="{{route('addPartnerTrans')}}" method="post">
                                     <td>
-                                        <select class="custom-select custom-select-lg" style="height: 43px;" id="accountNumberInput" name="accountNumberInput" required>
-                                            <option value="" disabled selected>رقم الحساب</option>
+                                        <select class="custom-select custom-select-lg" style="height: 43px;" id="partnerInput" name="partnerInput" required>
+                                            <option value="" disabled selected>اسم الشريك</option>
+                                            @foreach($partners as $partner)
+                                                <option value="{{$partner->name}}">{{$partner->name}}</option>
+                                            @endforeach
+                                        </select>
+                                                                                
+                                    </td>
+                                    <td>
+                                        <select class="custom-select custom-select-lg" style="height: 43px;" id="sourceInput" name="sourceInput" required>
+                                            <option value="none" selected>لا يوجد</option>
+                                            <option value="normalCash">الخزنة</option>
+                                            <option value="custodyCash">خزنة العهدة</option>
                                             @foreach($banks as $bank)
                                                 <option value="{{$bank->accountNumber}}">{{$bank->bankName}}:{{$bank->accountNumber}}</option>
                                             @endforeach
@@ -46,17 +57,10 @@
                                         <input type="date" class= "custom-select custom-select-sm" id="dateInput" name="dateInput" style="height: 40px;" required>
                                     </td>
                                     <td>
-                                        <input type="date" class= "custom-select custom-select-sm" id="valueDateInput" name="valueDateInput" style="height: 40px;" required>
-                                    </td>
-                                    <td>
                                         <select class="custom-select custom-select-lg" style="height: 45px;width: 150px;" id="typeInput" name="typeInput" required>
                                             <option value="" disabled selected>نوع المعاملة</option>
                                             <option value="add">ايداع</option>
                                             <option value="sub">سحب</option>
-                                            <option value="addCash">ايداع كاش</option>
-                                            <option value="subToNormalCash">تمويل الخزنة</option>
-                                            <option value="subToCustodyCash">تمويل العهدة</option>
-                                            <option value="debtorInterest">فايدة مدينة</option>
                                         </select>
                                     </td>
                                     <td>
@@ -89,33 +93,31 @@
             width: auto;
             white-space: nowrap;">
                 <div class="table-responsive-sm">
-                    <table class="table ">
+                    <table id="partnerTransTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
-                                <th scope="col" class="text-center" >رقم الحساب</th>
+                                <th scope="col" class="text-center" >اسم الشريك</th>
                                 <th scope="col" class="text-center" >التاريخ</th>
-                                <th scope="col" class="text-center" >value Date</th>
                                 <th scope="col" class="text-center" >نوع المعاملة</th>
                                 <th scope="col" class="text-center">القيمة</th>
                                 <th scope="col" class="text-center" >البيان</th>
-                                <th scope="col" class="text-center" >رصيد الحساب</th>
-                                <th scope="col" class="text-center" >رصيد البنوك</th>
+                                <th scope="col" class="text-center" >رصيد الشريك</th>
+                                <th scope="col" class="text-center" >رصيد الشركاء</th>
                                 <th scope="col" class="text-center">مسح</th>
                             </tr>
                         </thead>
                         <tbody>
                             @foreach ($transactions as $transaction)
                             <tr>
-                                <td style="text-align:center">{{$transaction->accountNumber}}</td>
-                                <td style="text-align:center">{{$transaction->date}}</td>
-                                <td style="text-align:center">{{$transaction->valueDate}}</td>                                                    
+                                <td style="text-align:center">{{$transaction->partnerName}}</td>
+                                <td style="text-align:center">{{$transaction->date}}</td>                                                 
                                 <td style="text-align:center">{{$transaction->type}}</td>
                                 <td style="text-align:center">{{$transaction->value}}</td>
                                 <td style="text-align:center">{{$transaction->note}}</td>
-                                <td style="text-align:center">{{$transaction->currentBankBalance}}</td>
-                                <td style="text-align:center">{{$transaction->currentAllBanksBalance}}</td>
+                                <td style="text-align:center">{{$transaction->currentPartnerTotal}}</td>
+                                <td style="text-align:center">{{$transaction->currentAllPartnersTotal}}</td>
                                 <td style="text-align:center">
-                                    <a class="btn btn-danger" href="{{route('delTransaction',['transaction_id'=>$transaction->id, 'accNumber'=>$transaction->accountNumber])}}" role="button">Delete</a>
+                                    <a class="btn btn-danger" href="{{route('delPartnerTrans',['trans_id'=>$transaction->id])}}" role="button">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -126,4 +128,15 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('extraJS')
+<script>
+$('#partnerTransTable').DataTable({
+        "displayLength": 25,
+        "processing": true,
+        dom: 'frtip'
+    });
+    $('.buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
+</script>
 @endsection

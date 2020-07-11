@@ -43,11 +43,11 @@
     </div>
     <div class="row ">
         <div class="col ">
-            @if(count($suppliers)>0)
+            {{-- @if(count($suppliers)>0) --}}
                 <button type="button" class="btn waves-effect waves-light btn-dark" style="height: 38px;float: right;" id='applyQuery'>عرض</button>
-            @else
+            {{-- @else
             <button type="button" class="btn waves-effect waves-light btn-dark" style="height: 38px;float: right;" id='applyQuery' disabled>عرض</button>
-            @endif         
+            @endif          --}}
         </div>
         <div class="col ">
                 <input type="date" class="custom-select custom-select-lg" id="toDate" name="toDate" style="height: 38px;float: right;">
