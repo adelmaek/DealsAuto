@@ -369,6 +369,38 @@ Route::group(['middleware'=>['web']],function(){
     // end GeneralExpensesTransactions
     //================================================================================================
 
+    //================================================================================================
+    // taxesTransactions
+    //================================================================================================
+
+    Route::get('/TaxesTrans',[
+        'uses' => 'TaxesController@getAddTaxesTrans',
+        'as'=> 'TaxesTrans',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/TaxesTrans',[
+        'uses' => 'TaxesController@postAddTaxesTrans',
+        'as'=> 'TaxesTrans',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/delTaxesTransaction/{trans_id}',[
+        'uses' => 'TaxesController@getDelTaxesTrans',
+        'as'=> 'delTaxesTransaction',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/addedValue',[
+        'uses' => 'TaxesController@getAddedValue',
+        'as'=> 'addedValue',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/taxAuth',[
+        'uses' => 'TaxesController@getTaxAuth',
+        'as'=> 'taxAuth',
+        'middleware' => 'auth'
+    ]);
+    //================================================================================================
+    // end taxesTransactions
+    //================================================================================================
 });
 
 
