@@ -140,7 +140,14 @@ class SupplierTransactionController extends Controller
             if($trans->bill_id == -1)
                 $trans->setAttribute('bill_number','لا يوجد');
             else
-                $trans->setAttribute('bill_number',Bill::where('supplier_name',$trans->supplier_name)->first()->number);
+            {
+                $bill = Bill::where('supplier_name',$trans->supplier_name)->first();
+                if(!empty($bill))
+                    $trans->setAttribute('bill_number',$bill->number);
+                else
+                    $trans->setAttribute('bill_number',"لا يوجد");
+            }
+                
         }
         Log::debug($transaction);
         return Datatables::of($transaction)->make(true);

@@ -92,10 +92,10 @@ class PartnerTransaction extends Model
 
     public static function insert_transaction($valueInput,$dateInput,$typeInput,$noteInput,$partnerInput)
     {
-        Log::debug($partnerInput);
+        // Log::debug($partnerInput);
         
         $partner = Partner::where('name',$partnerInput)->first();
-        Log::debug($partner);
+        // Log::debug($partner);
         $currentPartnerTotal = PartnerTransaction::update_currentPartnerTotal($partner,$dateInput,$valueInput,$typeInput);
         $currentAllPartnersTotal = PartnerTransaction::update_currentAllPartnersTotal($dateInput,$valueInput,$typeInput);
 

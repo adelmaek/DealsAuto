@@ -61,37 +61,37 @@
                         @if($bill->importedTaxes1)                
                             {{-- <div class="clearfix"></div> --}}
                             <div class="pull-right m-t-30 text-right">
-                            <p>القيمة المقبولة: %{{$bill->importedTaxes1}}</p>
+                            <p>القيمة المقبولة: {{$bill->importedTaxes1}}</p>
                             </div>
                         @endif
                         @if($bill->importedTaxes2)
                             {{-- <div class="clearfix"></div> --}}
                             <div class="pull-right m-t-30 text-right">
-                            <p>مصروفات مشتريات: %{{$bill->importedTaxes2}}</p>
+                            <p>مصروفات مشتريات: {{$bill->importedTaxes2}}</p>
                             </div>
                         @endif
                         @if($bill->importedTaxes3)
                             {{-- <div class="clearfix"></div> --}}
                             <div class="pull-right m-t-30 text-right">
-                            <p>مصروفات بنكية: %{{$bill->importedTaxes3}}</p>
+                            <p>مصروفات بنكية: {{$bill->importedTaxes3}}</p>
                             </div>
                         @endif
                         @if($bill->importedTaxes4)
                             {{-- <div class="clearfix"></div> --}}
                             <div class="pull-right m-t-30 text-right">
-                            <p>جمارك : %{{$bill->importedTaxes4}}</p>
+                            <p>جمارك : {{$bill->importedTaxes4}}</p>
                             </div>
                         @endif
                         @if($bill->importedTaxes5)
                             {{-- <div class="clearfix"></div> --}}
                             <div class="pull-right m-t-30 text-right">
-                            <p>جاري مصلحة الضرائب: %{{$bill->importedTaxes5}}</p>
+                            <p>جاري مصلحة الضرائب: {{$bill->importedTaxes5}}</p>
                             </div>
                         @endif
                         <hr>
                         <div class="clearfix"></div>
                         <div class="pull-right m-t-30 text-right">
-                            <p>Total taxes: {{$totalTaxes}} %</p>
+                            <p>Total taxes: {{$totalTaxes}} </p>
                             </div>
                         <div class="clearfix"></div>
                         <hr>

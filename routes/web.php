@@ -36,7 +36,11 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'home',
         'middleware' => 'auth'
     ]);
-    
+    Route::post('/homeSubmit',[
+        'uses' => 'UserController@postHome',
+        'as' => 'homeSubmit',
+        'middleware' => 'auth'
+    ]);
     Route::post('/signin',[
         'uses' => 'UserController@postSignin',
         'as' => 'signin'

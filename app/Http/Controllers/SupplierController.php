@@ -17,8 +17,6 @@ class SupplierController extends Controller
     }
     public function postSuppliers(Request $request)
     {
-        // Log::debug($request['nameInput']);
-        // Log::debug($request['totalTransInput']);
         DB::table('suppliers')->insert([
             'name' => $request['nameInput'],
             'initialBalance'=>$request['totalTransInput'],

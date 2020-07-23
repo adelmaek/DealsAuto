@@ -4,8 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Bank;
 use App\BankTransaction;
+use App\currency;
 use Illuminate\Http\Request;
 use DB;
+
 class BankController extends Controller
 {
     //Create and store new bank account
@@ -27,7 +29,8 @@ class BankController extends Controller
     public function getAddBank()
     {
         $banks = Bank::all();
-        return view('banks/addBank',['banks'=>$banks]);
+        $currencies = currency::all();
+        return view('banks/addBank',['banks'=>$banks,"currencies"=>$currencies]);
     }
     public function getShowBank($accountNumber)
     {

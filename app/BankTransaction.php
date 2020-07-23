@@ -8,6 +8,7 @@ use Log;
 use App\PartnerTransaction;
 use App\CashTransaction;
 use App\MiscellaneousIncome;
+use App\currency;
 
 class BankTransaction extends Model
 {
@@ -102,7 +103,7 @@ class BankTransaction extends Model
 
     public static function del_update_currentTotal($transaction, $accNumber)
     {
-        
+
         $prevTransaction = BankTransaction::where('bank_id', $transaction->bank_id)->whereDate('date','<',$transaction->date)->orderBy('date','Desc')->first();
         if(!empty($prevTransaction))
             $prevTransaction = BankTransaction::where('bank_id', $transaction->bank_id)->whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
@@ -177,26 +178,32 @@ class BankTransaction extends Model
 
     public static function insert_transaction($accountNumberInput, $typeInput, $dateInput, $valueInput, $noteInput, $valueDateInput)
     {
+      
         $bank = DB::table('banks')->where('accountNumber', $accountNumberInput)->first();    
-        
+        $currencyName = $bank->currency;
+        if(!strcmp($currencyName,"egp"))
+            $currencyRate = 1;
+        else
+            $currencyRate = currency::where('name',$currencyName)->first()->rate;
+            
         if(!strcmp($typeInput,'addCash'))
         {
             $currentBalanceInput = BankTransaction::updateCurrentTotal_bank($bank, $dateInput,$valueInput, 'add');
             $currentAllBalanceInput = BankTransaction::updateCurrentTotal_AllBanks($dateInput,$valueInput, 'add');
-            CashTransaction::insert_transaction($valueInput,$dateInput,'sub',$noteInput,'normalCash');
+            CashTransaction::insert_transaction($valueInput * $currencyRate,$dateInput,'sub',$noteInput,'normalCash');
 
         }
         elseif(!strcmp($typeInput,'subToNormalCash'))
         {
             $currentBalanceInput = BankTransaction::updateCurrentTotal_bank($bank, $dateInput,$valueInput, 'sub');
             $currentAllBalanceInput = BankTransaction::updateCurrentTotal_AllBanks($dateInput,$valueInput, 'sub');
-            CashTransaction::insert_transaction($valueInput,$dateInput,'add',$noteInput,'normalCash');
+            CashTransaction::insert_transaction($valueInput * $currencyRate ,$dateInput,'add',$noteInput,'normalCash');
         }   
         elseif(!strcmp($typeInput,'subToCustodyCash'))
         {
             $currentBalanceInput = BankTransaction::updateCurrentTotal_bank($bank, $dateInput,$valueInput, 'sub');
             $currentAllBalanceInput = BankTransaction::updateCurrentTotal_AllBanks($dateInput,$valueInput, 'sub');
-            CashTransaction::insert_transaction($valueInput,$dateInput,'add',$noteInput,'custodyCash');
+            CashTransaction::insert_transaction($valueInput * $currencyRate,$dateInput,'add',$noteInput,'custodyCash');
         }
         elseif(!strcmp($typeInput,'personalSub'))
         {
@@ -208,7 +215,7 @@ class BankTransaction extends Model
         {
             $currentBalanceInput = BankTransaction::updateCurrentTotal_bank($bank, $dateInput,$valueInput, 'sub');
             $currentAllBalanceInput = BankTransaction::updateCurrentTotal_AllBanks($dateInput,$valueInput, 'sub');
-            MiscellaneousIncome::insert_transaction($valueInput,$dateInput,'add',$noteInput);
+            MiscellaneousIncome::insert_transaction($valueInput * $currencyRate,$dateInput,'add',$noteInput);
         }
         else
         {

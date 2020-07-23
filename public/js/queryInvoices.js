@@ -43,14 +43,14 @@ $(document).ready(function(){
                     return intVal(a) + intVal(b);
                 }, 0 );
                 
-            var totalTaxes = api
-                    .column( 6 )
-                    .data()
-                    .reduce( function (a, b) {
-                        return intVal(a) + intVal(b);
-                    }, 0 );
+            // var totalTaxes = api
+            //         .column( 6 )
+            //         .data()
+            //         .reduce( function (a, b) {
+            //             return intVal(a) + intVal(b);
+            //         }, 0 );
             var totalValueWithTaxes = api
-                .column( 7 )
+                .column( 6 )
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
@@ -59,8 +59,8 @@ $(document).ready(function(){
                 // Update footer by showing the total with the reference of the column index 
             $( api.column( 0 ).footer() ).html('Total');
             $( api.column( 5 ).footer() ).html(totalValue);
-            $( api.column( 6 ).footer() ).html(totalTaxes);
-            $( api.column( 7 ).footer() ).html(totalValueWithTaxes);
+            // $( api.column( 6 ).footer() ).html(totalTaxes);
+            $( api.column( 6 ).footer() ).html(totalValueWithTaxes);
         },
             "displayLength": 25,
             "processing": true,
@@ -72,7 +72,7 @@ $(document).ready(function(){
                 { "data": "total_items_number" },
                 { "data": "note" },
                 { "data": "value" },
-                { "data": "totalTaxesValue" },
+                // { "data": "totalTaxesValue" },
                 { "data": "totalValueWithTaxes" }
             ],
             "ajax": "queiredInvoices/"+ supplier + ',' + fromDate + ',' + toDate,

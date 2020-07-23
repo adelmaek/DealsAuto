@@ -29,7 +29,13 @@
                         </div>
                         <div class="form-group">
                             <label for="currencyInput" class="arabicLabel">العملة</label>
-                            <input type="text" class="form-control" id="currencyInput" name="currencyInput" placeholder="ادخل العملة" required>
+                            {{-- <input type="text" class="form-control" id="currencyInput" name="currencyInput" placeholder="ادخل العملة" required> --}}
+                            <select class="custom-select custom-select-lg"  id="currencyInput" name="currencyInput" required>
+                                    <option value="egp" selected >egp</option>
+                                @foreach($currencies as $currency)
+                                    <option value="{{$currency->name}}">{{$currency->name}}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="balanceInput" class="arabicLabel">الحساب الحالي</label>

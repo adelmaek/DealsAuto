@@ -9,14 +9,15 @@ use Log;
 use Illuminate\Http\Request;
 use DataTables;
 use App\PurchaseTransaction;
-
+use App\models;
 class BillController extends Controller
 {
    public function getAddNewInvoice()
    {
        $suppliers = Supplier::all();
        $bills = Bill::all();
-       return view('Invoices/addNewInvoice',['suppliers'=>$suppliers,'bills'=>$bills]);
+       $models= models::getModelsSummary();
+       return view('Invoices/addNewInvoice',['suppliers'=>$suppliers,'bills'=>$bills,'models'=>$models]);
    }
    public function postAddNewInvoice(Request $request)
    {
@@ -130,53 +131,6 @@ class BillController extends Controller
         // Log::debug($items);
         foreach($items as $item)
             DB::table('invoice_items')->where('id',$item->id)->delete();
-        
-
-        //Deleting the supplier trans
-
-        $transaction = SupplierTransaction::where('bill_id',$bill_id)->first();
-        Supplier::where('id',$transaction->supplier_id)->increment('currentBalance',$transaction->value);
-        $transaction->delete();
-        // Log::debug($transaction);
-
-        $prevTransaction = SupplierTransaction::where('supplier_id',$transaction->supplier_id)->whereDate('date','<',$transaction->date)->first();
-        if(!empty($prevTransaction))
-            $prevTransaction = SupplierTransaction::where('supplier_id', $transaction->supplier_id)->whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
-
-        $followingTransactions = SupplierTransaction::where('supplier_id', $transaction->supplier_id)->whereDate('date','>=',$transaction->date)->orderBy('date','Asc')->get();
-
-        if(!empty($prevTransaction))
-            $currentBalance = $prevTransaction->currentSupplierTotal;
-        else
-            $currentBalance = Supplier::where('id',$transaction->supplier_id)->first()->initialBalance;
-        
-        foreach($followingTransactions as $trans)
-        {
-            $currentBalance = $currentBalance - $trans->value;
-            SupplierTransaction::where('id',$trans->id)->update(['currentSupplierTotal'=>$currentBalance]);
-        }
-
-        //Deleting purchasing trans
-
-        $transaction = PurchaseTransaction::where('bill_number',$bill_number)->first();
-        $transaction->delete();
-
-        $prevTransaction = PurchaseTransaction::where('type',$transaction->type)->whereDate('date','<',$transaction->date)->first();
-        if(!empty($prevTransaction))
-            $prevTransaction = PurchaseTransaction::where('type', $transaction->type)->whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
-
-        $followingTransactions = PurchaseTransaction::where('type', $transaction->type)->whereDate('date','>=',$transaction->date)->orderBy('date','Asc')->get();
-
-        if(!empty($prevTransaction))
-            $currentBalance = $prevTransaction->currentTotal;
-        else
-            $currentBalance = 0;
-        
-        foreach($followingTransactions as $trans)
-        {
-            $currentBalance = $currentBalance + $trans->value;
-            PurchaseTransaction::where('id',$trans->id)->update(['currentTotal'=>$currentBalance]);
-        }
 
         return redirect()->back();
     }
@@ -186,9 +140,9 @@ class BillController extends Controller
         $bill = Bill::where('number',$bill_number)->first();
         $items = DB::table('invoice_items')->where('invoice_number',$bill_number)->get();
         $supplier = Supplier::where('name',$bill->supplier_name)->first();
-        $totalWithTaxes = ($bill->value * (($bill->addValueTaxes + $bill->importedTaxes1 + $bill->importedTaxes2 + $bill->importedTaxes3
-        + $bill->importedTaxes4 + $bill->importedTaxes5)/100)) + $bill->value;
-        $totalTaxes = $bill->addValueTaxes + $bill->importedTaxes1 + $bill->importedTaxes2 + $bill->importedTaxes3
+        $totalWithTaxes = ($bill->value * (($bill->addValueTaxes )/100)) + $bill->value+ $bill->importedTaxes1 + $bill->importedTaxes2 + $bill->importedTaxes3
+        + $bill->importedTaxes4 + $bill->importedTaxes5;
+        $totalTaxes = ($bill->value *($bill->addValueTaxes / 100)) + $bill->importedTaxes1 + $bill->importedTaxes2 + $bill->importedTaxes3
         + $bill->importedTaxes4 + $bill->importedTaxes5;
         return view('Invoices/invoiceDetails',['bill'=>$bill,'billItems'=>$items,'supplier'=>$supplier,'totalTaxes'=>$totalTaxes,'totalWithTaxes'=>$totalWithTaxes]);
     }
@@ -258,12 +212,11 @@ class BillController extends Controller
                 // $total_number_items = $total_number_items + $item->quantity;
                 $total_number_items = $total_number_items + 1;
             }
-            $totalTaxesValue = $bill->totalTaxes();
+            // $totalTaxesValue = $bill->totalTaxes();
             $totalValueWithTaxes = $bill->totalValueWithTaxes();
-            // Log::debug('message');
-            // Log::debug($totalValueWithTaxes);
+        
             $bill->setAttribute('total_items_number', $total_number_items);
-            $bill->setAttribute('totalTaxesValue', $totalTaxesValue);
+            // $bill->setAttribute('totalTaxesValue', $totalTaxesValue);
             $bill->setAttribute('totalValueWithTaxes', $totalValueWithTaxes);
             
         }

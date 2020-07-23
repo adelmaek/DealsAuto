@@ -54,8 +54,16 @@
                                             <div class="table-responsive">  
                                                 <table class="table table-borderless " id="dynamic_field" name="dynamic_field">  
                                                     <tr>  
-                                                        <td><input type="text"  name="item_name[]" placeholder="Enter item name" class="form-control item_name_list" required /></td> 
-                                                        <td><input type="text" name="item_chassis_number[]" placeholder="Enter chassis number " class="form-control item_chassis_number_list" required /></td> 
+                                                        {{-- <td><input type="text"  name="item_name[]" placeholder="Enter item name" class="form-control item_name_list" required /></td>  --}}
+                                                        <td>
+                                                            <select class="select2 form-control custom-select" name="item_name[]" style="width: 100%;height:36px;" required>
+                                                                <option>Select Item</option>
+                                                                @foreach($models as $model)
+                                                                    <option value="{{$model->BRND_NAME}}-{{$model->MODL_NAME}}-{{$model->MODL_YEAR}}-{{$model->MODL_CATG}}">{{$model->BRND_NAME}}-{{$model->MODL_NAME}}-{{$model->MODL_YEAR}}-{{$model->MODL_CATG}}</option>
+                                                                @endforeach             
+                                                            </select>
+                                                        </td>
+                                                        <td><input type="text" name="item_chassis_number[]" placeholder="Enter chassis number " class="form-control  item_chassis_number_list" style="height:36px;" required /></td> 
                                                         <td><input type="number" name="item_cost[]" placeholder="Enter item cost" class="form-control item_cost_list" required /></td> 
                                                         <td><button type="button" name="add" id="add" class="btn btn-success" >+</button></td>  
                                                     </tr>  
@@ -118,13 +126,120 @@
             
 @endsection
 
+
+
+
 @section('extraJS')
 <script>  
     $(document).ready(function(){  
          var i=1;  
          $('#add').click(function(){  
               i++;  
-              $('#dynamic_field').append('<tr id="row'+i+'"><td><input type="text" name="item_name[]" placeholder="Enter your item name" class="form-control item_name_list" /></td><td><input type="text" name="item_chassis_number[]" placeholder="Enter item chassis number" class="form-control item_chassis_number_list" /></td> <td><input type="number" name="item_cost[]" placeholder="Enter item cost" class="form-control item_cost_list" required /></td> <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+              $('#dynamic_field').append('<tr id="row'+i+'"><td><select class="select2 form-control custom-select" name="item_name[]" style="width: 100%;height:36px;" required><option>Select Item</option>@foreach($models as $model)<option value="{{$model->BRND_NAME}}-{{$model->MODL_NAME}}-{{$model->MODL_YEAR}}-{{$model->MODL_CATG}}">{{$model->BRND_NAME}}-{{$model->MODL_NAME}}-{{$model->MODL_YEAR}}-{{$model->MODL_CATG}}</option>@endforeach</select></td><td><input type="text" name="item_chassis_number[]" placeholder="Enter item chassis number" class="form-control item_chassis_number_list" /></td> <td><input type="number" name="item_cost[]" placeholder="Enter item cost" class="form-control item_cost_list" required /></td> <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+              
+            // Switchery
+            var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+            $('.js-switch').each(function () {
+                new Switchery($(this)[0], $(this).data());
+            });
+            // For select 2
+            $(".select2").select2();
+            $('.selectpicker').selectpicker();
+            //Bootstrap-TouchSpin
+            $(".vertical-spin").TouchSpin({
+                verticalbuttons: true
+            });
+            var vspinTrue = $(".vertical-spin").TouchSpin({
+                verticalbuttons: true
+            });
+            if (vspinTrue) {
+                $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
+            }
+            $("input[name='tch1']").TouchSpin({
+                min: 0,
+                max: 100,
+                step: 0.1,
+                decimals: 2,
+                boostat: 5,
+                maxboostedstep: 10,
+                postfix: '%'
+            });
+            $("input[name='tch2']").TouchSpin({
+                min: -1000000000,
+                max: 1000000000,
+                stepinterval: 50,
+                maxboostedstep: 10000000,
+                prefix: '$'
+            });
+            $("input[name='tch3']").TouchSpin();
+            $("input[name='tch3_22']").TouchSpin({
+                initval: 40
+            });
+            $("input[name='tch5']").TouchSpin({
+                prefix: "pre",
+                postfix: "post"
+            });
+            // For multiselect
+            $('#pre-selected-options').multiSelect();
+            $('#optgroup').multiSelect({
+                selectableOptgroup: true
+            });
+            $('#public-methods').multiSelect();
+            $('#select-all').click(function () {
+                $('#public-methods').multiSelect('select_all');
+                return false;
+            });
+            $('#deselect-all').click(function () {
+                $('#public-methods').multiSelect('deselect_all');
+                return false;
+            });
+            $('#refresh').on('click', function () {
+                $('#public-methods').multiSelect('refresh');
+                return false;
+            });
+            $('#add-option').on('click', function () {
+                $('#public-methods').multiSelect('addOption', {
+                    value: 42,
+                    text: 'test 42',
+                    index: 0
+                });
+                return false;
+            });
+            $(".ajax").select2({
+                ajax: {
+                    url: "https://api.github.com/search/repositories",
+                    dataType: 'json',
+                    delay: 250,
+                    data: function (params) {
+                        return {
+                            q: params.term, // search term
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, params) {
+                        // parse the results into the format expected by Select2
+                        // since we are using custom formatting functions we do not need to
+                        // alter the remote JSON data, except to indicate that infinite
+                        // scrolling can be used
+                        params.page = params.page || 1;
+                        return {
+                            results: data.items,
+                            pagination: {
+                                more: (params.page * 30) < data.total_count
+                            }
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) {
+                    return markup;
+                }, // let our custom formatter work
+                minimumInputLength: 1,
+                //templateResult: formatRepo, // omitted for brevity, see the source of this page
+                //templateSelection: formatRepoSelection // omitted for brevity, see the source of this page
+            });
+        
+
          });  
          $(document).on('click', '.btn_remove', function(){  
               var button_id = $(this).attr("id");   
@@ -136,19 +251,19 @@
             {
                $('<div class="row align-items-start" id="importedTaxes" name="importedTaxes" style="padding-top:10px;">'+
                     '<div class="col">' +
-                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes1Input"  id="importedTaxes1Input" style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المقبولة" class="form-control " required />  %</span>'+
+                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes1Input"  id="importedTaxes1Input" style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المقبولة" class="form-control " required />  </span>'+
                     '</div>'+
                     '<div class="col">' +
-                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes2Input"  id="importedTaxes2Input"  style="height: 38px;width:130px; margin-left: 17px;" placeholder="مصروفات مشتريات" class="form-control " required />  %</span>'+
+                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes2Input"  id="importedTaxes2Input"  style="height: 38px;width:140px; margin-left: 17px;" placeholder="مصروفات مشتريات" class="form-control " required />  </span>'+
                     '</div>'+
                     '<div class="col">' +
-                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes3Input"  id="importedTaxes3Input"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="مصروفات بنكية" class="form-control " required />  %</span>'+
+                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes3Input"  id="importedTaxes3Input"  style="height: 38px;width:140px; margin-left: 17px;" placeholder="مصروفات بنكية" class="form-control " required />  </span>'+
                     '</div>'+
                     '<div class="col">' +
-                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes4Input"  id="importedTaxes4Input"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="جمارك" class="form-control " required />  %</span>'+
+                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes4Input"  id="importedTaxes4Input"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="جمارك" class="form-control " required />  </span>'+
                     '</div>'+
                     '<div class="col">' +
-                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes5Input"  id="importedTaxes5Input"  style="height: 38px;width:150px; margin-left: 17px;" placeholder="جاري مصلحة الضرائب" class="form-control " required />  %</span>'+
+                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes5Input"  id="importedTaxes5Input"  style="height: 38px;width:150px; margin-left: 17px;" placeholder="جاري مصلحة الضرائب" class="form-control " required />  </span>'+
                     '</div>'+
                 '</div>').insertAfter('#localTaxes');
                 $('#addedValueTaxesInput').val('');

@@ -10,6 +10,7 @@ use App\CashTransaction;
 use App\BankTransaction;
 use DataTables;
 use Log;
+use App\currency;
 
 class PartnerTransactionController extends Controller
 {
@@ -45,10 +46,16 @@ class PartnerTransactionController extends Controller
         }
         else
         {
-            if(!strcmp($request['typeInput'],'add'))
-                BankTransaction::insert_transaction($request['sourceInput'], 'sub', $request['dateInput'], $request['valueInput'], $request['noteInput'], $request['dateInput']);
+            $bank = DB::table('banks')->where('accountNumber', $request['sourceInput'])->first();    
+            $currencyName = $bank->currency;
+            if(!strcmp($currencyName,"egp"))
+                $currencyRate = 1;
             else
-                BankTransaction::insert_transaction($request['sourceInput'], 'add', $request['dateInput'], $request['valueInput'], $request['noteInput'], $request['dateInput']);
+                $currencyRate = currency::where('name',$currencyName)->first()->rate;
+            if(!strcmp($request['typeInput'],'add'))
+                BankTransaction::insert_transaction($request['sourceInput'], 'sub', $request['dateInput'], $request['valueInput'] / $currencyRate, $request['noteInput'], $request['dateInput']);
+            else
+                BankTransaction::insert_transaction($request['sourceInput'], 'add', $request['dateInput'], $request['valueInput'] / $currencyRate, $request['noteInput'], $request['dateInput']);
         }
         return redirect()->back();
     }
@@ -69,7 +76,7 @@ class PartnerTransactionController extends Controller
 
     public function getQueriedPartnerTransactions($partner,$fromDate,$toDate)
     {
-        Log::debug("in partner Query");
+        // Log::debug("in partner Query");
         if(!strcmp($fromDate,"empty")&&!strcmp($toDate,"empty"))
         { 
             if(!strcmp($partner,"all"))
