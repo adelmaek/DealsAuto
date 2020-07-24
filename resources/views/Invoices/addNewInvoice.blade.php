@@ -54,7 +54,6 @@
                                             <div class="table-responsive">  
                                                 <table class="table table-borderless " id="dynamic_field" name="dynamic_field">  
                                                     <tr>  
-                                                        {{-- <td><input type="text"  name="item_name[]" placeholder="Enter item name" class="form-control item_name_list" required /></td>  --}}
                                                         <td>
                                                             <select class="select2 form-control custom-select" name="item_name[]" style="width: 100%;height:36px;" required>
                                                                 <option>Select Item</option>

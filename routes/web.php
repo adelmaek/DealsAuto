@@ -234,6 +234,12 @@ Route::group(['middleware'=>['web']],function(){
         'as' => 'queiredInvoices',
         'middleware' =>'auth'
     ]);
+    Route::get('/invoicesTaxes',[
+        'uses'=>'BillController@getQueryInvoiceTaxes',
+        'as' => 'invoicesTaxes',
+        'middleware' => 'auth'
+        
+    ]);
     //================================================================================================
     // end bills
     //================================================================================================

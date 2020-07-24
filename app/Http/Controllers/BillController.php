@@ -222,4 +222,11 @@ class BillController extends Controller
         }
         return Datatables::of($bills)->make(true);
     }
+
+    public function getQueryInvoiceTaxes()
+    {
+        $suppliers = Supplier::all();
+        return view('Invoices/queryInvoicesTaxes',['suppliers'=>$suppliers]);
+    }
+    
 }
