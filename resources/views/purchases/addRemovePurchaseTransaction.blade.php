@@ -84,9 +84,9 @@
                             @foreach ($purchaseTransactions as $trans)
                                 <tr>
                                     @if(!strcmp($trans->type,"local"))
-                                        <th scope="row" class="text-center">محلي</th>
+                                        <td scope="row" class="text-center">محلي</td>
                                     @else
-                                        <th scope="row" class="text-center">مستورد</th>
+                                        <td scope="row" class="text-center">مستورد</td>
                                     @endif
                                     <td class="text-center">{{$trans->value}}</td>
                                     <td class="text-center">{{$trans->date}}</td>
@@ -99,7 +99,7 @@
                                         <td class="text-center">لا يوجد</td>  
                                     @endif
                                     <td style="text-align:center">
-                                        <a class="btn btn-danger delete-confirm" href="{{route('delPurchaseTransaction',['trans_id'=>$trans->id])}}" role="button">Delete</a>
+                                        <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delPurchaseTransaction',['trans_id'=>$trans->id])}}" role="button">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

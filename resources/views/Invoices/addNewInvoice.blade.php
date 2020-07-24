@@ -105,12 +105,12 @@
                                 <tbody>
                                     @foreach ($bills as $bill)
                                         <tr>
-                                            <th scope="row" class="text-center">{{$bill->number}}</th>
+                                            <td scope="row" class="text-center">{{$bill->number}}</td>
                                             <td style="text-align:center">
                                                 <a class="btn btn-info" href="{{route('showInvoice',['bill_number'=>$bill->number])}}" role="button">show</a>
                                             </td>
                                             <td style="text-align:center">
-                                                <a class="btn btn-danger delete-confirm" href="{{route('delInvoice',['bill_number'=>$bill->number])}}" role="button">Delete</a>
+                                                <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delInvoice',['bill_number'=>$bill->number])}}" role="button">Delete</a>
                                             </td>      
                                         </tr>
                                     @endforeach

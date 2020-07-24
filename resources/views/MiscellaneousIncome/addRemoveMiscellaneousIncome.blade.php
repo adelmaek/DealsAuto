@@ -82,13 +82,13 @@
                         <tbody>
                             @foreach ($MITransactions as $MITransaction)
                                 <tr>
-                                    <th scope="row" class="text-center">{{$MITransaction->type}}</th>
+                                    <td scope="row" class="text-center">{{$MITransaction->type}}</td>
                                     <td class="text-center">{{$MITransaction->value}}</td>
                                     <td class="text-center">{{$MITransaction->date}}</td>
                                     <td class="text-center">{{$MITransaction->note}}</td>
                                     <td class="text-center">{{$MITransaction->currentTotal}}</td>
                                     <td style="text-align:center">
-                                        <a class="btn btn-danger delete-confirm" href="{{route('delMITrans',['MITransaction_id'=>$MITransaction->id])}}" role="button">Delete</a>
+                                        <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delMITrans',['MITransaction_id'=>$MITransaction->id])}}" role="button">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -115,7 +115,7 @@
                                 <td style="text-align:center">{{$transaction->currentBankBalance}}</td>
                                 <td style="text-align:center">{{$transaction->currentAllBanksBalance}}</td>
                                 <td style="text-align:center">
-                                    <a class="btn btn-danger delete-confirm" href="{{route('delTransaction',['transaction_id'=>$transaction->id, 'accNumber'=>$transaction->accountNumber])}}" role="button">Delete</a>
+                                    <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delTransaction',['transaction_id'=>$transaction->id, 'accNumber'=>$transaction->accountNumber])}}" role="button">Delete</a>
                                 </td>
                             </tr>
                             @endforeach

@@ -80,13 +80,13 @@
                         <tbody>
                             @foreach ($suppliersTransactions as $trans)
                                 <tr>
-                                    <th scope="row" class="text-center">{{\App\Supplier::where('id',$trans->supplier_id)->first()->name}}</th>
+                                    <td scope="row" class="text-center">{{\App\Supplier::where('id',$trans->supplier_id)->first()->name}}</td>
                                     <td class="text-center">{{$trans->date}}</td>
                                     <td class="text-center">{{$trans->value}}</td>
                                     <td class="text-center">{{$trans->currentSupplierTotal}}</td>
                                     <td class="text-center">{{$trans->note}}</td>
                                     <td style="text-align:center">
-                                        <a class="btn btn-danger delete-confirm" href="{{route('delSupplierTrans',['transaction_id'=>$trans->id])}}" role="button">Delete</a>
+                                        <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delSupplierTrans',['transaction_id'=>$trans->id])}}" role="button">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

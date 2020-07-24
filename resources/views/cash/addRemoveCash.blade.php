@@ -94,11 +94,11 @@
                         <tbody>
                             @foreach ($cashTransactions as $cashTransaction)
                                 <tr>
-                                    <th scope="row" class="text-center">{{$cashTransaction->type}}</th>
+                                    <td  class="text-center">{{$cashTransaction->type}}</td>
                                     @if(!strcmp('normalCash', $cashTransaction->name))
-                                        <th scope="row" class="text-center">الخزنة</th>
+                                        <td class="text-center">الخزنة</td>
                                     @else
-                                        <th scope="row" class="text-center">خزنة العهدة</th>
+                                        <td  class="text-center">خزنة العهدة</td>
                                     @endif
                                     <td class="text-center">{{$cashTransaction->value}}</td>
                                     {{-- <td class="text-center">{{$cashTransaction->currency}}</td> --}}
@@ -107,7 +107,7 @@
                                     <td class="text-center">{{$cashTransaction->currentCashNameTotal}}</td>
                                     <td class="text-center">{{$cashTransaction->currentAllCashTotal}}</td>
                                     <td style="text-align:center">
-                                        <a class="btn btn-danger delete-confirm" href="{{route('delCashTransaction',['cashTransaction_id'=>$cashTransaction->id])}}" role="button">Delete</a>
+                                        <a class="btn btn-danger delete-confirm" href="{{route('delCashTransaction',['cashTransaction_id'=>$cashTransaction->id])}}" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" role="button">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -63,10 +63,10 @@
                         <tbody>
                             @foreach ($suppliers as $supplier)
                                 <tr>
-                                    <th scope="row" class="text-center">{{$supplier->name}}</th>
+                                    <td scope="row" class="text-center">{{$supplier->name}}</td>
                                     <td class="text-center">{{$supplier->currentBalance}}</td>
                                     <td style="text-align:center">
-                                        <a class="btn btn-danger delete-confirm" href="{{route('delSupplier',['supplier_id'=>$supplier->id])}}" role="button">Delete</a>
+                                        <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delSupplier',['supplier_id'=>$supplier->id])}}" role="button">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

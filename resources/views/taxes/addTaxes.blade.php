@@ -101,14 +101,14 @@
                         <tbody>
                             @foreach ($TaxesTransactions as $TaxesTransaction)
                                 <tr>
-                                    <th scope="row" class="text-center">{{$TaxesTransaction->type}}</th>
+                                    <td scope="row" class="text-center">{{$TaxesTransaction->type}}</td>
                                     <td class="text-center">{{$TaxesTransaction->taxType}}</td>
                                     <td class="text-center">{{$TaxesTransaction->value}}</td>
                                     <td class="text-center">{{$TaxesTransaction->date}}</td>
                                     <td class="text-center">{{$TaxesTransaction->note}}</td>
                                     <td class="text-center">{{$TaxesTransaction->currentBalance}}</td>
                                     <td style="text-align:center">
-                                        <a class="btn btn-danger delete-confirm" href="{{route('delTaxesTransaction',['trans_id'=>$TaxesTransaction->id])}}" role="button">Delete</a>
+                                        <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delTaxesTransaction',['trans_id'=>$TaxesTransaction->id])}}" role="button">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
