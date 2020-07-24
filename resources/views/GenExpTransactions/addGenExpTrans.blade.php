@@ -96,7 +96,7 @@
                                     <td class="text-center">{{$trans->note}}</td>
                                     <td class="text-center">{{$trans->currentTotal}}</td>
                                     <td style="text-align:center">
-                                        <a class="btn btn-danger" href="{{route('delGeneralExpenses',['trans_id'=>$trans->id])}}" role="button">Delete</a>
+                                        <a class="btn btn-danger delete-confirm" href="{{route('delGeneralExpenses',['trans_id'=>$trans->id])}}" role="button">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

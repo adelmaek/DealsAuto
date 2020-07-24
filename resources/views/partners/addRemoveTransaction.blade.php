@@ -117,7 +117,7 @@
                                 <td style="text-align:center">{{$transaction->currentPartnerTotal}}</td>
                                 <td style="text-align:center">{{$transaction->currentAllPartnersTotal}}</td>
                                 <td style="text-align:center">
-                                    <a class="btn btn-danger" href="{{route('delPartnerTrans',['trans_id'=>$transaction->id])}}" role="button">Delete</a>
+                                    <a class="btn btn-danger delete-confirm" href="{{route('delPartnerTrans',['trans_id'=>$transaction->id])}}" role="button">Delete</a>
                                 </td>
                             </tr>
                             @endforeach

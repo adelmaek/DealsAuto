@@ -88,7 +88,7 @@
                                     <td class="text-center">{{$MITransaction->note}}</td>
                                     <td class="text-center">{{$MITransaction->currentTotal}}</td>
                                     <td style="text-align:center">
-                                        <a class="btn btn-danger" href="{{route('delMITrans',['MITransaction_id'=>$MITransaction->id])}}" role="button">Delete</a>
+                                        <a class="btn btn-danger delete-confirm" href="{{route('delMITrans',['MITransaction_id'=>$MITransaction->id])}}" role="button">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

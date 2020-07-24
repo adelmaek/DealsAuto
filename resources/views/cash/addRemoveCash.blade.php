@@ -107,7 +107,7 @@
                                     <td class="text-center">{{$cashTransaction->currentCashNameTotal}}</td>
                                     <td class="text-center">{{$cashTransaction->currentAllCashTotal}}</td>
                                     <td style="text-align:center">
-                                        <a class="btn btn-danger" href="{{route('delCashTransaction',['cashTransaction_id'=>$cashTransaction->id])}}" role="button">Delete</a>
+                                        <a class="btn btn-danger delete-confirm" href="{{route('delCashTransaction',['cashTransaction_id'=>$cashTransaction->id])}}" role="button">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

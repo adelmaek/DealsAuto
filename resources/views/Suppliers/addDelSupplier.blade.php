@@ -66,7 +66,7 @@
                                     <th scope="row" class="text-center">{{$supplier->name}}</th>
                                     <td class="text-center">{{$supplier->currentBalance}}</td>
                                     <td style="text-align:center">
-                                        <a class="btn btn-danger" href="{{route('delSupplier',['supplier_id'=>$supplier->id])}}" role="button">Delete</a>
+                                        <a class="btn btn-danger delete-confirm" href="{{route('delSupplier',['supplier_id'=>$supplier->id])}}" role="button">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -110,7 +110,7 @@
                                                 <a class="btn btn-info" href="{{route('showInvoice',['bill_number'=>$bill->number])}}" role="button">show</a>
                                             </td>
                                             <td style="text-align:center">
-                                                <a class="btn btn-danger" href="{{route('delInvoice',['bill_number'=>$bill->number])}}" role="button">Delete</a>
+                                                <a class="btn btn-danger delete-confirm" href="{{route('delInvoice',['bill_number'=>$bill->number])}}" role="button">Delete</a>
                                             </td>      
                                         </tr>
                                     @endforeach

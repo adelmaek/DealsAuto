@@ -108,7 +108,7 @@
                                     <td class="text-center">{{$TaxesTransaction->note}}</td>
                                     <td class="text-center">{{$TaxesTransaction->currentBalance}}</td>
                                     <td style="text-align:center">
-                                        <a class="btn btn-danger" href="{{route('delTaxesTransaction',['trans_id'=>$TaxesTransaction->id])}}" role="button">Delete</a>
+                                        <a class="btn btn-danger delete-confirm" href="{{route('delTaxesTransaction',['trans_id'=>$TaxesTransaction->id])}}" role="button">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -137,5 +137,6 @@ $('#taxesTable').DataTable({
             ]   
     });
     $('.buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
+
 </script>
 @endsection

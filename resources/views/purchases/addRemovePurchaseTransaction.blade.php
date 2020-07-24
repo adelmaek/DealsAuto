@@ -99,7 +99,7 @@
                                         <td class="text-center">لا يوجد</td>  
                                     @endif
                                     <td style="text-align:center">
-                                        <a class="btn btn-danger" href="{{route('delPurchaseTransaction',['trans_id'=>$trans->id])}}" role="button">Delete</a>
+                                        <a class="btn btn-danger delete-confirm" href="{{route('delPurchaseTransaction',['trans_id'=>$trans->id])}}" role="button">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach

@@ -23,6 +23,8 @@
     <link href="{{asset('assets/node_modules/datatables/media/css/dataTables.bootstrap4.css')}}" rel="stylesheet"> 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
+
+    {{-- <link href="{{ asset('node_modules/sweetalert/sweetalert.css}')}}" rel="stylesheet" type="text/css"> --}}
 </head>
 
 <body>
@@ -275,6 +277,25 @@
     <script src="https://cdn.datatables.net/buttons/1.5.1/js/buttons.print.min.js"></script>
     <!-- end - This is for export functionality only -->
     
+     {{-- sweet alert --}} 
+     <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+     <script>
+         $('.delete-confirm').on('click', function (event) {
+            event.preventDefault();
+            const url = $(this).attr('href');
+            swal({
+                title: 'Are you sure?',
+                text: 'This record and it`s details will be permanantly deleted!',
+                icon: 'warning',
+                buttons: ["Cancel", "Yes!"],
+            }).then(function(value) {
+                if (value) {
+                    window.location.href = url;
+                }
+            });
+        });
+     </script>
+     {{-- end sweer alert --}}
      @yield('extraJS')
 
      <script>
@@ -286,67 +307,6 @@
             });
             // For select 2
             $(".select2").select2();
-            $('.selectpicker').selectpicker();
-            //Bootstrap-TouchSpin
-            $(".vertical-spin").TouchSpin({
-                verticalbuttons: true
-            });
-            var vspinTrue = $(".vertical-spin").TouchSpin({
-                verticalbuttons: true
-            });
-            if (vspinTrue) {
-                $('.vertical-spin').prev('.bootstrap-touchspin-prefix').remove();
-            }
-            $("input[name='tch1']").TouchSpin({
-                min: 0,
-                max: 100,
-                step: 0.1,
-                decimals: 2,
-                boostat: 5,
-                maxboostedstep: 10,
-                postfix: '%'
-            });
-            $("input[name='tch2']").TouchSpin({
-                min: -1000000000,
-                max: 1000000000,
-                stepinterval: 50,
-                maxboostedstep: 10000000,
-                prefix: '$'
-            });
-            $("input[name='tch3']").TouchSpin();
-            $("input[name='tch3_22']").TouchSpin({
-                initval: 40
-            });
-            $("input[name='tch5']").TouchSpin({
-                prefix: "pre",
-                postfix: "post"
-            });
-            // For multiselect
-            $('#pre-selected-options').multiSelect();
-            $('#optgroup').multiSelect({
-                selectableOptgroup: true
-            });
-            $('#public-methods').multiSelect();
-            $('#select-all').click(function () {
-                $('#public-methods').multiSelect('select_all');
-                return false;
-            });
-            $('#deselect-all').click(function () {
-                $('#public-methods').multiSelect('deselect_all');
-                return false;
-            });
-            $('#refresh').on('click', function () {
-                $('#public-methods').multiSelect('refresh');
-                return false;
-            });
-            $('#add-option').on('click', function () {
-                $('#public-methods').multiSelect('addOption', {
-                    value: 42,
-                    text: 'test 42',
-                    index: 0
-                });
-                return false;
-            });
             $(".ajax").select2({
                 ajax: {
                     url: "https://api.github.com/search/repositories",
