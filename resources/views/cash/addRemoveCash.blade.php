@@ -38,6 +38,7 @@
                                             <option value="" disabled selected>نوع المعاملة</option>
                                             <option value="add">ايداع</option>
                                             <option value="sub">سحب</option>
+                                            <option value="fromNormalCashToCustodyCash">تمويل العهدة</option>
                                         </select>
                                     </td>
                                     <td>

@@ -26,7 +26,13 @@ class CashTransactionController extends Controller
 
     public function postAddRemoveCash(Request $request)
     {
-        cashTransaction::insert_transaction($request['valueInput'],$request['dateInput'],$request['typeInput'], $request['noteInput'],$request['nameInput']);
+        if(!strcmp($request['typeInput'],"fromNormalCashToCustodyCash"))
+        {
+            cashTransaction::insert_transaction($request['valueInput'],$request['dateInput'],'sub', $request['noteInput'],"normalCash");
+            cashTransaction::insert_transaction($request['valueInput'],$request['dateInput'],"add", $request['noteInput'],"custodyCash");
+        }
+        else
+            cashTransaction::insert_transaction($request['valueInput'],$request['dateInput'],$request['typeInput'], $request['noteInput'],$request['nameInput']);
         return redirect()->back();
     }
 
