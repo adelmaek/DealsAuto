@@ -80,7 +80,8 @@
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center" >النوع</th> 
-                                <th scope="col" class="text-center">القيمة</th>    
+                                <th scope="col" class="text-center">قيمة الايدع</th>
+                                <th scope="col" class="text-center">قيمة السحب</th>   
                                 <th scope="col" class="text-center" >التاريخ</th>
                                 <th scope="col" class="text-center" >البيان</th>
                                 <th scope="col" class="text-center">الرصيد</th>
@@ -91,7 +92,8 @@
                             @foreach ($transactions as $trans)
                                 <tr>
                                     <td scope="row" class="text-center">{{$trans->type}}</td>
-                                    <td class="text-center">{{$trans->value}}</td>
+                                    <td class="text-center">{{$trans->value_add}}</td>
+                                    <td class="text-center">{{$trans->value_sub}}</td>
                                     <td class="text-center">{{$trans->date}}</td>
                                     <td class="text-center">{{$trans->note}}</td>
                                     <td class="text-center">{{$trans->currentTotal}}</td>

@@ -64,7 +64,8 @@ Partners Transactions
                 <tr>
                     <th scope="col" class="text-left" >نوع المعاملة</th>
                     <th scope="col" class="text-left" >اسم الشريك</th>
-                    <th scope="col" class="text-left">القيمة</th>
+                    <th scope="col" class="text-left">قيمة الايدع</th>
+                    <th scope="col" class="text-left">قيمة السحب</th>
                     <th scope="col" class="text-left" >التاريخ</th>
                     <th scope="col" class="text-left" >البيان</th>
                     <th scope="col" class="text-left">رصيد الشريك</th>
@@ -112,7 +113,8 @@ $(document).ready(function(){
             "columns": [
                 { "data": "type" },
                 {"data" : "partnerName"},
-                { "data": "value" },
+                { "data": "value_add" },
+                { "data": "value_sub" },
                 { "data": "date" },
                 { "data": "note" },
                 { "data": "currentPartnerTotal" },

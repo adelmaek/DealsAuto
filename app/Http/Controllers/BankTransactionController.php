@@ -8,12 +8,14 @@ use Illuminate\Http\Request;
 use DB;
 use Log;
 use DataTables;
+use App\generalTransaction;
 class BankTransactionController extends Controller
 {
     public function getCreateTransaction()
     {
         $banks = Bank::all();
         $bankTransactions = BankTransaction::orderBy('date', 'ASC')->get();
+        $bankTransactions = generalTransaction::separate_add_from_sub ($bankTransactions);
         return view('transactions/addTransaction',['banks'=>$banks,'transactions'=>$bankTransactions]);
     }
     
@@ -202,7 +204,7 @@ class BankTransactionController extends Controller
                 $transaction = BankTransaction::where('accountNumber',$bank)->whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'ASC')->get();
             }
         }
-
+        $transaction = generalTransaction::separate_add_from_sub($transaction);
         return Datatables::of($transaction)->make(true);
     }
 

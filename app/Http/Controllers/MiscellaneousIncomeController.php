@@ -6,13 +6,14 @@ use Illuminate\Http\Request;
 use App\MiscellaneousIncome;
 use DB;
 use Log;
-
+use App\generalTransaction;
 class MiscellaneousIncomeController extends Controller
 {
     public function getMITransactions()
     {
         $MITransactions = MiscellaneousIncome::all();
-        return view('MiscellaneousIncome/addRemoveMiscellaneousIncome',['MITransactions'=>$MITransactions]);
+        $transaction = generalTransaction::separate_add_from_sub($MITransactions);
+        return view('MiscellaneousIncome/addRemoveMiscellaneousIncome',['MITransactions'=>$transaction]);
     }
     public function postMITransactions(Request $request)
     {

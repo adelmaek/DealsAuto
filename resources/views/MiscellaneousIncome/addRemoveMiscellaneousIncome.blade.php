@@ -72,7 +72,8 @@
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center" >نوع المعاملة</th> 
-                                <th scope="col" class="text-center">القيمة</th>
+                                <th scope="col" class="text-center">قيمة الايداع</th>
+                                <th scope="col" class="text-center">قيمة السحب</th>
                                 <th scope="col" class="text-center" >التاريخ</th>
                                 <th scope="col" class="text-center" >البيان</th>
                                 <th scope="col" class="text-center">الرصيد</th>
@@ -83,7 +84,8 @@
                             @foreach ($MITransactions as $MITransaction)
                                 <tr>
                                     <td scope="row" class="text-center">{{$MITransaction->type}}</td>
-                                    <td class="text-center">{{$MITransaction->value}}</td>
+                                    <td class="text-center">{{$MITransaction->value_add}}</td>
+                                    <td class="text-center">{{$MITransaction->value_sub}}</td>
                                     <td class="text-center">{{$MITransaction->date}}</td>
                                     <td class="text-center">{{$MITransaction->note}}</td>
                                     <td class="text-center">{{$MITransaction->currentTotal}}</td>

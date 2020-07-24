@@ -99,7 +99,8 @@
                                 <th scope="col" class="text-center" >اسم الشريك</th>
                                 <th scope="col" class="text-center" >التاريخ</th>
                                 <th scope="col" class="text-center" >نوع المعاملة</th>
-                                <th scope="col" class="text-center">القيمة</th>
+                                <th scope="col" class="text-center">قيمة الايداع</th>
+                                <th scope="col" class="text-center">قيمة السحب</th>
                                 <th scope="col" class="text-center" >البيان</th>
                                 <th scope="col" class="text-center" >رصيد الشريك</th>
                                 <th scope="col" class="text-center" >رصيد الشركاء</th>
@@ -112,7 +113,8 @@
                                 <td style="text-align:center">{{$transaction->partnerName}}</td>
                                 <td style="text-align:center">{{$transaction->date}}</td>                                                 
                                 <td style="text-align:center">{{$transaction->type}}</td>
-                                <td style="text-align:center">{{$transaction->value}}</td>
+                                <td style="text-align:center">{{$transaction->value_add}}</td>
+                                <td style="text-align:center">{{$transaction->value_sub}}</td>
                                 <td style="text-align:center">{{$transaction->note}}</td>
                                 <td style="text-align:center">{{$transaction->currentPartnerTotal}}</td>
                                 <td style="text-align:center">{{$transaction->currentAllPartnersTotal}}</td>

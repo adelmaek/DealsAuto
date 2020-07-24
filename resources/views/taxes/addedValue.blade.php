@@ -21,7 +21,8 @@
                             <tr>
                                 <th scope="col" class="text-center" >نوع المعاملة</th>
                                 <th scope="col" class="text-center" >الضريبة</th>
-                                <th scope="col" class="text-center">القيمة</th>
+                                <th scope="col" class="text-center">قيمة الايداع</th>
+                                <th scope="col" class="text-center">قيمة السحب</th>
                                 <th scope="col" class="text-center" >التاريخ</th>
                                 <th scope="col" class="text-center" >البيان</th>
                                 <th scope="col" class="text-center">الرصيد</th>
@@ -30,9 +31,10 @@
                         <tbody>
                             @foreach ($addedValueTrans as $TaxesTransaction)
                                 <tr>
-                                    <th scope="row" class="text-center">{{$TaxesTransaction->type}}</th>
+                                    <td scope="row" class="text-center">{{$TaxesTransaction->type}}</td>
                                     <td class="text-center">{{$TaxesTransaction->taxType}}</td>
-                                    <td class="text-center">{{$TaxesTransaction->value}}</td>
+                                    <td class="text-center">{{$TaxesTransaction->value_add}}</td>
+                                    <td class="text-center">{{$TaxesTransaction->value_sub}}</td>
                                     <td class="text-center">{{$TaxesTransaction->date}}</td>
                                     <td class="text-center">{{$TaxesTransaction->note}}</td>
                                     <td class="text-center">{{$TaxesTransaction->currentBalance}}</td>

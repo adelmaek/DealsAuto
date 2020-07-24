@@ -29,8 +29,9 @@ $(document).ready(function(){
                 { "data": "accountNumber" },
                 { "data": "date" },
                 { "data": "valueDate" },
+                { "data": "value_add" },
+                { "data": "value_sub" },
                 { "data": "type" },
-                { "data": "value" },
                 { "data": "currentBankBalance" },
                 { "data": "currentAllBanksBalance" },
                 { "data": "note" }

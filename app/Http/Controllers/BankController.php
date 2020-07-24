@@ -7,7 +7,7 @@ use App\BankTransaction;
 use App\currency;
 use Illuminate\Http\Request;
 use DB;
-
+use App\generalTransaction;
 class BankController extends Controller
 {
     //Create and store new bank account
@@ -35,6 +35,7 @@ class BankController extends Controller
     public function getShowBank($accountNumber)
     {
         $transaction = BankTransaction::where('accountNumber',$accountNumber)->get();
+        $transaction = generalTransaction::separate_add_from_sub($transaction);
         return view('banks/showBank',['transactions'=>$transaction]);
     }
  

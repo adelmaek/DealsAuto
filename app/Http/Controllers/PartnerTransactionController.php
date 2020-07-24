@@ -11,6 +11,7 @@ use App\BankTransaction;
 use DataTables;
 use Log;
 use App\currency;
+use App\generalTransaction;
 
 class PartnerTransactionController extends Controller
 {
@@ -19,6 +20,7 @@ class PartnerTransactionController extends Controller
         $partners = Partner::all();
         $transactions = PartnerTransaction::orderBy('date','Asc')->get();
         $banks = Bank::all();
+        $transactions = generalTransaction::separate_add_from_sub($transactions);
         return view('partners/addRemoveTransaction',['partners'=>$partners,"transactions"=>$transactions, "banks"=>$banks]);
     }
     
@@ -123,7 +125,7 @@ class PartnerTransactionController extends Controller
                 $transaction = PartnerTransaction::where('partnerName',$partner)->whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'ASC')->get();
             }
         }
-
+        $transaction = generalTransaction::separate_add_from_sub($transaction);
         return Datatables::of($transaction)->make(true);
     }
 

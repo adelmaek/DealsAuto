@@ -7,6 +7,7 @@ use App\cashTransaction;
 use Illuminate\Http\Request;
 use App\taxes;
 use App\Bank;
+use App\generalTransaction;
 class TaxesController extends Controller
 {
     public function getAddTaxesTrans()
@@ -20,7 +21,8 @@ class TaxesController extends Controller
             else
                 $trans->taxType = "جاري مصلحة الضرايب";
         }
-        return view('taxes/addTaxes',["TaxesTransactions"=>$taxesTransactiosn,"banks"=>$banks]);
+        $transactions = generalTransaction::separate_add_from_sub($taxesTransactiosn);
+        return view('taxes/addTaxes',["TaxesTransactions"=>$transactions,"banks"=>$banks]);
     }
     public  function postAddTaxesTrans(Request $request)
     {
@@ -56,7 +58,8 @@ class TaxesController extends Controller
         {
             $trans->taxType = "قيمة مضافة";
         }
-        return view('taxes/addedValue',["addedValueTrans"=>$addedValueTrans]);
+        $transactions = generalTransaction::separate_add_from_sub($addedValueTrans);
+        return view('taxes/addedValue',["addedValueTrans"=>$transactions]);
     }
     public function getTaxAuth()
     {
@@ -65,6 +68,7 @@ class TaxesController extends Controller
         {
             $trans->taxType = "جاري مصلحة الضرايب";
         }
-        return view('taxes/taxAuth',["taxAuthTrans"=>$taxAuthTrans]);
+        $transactions = generalTransaction::separate_add_from_sub($taxAuthTrans);
+        return view('taxes/taxAuth',["taxAuthTrans"=>$transactions]);
     }
 }

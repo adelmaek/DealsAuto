@@ -81,9 +81,9 @@
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center" >نوع المعاملة</th>
-                                <th scope="col" class="text-center" >اسم الخزنة</th>  
-                                <th scope="col" class="text-center">القيمة</th>
-                                {{-- <th scope="col" class="text-center" >العملة</th> --}}
+                                <th scope="col" class="text-center" >اسم الخزنة</th> 
+                                <th scope="col" class="text-center">قيمة الايداع</th> 
+                                <th scope="col" class="text-center">قيمة السحب</th>                                
                                 <th scope="col" class="text-center" >التاريخ</th>
                                 <th scope="col" class="text-center" >البيان</th>
                                 <th scope="col" class="text-center">رصيد الخزينة</th>
@@ -100,8 +100,8 @@
                                     @else
                                         <td  class="text-center">خزنة العهدة</td>
                                     @endif
-                                    <td class="text-center">{{$cashTransaction->value}}</td>
-                                    {{-- <td class="text-center">{{$cashTransaction->currency}}</td> --}}
+                                    <td class="text-center">{{$cashTransaction->value_add}}</td>
+                                    <td class="text-center">{{$cashTransaction->value_sub}}</td>
                                     <td class="text-center">{{$cashTransaction->date}}</td>
                                     <td class="text-center">{{$cashTransaction->note}}</td>
                                     <td class="text-center">{{$cashTransaction->currentCashNameTotal}}</td>

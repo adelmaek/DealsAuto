@@ -6,6 +6,7 @@ use DB;
 use Illuminate\Http\Request;
 use Log;
 use DataTables;
+use App\generalTransaction;
 
 
 class CashTransactionController extends Controller
@@ -19,6 +20,7 @@ class CashTransactionController extends Controller
     public function getAddRemoveCash()
     {
         $cashTransactions = cashTransaction::orderBy('date','Asc')->get();
+        $cashTransactions = generalTransaction::separate_add_from_sub($cashTransactions);
         return view('cash/addRemoveCash',['cashTransactions'=>$cashTransactions]);
     }
 
@@ -69,6 +71,7 @@ class CashTransactionController extends Controller
             else
                 $trans->name = 'خزنة العهدة';
         }
+        $transaction = generalTransaction::separate_add_from_sub($transaction);
         return Datatables::of($transaction)->make(true);
     }
 }

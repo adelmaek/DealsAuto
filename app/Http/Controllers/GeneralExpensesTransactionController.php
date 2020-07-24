@@ -6,12 +6,14 @@ use App\GeneralExpensesTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
 use App\cashTransaction;
+use App\generalTransaction;
 
 class GeneralExpensesTransactionController extends Controller
 {
     public function getAddGenExpTrans()
     {
         $transactions = GeneralExpensesTransaction::orderBy('date','Asc')->get();
+        $transactions = generalTransaction::separate_add_from_sub($transactions);
         return view('GenExpTransactions/addGenExpTrans',['transactions'=>$transactions]);
     }
 
