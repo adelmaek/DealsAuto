@@ -93,7 +93,7 @@
                 <!-- User Profile-->
                 <div class="user-profile">
                     <div class="user-pro-body">
-                        <div><img src="{{asset('assets/images/users/2.jpg')}}" alt="user-img" class="img-circle"></div>
+                        <div><img src="{{asset('assets/images/users/genericUser.png')}}" alt="user-img" class="img-circle"></div>
                         <div class="dropdown">
                             <a href="javascript:void(0)" class="dropdown-toggle u-dropdown link hide-menu" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">{{ Auth::user()->fullname }} <span class="caret"></span></a>
                             <div class="dropdown-menu animated flipInY">
