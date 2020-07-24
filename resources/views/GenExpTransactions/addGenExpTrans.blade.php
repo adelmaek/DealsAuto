@@ -80,7 +80,7 @@
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center" >النوع</th> 
-                                <th scope="col" class="text-center">قيمة الايدع</th>
+                                <th scope="col" class="text-center">قيمة الايداع</th>
                                 <th scope="col" class="text-center">قيمة السحب</th>   
                                 <th scope="col" class="text-center" >التاريخ</th>
                                 <th scope="col" class="text-center" >البيان</th>

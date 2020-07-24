@@ -64,7 +64,7 @@ Partners Transactions
                 <tr>
                     <th scope="col" class="text-left" >نوع المعاملة</th>
                     <th scope="col" class="text-left" >اسم الشريك</th>
-                    <th scope="col" class="text-left">قيمة الايدع</th>
+                    <th scope="col" class="text-left">قيمة الايداع</th>
                     <th scope="col" class="text-left">قيمة السحب</th>
                     <th scope="col" class="text-left" >التاريخ</th>
                     <th scope="col" class="text-left" >البيان</th>

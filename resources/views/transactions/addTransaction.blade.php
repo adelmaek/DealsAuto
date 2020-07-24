@@ -89,15 +89,15 @@
             width: auto;
             white-space: nowrap;">
                 <div class="table-responsive-sm">
-                    <table class="table ">
+                    <table id="bankTransTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center" >رقم الحساب</th>
                                 <th scope="col" class="text-center" >التاريخ</th>
                                 <th scope="col" class="text-center" >value Date</th>
-                                <th scope="col" class="text-center" >نوع المعاملة</th>
-                                <th scope="col" class="text-center">قيمة الايدع</th>
+                                <th scope="col" class="text-center">قيمة الايداع</th>
                                 <th scope="col" class="text-center">قيمة السحب</th>
+                                <th scope="col" class="text-center" >نوع المعاملة</th>
                                 <th scope="col" class="text-center" >البيان</th>
                                 <th scope="col" class="text-center" >رصيد الحساب</th>
                                 <th scope="col" class="text-center" >رصيد البنوك</th>
@@ -111,12 +111,12 @@
                                 <td style="text-align:center">{{$transaction->date}}</td>
                                 <td style="text-align:center">{{$transaction->valueDate}}</td>
                                 <td style="text-align:center">{{$transaction->value_add}}</td>
-                                <td style="text-align:center">{{$transaction->value_sub}}</td>                                          
+                                <td style="text-align:center">{{$transaction->value_sub}}</td>                                         
                                 <td style="text-align:center">{{$transaction->type}}</td>
                                 {{-- <td style="text-align:center">{{$transaction->value}}</td> --}}
                                 <td style="text-align:center">{{$transaction->note}}</td>
-                                <td style="text-align:center">{{$transaction->currentBankBalance}}</td>
-                                <td style="text-align:center">{{$transaction->currentAllBanksBalance}}</td>
+                                <td style="text-align:center">{{$transaction->currentBankBalance}} {{$transaction->currency}}</td>
+                                <td style="text-align:center">{{$transaction->currentAllBanksBalance}} egp</td>
                                 <td style="text-align:center">
                                     <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delTransaction',['transaction_id'=>$transaction->id, 'accNumber'=>$transaction->accountNumber])}}" role="button">Delete</a>
                                 </td>
@@ -129,4 +129,28 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('extraJS')
+<script>
+$('#bankTransTable').DataTable({
+        "displayLength": 25,
+        "processing": true,
+        dom: 'Bfrtip',
+        buttons: [
+            
+                {
+                extend: 'excel',
+                title: 'Deals-Auto',
+                footer: true,
+            },
+            {
+                extend: 'print',
+                title: 'Deals-Auto',
+                footer: true,
+            }
+        ]   
+    });
+    $(' .buttons-print,.buttons-excel').addClass('btn btn-primary mr-1');
+</script>
 @endsection

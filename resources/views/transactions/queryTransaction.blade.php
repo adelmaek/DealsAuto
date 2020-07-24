@@ -71,6 +71,7 @@ Banks Transactions
                 <th scope='col' class='text-left' >Value Date</th>
                 <th scope='col' class='text-left' >قيمة الايداع</th>
                 <th scope='col' class='text-left' >قيمة السحب</th>
+                <th scope='col' class='text-left' >العملة</th>
                 <th scope='col' class='text-left' >نوع المعاملة</th>  
                 <th scope='col' class='text-left' >رصيد الحساب</th>
                 <th scope='col' class='text-left' >رصيد البنوك</th>

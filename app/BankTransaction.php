@@ -9,6 +9,7 @@ use App\PartnerTransaction;
 use App\CashTransaction;
 use App\MiscellaneousIncome;
 use App\currency;
+use App\Bank;
 
 class BankTransaction extends Model
 {
@@ -338,5 +339,40 @@ class BankTransaction extends Model
             DB::table('banks')->where('id', $bank-> id)->increment('currentBalance',$valueInput);
         }
     }
-
+    public static function update_all_banks_total_before_showing($transactions)
+    {
+        $total =0;
+        $banks = Bank::all();
+        foreach($banks as $bank)
+        {
+            if(!strcmp($bank->currency,"egp"))
+                $currencyRate = 1;
+            else
+                $currencyRate = currency::where('name',$bank->currency)->first()->rate;
+            Log::debug('-------------------------------------');
+            Log::debug($bank->currency);
+            Log::debug($currencyRate);
+            Log::debug($bank->intialBalance);
+            $total = $total + $bank->intialBalance * $currencyRate;
+        }
+        Log::debug($total);
+        foreach($transactions as $trans)
+        {
+            $bank = Bank::where("id", $trans->bank_id)->first();
+            if(!strcmp($bank->currency,"egp"))
+                $currencyRate = 1;
+            else
+                $currencyRate = currency::where('name',$bank->currency)->first()->rate;
+            if(!strcmp($trans->action, "add"))
+            {
+                $total = $total + $trans->value * $currencyRate;
+            }
+            else
+            {
+                $total = $total - $trans->value * $currencyRate;
+            }
+            $trans->currentAllBanksBalance = $total;
+        }
+        return $transactions;
+    }
 }

@@ -36,7 +36,8 @@ class BankController extends Controller
     {
         $transaction = BankTransaction::where('accountNumber',$accountNumber)->get();
         $transaction = generalTransaction::separate_add_from_sub($transaction);
-        return view('banks/showBank',['transactions'=>$transaction]);
+        $transactions = bankTransaction::update_all_banks_total_before_showing($transaction);
+        return view('banks/showBank',['transactions'=>$transactions]);
     }
  
 }
