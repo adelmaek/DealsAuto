@@ -207,6 +207,7 @@ class BankTransactionController extends Controller
         }
         $transactions = generalTransaction::separate_add_from_sub($transaction);
         $transactions = bankTransaction::update_all_banks_total_before_showing($transactions);
+        $transactions = BankTransaction::add_currency_field($transactions);
         return Datatables::of($transactions)->make(true);
     }
 

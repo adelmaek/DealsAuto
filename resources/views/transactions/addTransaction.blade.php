@@ -18,7 +18,7 @@
             width: auto;
             white-space: nowrap;">
                 <div class="table-responsive-sm">
-                    <table class="table ">
+                    <table class="table color-bordered-table table-striped full-color-table full-dark-table hover-table ">
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center" >رقم الحساب</th>
@@ -34,7 +34,7 @@
                             <tr>
                                 <form id="transaction-form" class="form"action="{{route('insertTransaction')}}" method="post">
                                     <td>
-                                        <select class="custom-select custom-select-lg" style="height: 43px;" id="accountNumberInput" name="accountNumberInput" required>
+                                        <select class="form-control" style="width:100%; height: 43px;" id="accountNumberInput" name="accountNumberInput" required>
                                             <option value="" disabled selected>رقم الحساب</option>
                                             @foreach($banks as $bank)
                                                 <option value="{{$bank->accountNumber}}">{{$bank->bankName}}:{{$bank->accountNumber}}</option>
@@ -43,13 +43,13 @@
                                                                                 
                                     </td>
                                     <td>
-                                        <input type="date" class= "custom-select custom-select-sm" id="dateInput" name="dateInput" style="height: 40px;" required>
+                                        <input type="date" class= "form-control" id="dateInput" name="dateInput" style="height: 40px;" required>
                                     </td>
                                     <td>
-                                        <input type="date" class= "custom-select custom-select-sm" id="valueDateInput" name="valueDateInput" style="height: 40px;" required>
+                                        <input type="date" class= "form-control" id="valueDateInput" name="valueDateInput" style="height: 40px;" required>
                                     </td>
                                     <td>
-                                        <select class="custom-select custom-select-lg" style="height: 45px;width: 150px;" id="typeInput" name="typeInput" required>
+                                        <select class="form-control" style="height: 45px;width: 150px;" id="typeInput" name="typeInput" required>
                                             <option value="" disabled selected>نوع المعاملة</option>
                                             <option value="add">ايداع</option>
                                             <option value="sub">سحب</option>
@@ -141,11 +141,6 @@ $('#bankTransTable').DataTable({
             
                 {
                 extend: 'excel',
-                title: 'Deals-Auto',
-                footer: true,
-            },
-            {
-                extend: 'print',
                 title: 'Deals-Auto',
                 footer: true,
             }

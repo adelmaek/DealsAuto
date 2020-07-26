@@ -349,13 +349,8 @@ class BankTransaction extends Model
                 $currencyRate = 1;
             else
                 $currencyRate = currency::where('name',$bank->currency)->first()->rate;
-            Log::debug('-------------------------------------');
-            Log::debug($bank->currency);
-            Log::debug($currencyRate);
-            Log::debug($bank->intialBalance);
             $total = $total + $bank->intialBalance * $currencyRate;
         }
-        Log::debug($total);
         foreach($transactions as $trans)
         {
             $bank = Bank::where("id", $trans->bank_id)->first();
@@ -372,6 +367,16 @@ class BankTransaction extends Model
                 $total = $total - $trans->value * $currencyRate;
             }
             $trans->currentAllBanksBalance = $total;
+        }
+        return $transactions;
+    }
+
+    public static function add_currency_field($transactions)
+    {
+        foreach($transactions as $trans)
+        {
+            $currency = Bank::where("id", $trans->bank_id)->first()->currency;
+            $trans->setAttribute('currency',$currency);
         }
         return $transactions;
     }

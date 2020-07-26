@@ -60,14 +60,9 @@ $('#showBankTable').DataTable({
                 extend: 'excel',
                 title: 'Deals-Auto',
                 footer: true,
-            },
-            {
-                extend: 'print',
-                title: 'Deals-Auto',
-                footer: true,
             }
         ]   
     });
-    $(' .buttons-print,.buttons-excel').addClass('btn btn-primary mr-1');
+    $('.buttons-excel').addClass('btn btn-primary mr-1');
 </script>
 @endsection

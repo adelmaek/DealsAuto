@@ -31,6 +31,7 @@ $(document).ready(function(){
                 { "data": "valueDate" },
                 { "data": "value_add" },
                 { "data": "value_sub" },
+                { "data": "currency" },
                 { "data": "type" },
                 { "data": "currentBankBalance" },
                 { "data": "currentAllBanksBalance" },
@@ -48,5 +49,6 @@ $(document).ready(function(){
             ]           
 
         });
+        $('.buttons-excel').addClass('btn btn-primary mr-1');
     });
 });
