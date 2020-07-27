@@ -28,14 +28,14 @@
                     </div>
                     <div class="row ">
                         <div class="col ">                     
-                                <select class="custom-select custom-select-lg" style="height: 45px;float: right;" id="typeInput" name="typeInput" dir="rtl" required>
+                                <select class="form-control" style="height: 45px;float: right;" id="typeInput" name="typeInput" dir="rtl" required>
                                         <option value="all" selected dir="rtl">جميع المشتريات</option>
                                         <option value="local">محلي</option>
                                         <option value="imported">مستورد</option>
                                 </select>
                         </div>
                         <div class="col  ">                                
-                                <input type="date" class="custom-select custom-select-lg" id="fromDate" name="fromDate" style="height: 38px;float: right;">
+                                <input type="date" class="form-control" id="fromDate" name="fromDate" style="height: 38px;float: right;">
                         </div>
                     </div>
                     <div class="row ">
@@ -49,7 +49,7 @@
                             <button type="button" class="btn waves-effect waves-light btn-dark" style="height: 38px;float: right;" id='applyQuery'>عرض</button>        
                         </div>
                         <div class="col ">
-                                <input type="date" class="custom-select custom-select-lg" id="toDate" name="toDate" style="height: 38px;float: right;">
+                                <input type="date" class="form-control" id="toDate" name="toDate" style="height: 38px;float: right;">
                         </div>
                     </div>
                 </form>

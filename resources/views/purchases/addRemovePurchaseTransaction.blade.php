@@ -18,7 +18,7 @@
             width: auto;
             white-space: nowrap;">
                 <div class="table-responsive-sm">
-                    <table class="table ">
+                    <table class="table color-bordered-table table-striped full-color-table full-dark-table hover-table">
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center" >النوع</th> 

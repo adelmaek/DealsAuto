@@ -18,7 +18,7 @@
             width: auto;
             white-space: nowrap;">
                 <div class="table-responsive-sm">
-                    <table class="table ">
+                    <table class="table color-bordered-table table-striped full-color-table full-dark-table hover-table ">
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center" >نوع المعاملة</th>
@@ -34,21 +34,21 @@
                             <tr>
                                 <form id="transaction-form" class="form"action="{{route('TaxesTrans')}}" method="post">
                                     <td>
-                                        <select class="custom-select custom-select-lg" style="height: 42px;" id="typeInput" name="typeInput" required>
+                                        <select class="form-control" style="height: 42px;" id="typeInput" name="typeInput" required>
                                             <option value="" disabled selected>نوع المعاملة</option>
                                             <option value="add">اضافة</option>
                                             <option value="sub">تسديد</option>
                                         </select>
                                     </td>
                                     <td>
-                                        <select class="custom-select custom-select-lg" style="height: 42px;" id="taxInput" name="taxInput" required>
+                                        <select class="form-control" style="height: 42px;" id="taxInput" name="taxInput" required>
                                             <option value="" disabled selected>الضريبة</option>
                                             <option value="addedValue">قيمة مضافة</option>
                                             <option value="taxAuth">جاري مصلحةالضرائب</option>
                                         </select>
                                     </td>
                                     <td>
-                                        <select class="custom-select custom-select-lg" style="height: 42px;" id="sourceInput" name="sourceInput" required>
+                                        <select class="form-control" style="height: 42px;" id="sourceInput" name="sourceInput" required>
                                             <option value="none"  selected>المصدر</option>
                                             <option value="normalCash">الخزنة</option>
                                             @foreach($banks as $bank)
@@ -60,7 +60,7 @@
                                         <input type="number" class="form-control" id="valueInput" name="valueInput" placeholder="القيمة" required style="min-width: 100px;" >
                                     </td>
                                     <td>
-                                        <input type="date" class="custom-select custom-select-lg" id="dateInput" name="dateInput" style="height: 42px;" required>     
+                                        <input type="date" class="form-control" id="dateInput" name="dateInput" style="height: 42px;" required>     
                                     <td>
                                         <input type="text" class="form-control" id="noteInput" name="noteInput" placeholder="البيان" required style="min-width: 100px;overflow:scroll;text-align: right;direction:RTL;">
                                     </td>

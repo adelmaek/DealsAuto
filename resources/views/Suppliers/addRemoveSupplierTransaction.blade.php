@@ -12,7 +12,7 @@
             width: auto;
             white-space: nowrap;">
                 <div class="table-responsive-sm">
-                    <table class="table ">
+                    <table class="table color-bordered-table table-striped full-color-table full-dark-table hover-table ">
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center" >المورد</th>
@@ -26,7 +26,7 @@
                             <tr>
                                 <form id="transaction-form" class="form"action="{{route('insertSupplierTrans')}}" method="post">
                                     <td class="text-center">
-                                        <select class="browser-default" style="height: 38px;" id="supplierNameInput" name="supplierNameInput" required>
+                                        <select class="form-control" style="height: 38px;" id="supplierNameInput" name="supplierNameInput" required>
                                             <option value="" disabled selected>اسم المورد</option>
                                             @foreach($suppliers as $supplier)
                                                 <option value="{{$supplier->name}}">{{$supplier->name}}</option>

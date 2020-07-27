@@ -12,7 +12,7 @@
             width: auto;
             white-space: nowrap;">
                 <div class="table-responsive-sm">
-                    <table class="table ">
+                    <table class="table color-bordered-table table-striped full-color-table full-dark-table hover-table ">
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center" >اسم الشريك</th> 
@@ -24,7 +24,7 @@
                             <tr>
                                 <form id="transaction-form" class="form"action="{{route('addPartner')}}" method="post">
                                     <td style="text-align:center">
-                                        <input type="text" class="form-control" id="nameInput" name="nameInput" placeholder="اسم لشريك" required style="min-width: 100px;text-align: center;" >
+                                        <input type="text" class="form-control" id="nameInput" name="nameInput" placeholder="اسم الشريك" required style="min-width: 100px;text-align: center;" >
                                     </td>
                                     <td style="text-align:center">
                                         <input type="number" class="form-control" id="intialBalance" name="intialBalance" required placeholder="الحساب المبدأي" style="min-width: 100px;text-align: center;" >

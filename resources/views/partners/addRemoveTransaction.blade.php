@@ -18,7 +18,7 @@
             width: auto;
             white-space: nowrap;">
                 <div class="table-responsive-sm">
-                    <table class="table ">
+                    <table class="table color-bordered-table table-striped full-color-table full-dark-table hover-table ">
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center" >اسم الشريك</th>
@@ -34,7 +34,7 @@
                             <tr>
                                 <form id="transaction-form" class="form"action="{{route('addPartnerTrans')}}" method="post">
                                     <td>
-                                        <select class="custom-select custom-select-lg" style="height: 43px;" id="partnerInput" name="partnerInput" required>
+                                        <select class="form-control" style="height: 43px;" id="partnerInput" name="partnerInput" required>
                                             <option value="" disabled selected>اسم الشريك</option>
                                             @foreach($partners as $partner)
                                                 <option value="{{$partner->name}}">{{$partner->name}}</option>
@@ -43,7 +43,7 @@
                                                                                 
                                     </td>
                                     <td>
-                                        <select class="custom-select custom-select-lg" style="height: 43px;" id="sourceInput" name="sourceInput" required>
+                                        <select class="form-control" style="height: 43px;" id="sourceInput" name="sourceInput" required>
                                             <option value="none" selected>لا يوجد</option>
                                             <option value="normalCash">الخزنة</option>
                                             <option value="custodyCash">خزنة العهدة</option>
@@ -54,10 +54,10 @@
                                                                                 
                                     </td>
                                     <td>
-                                        <input type="date" class= "custom-select custom-select-sm" id="dateInput" name="dateInput" style="height: 40px;" required>
+                                        <input type="date" class= "form-control" id="dateInput" name="dateInput" style="height: 40px;" required>
                                     </td>
                                     <td>
-                                        <select class="custom-select custom-select-lg" style="height: 45px;width: 150px;" id="typeInput" name="typeInput" required>
+                                        <select class="form-control" style="height: 45px;width: 150px;" id="typeInput" name="typeInput" required>
                                             <option value="" disabled selected>نوع المعاملة</option>
                                             <option value="add">ايداع</option>
                                             <option value="sub">سحب</option>

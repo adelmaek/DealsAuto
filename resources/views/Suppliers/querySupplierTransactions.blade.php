@@ -28,7 +28,7 @@
                     </div>
                     <div class="row ">
                         <div class="col ">                     
-                                <select class="custom-select custom-select-lg" style="height: 45px;float: right;" id="supplierNameInput" name="supplierNameInput" dir="rtl" required>
+                                <select class="form-control" style="height: 45px;float: right;" id="supplierNameInput" name="supplierNameInput" dir="rtl" required>
                                     @if(count($suppliers)==0)
                                         <option value="" disabled selected dir="rtl">اسم المورد</option>
                                     @endif
@@ -41,7 +41,7 @@
                                 </select>
                         </div>
                         <div class="col  ">                                
-                                <input type="date" class="custom-select custom-select-lg" id="fromDate" name="fromDate" style="height: 38px;float: right;">
+                                <input type="date" class="form-control" id="fromDate" name="fromDate" style="height: 38px;float: right;">
                         </div>
                     </div>
                     <div class="row ">
@@ -58,7 +58,7 @@
                             @endif         
                         </div>
                         <div class="col ">
-                                <input type="date" class="custom-select custom-select-lg" id="toDate" name="toDate" style="height: 38px;float: right;">
+                                <input type="date" class="form-control" id="toDate" name="toDate" style="height: 38px;float: right;">
                         </div>
                     </div>
                 </form>
