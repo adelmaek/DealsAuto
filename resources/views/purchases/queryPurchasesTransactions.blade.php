@@ -32,6 +32,7 @@
                                         <option value="all" selected dir="rtl">جميع المشتريات</option>
                                         <option value="local">محلي</option>
                                         <option value="imported">مستورد</option>
+                                        <option value="used">مستعمل</option>
                                 </select>
                         </div>
                         <div class="col  ">                                

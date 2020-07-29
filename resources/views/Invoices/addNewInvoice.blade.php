@@ -33,6 +33,7 @@
                                             <option value="-1" disabled selected >النوع</option>                                            
                                                 <option value="local">محلي</option>
                                                 <option value="imported">مستورد</option>
+                                                <option value="used">مستعمل</option>
                                         </select>
                                     </div>
                                     <div class="col">
@@ -63,6 +64,7 @@
                                                             </select>
                                                         </td>
                                                         <td><input type="text" name="item_chassis_number[]" placeholder="Enter chassis number " class="form-control  item_chassis_number_list" style="height:36px;" required /></td> 
+                                                        <td><input type="text" name="item_color[]" placeholder="Enter item color" class="form-control  item_color_list" style="height:36px;" required /></td> 
                                                         <td><input type="number" name="item_cost[]" placeholder="Enter item cost" class="form-control item_cost_list" required /></td> 
                                                         <td><button type="button" name="add" id="add" class="btn btn-success" >+</button></td>  
                                                     </tr>  
@@ -106,7 +108,7 @@
                                         <tr>
                                             <td scope="row" class="text-center">{{$bill->number}}</td>
                                             <td style="text-align:center">
-                                                <a class="btn btn-info" href="{{route('showInvoice',['bill_number'=>$bill->number])}}" role="button">show</a>
+                                                <a class="btn btn-info"  style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('showInvoice',['bill_number'=>$bill->number])}}" role="button">show</a>
                                             </td>
                                             <td style="text-align:center">
                                                 <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delInvoice',['bill_number'=>$bill->number])}}" role="button">Delete</a>
@@ -134,7 +136,7 @@
          var i=1;  
          $('#add').click(function(){  
               i++;  
-              $('#dynamic_field').append('<tr id="row'+i+'"><td><select class="select2 form-control custom-select" name="item_name[]" style="width: 100%;height:36px;" required><option>Select Item</option>@foreach($models as $model)<option value="{{$model->BRND_NAME}}-{{$model->MODL_NAME}}-{{$model->MODL_YEAR}}-{{$model->MODL_CATG}}">{{$model->BRND_NAME}}-{{$model->MODL_NAME}}-{{$model->MODL_YEAR}}-{{$model->MODL_CATG}}</option>@endforeach</select></td><td><input type="text" name="item_chassis_number[]" placeholder="Enter item chassis number" class="form-control item_chassis_number_list" /></td> <td><input type="number" name="item_cost[]" placeholder="Enter item cost" class="form-control item_cost_list" required /></td> <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+              $('#dynamic_field').append('<tr id="row'+i+'"><td><select class="select2 form-control custom-select" name="item_name[]" style="width: 100%;height:36px;" required><option>Select Item</option>@foreach($models as $model)<option value="{{$model->BRND_NAME}}-{{$model->MODL_NAME}}-{{$model->MODL_YEAR}}-{{$model->MODL_CATG}}">{{$model->BRND_NAME}}-{{$model->MODL_NAME}}-{{$model->MODL_YEAR}}-{{$model->MODL_CATG}}</option>@endforeach</select></td><td><input type="text" name="item_chassis_number[]" placeholder="Enter item chassis number" class="form-control item_chassis_number_list" /></td> <td><input type="text" name="item_color[]" placeholder="Enter item color" class="form-control item_color_list" /></td> <td><input type="number" name="item_cost[]" placeholder="Enter item cost" class="form-control item_cost_list" required /></td> <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
               
             // Switchery
             var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
@@ -267,9 +269,14 @@
                 '</div>').insertAfter('#localTaxes');
                 $('#addedValueTaxesInput').val('');
             }
-            else
+            else if(selectedType == 'local')
             {
                 $('#addedValueTaxesInput').val(14);
+                $('#importedTaxes').remove();
+            }
+            else
+            {
+                $('#addedValueTaxesInput').val(0);
                 $('#importedTaxes').remove();
             }
             
@@ -284,33 +291,3 @@
         });
 </script>
 @endsection
-
-{{-- if(selectedType === "imported")
-            {
-                alert("You have selected the country - " + selectedType);
-                $(#localTaxes).after('
-                <div class="row align-items-start" style="padding-top:10px;">\
-                    <div class="col">\
-                        <span class="valuePadding" style="font-weight: bold; "><input type="number" name="addedTaxesInput"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المضافة" class="form-control " required />  %</span>\
-                    </div>\
-                    <div class="col">\
-                        <span class="valuePadding" style="font-weight: bold; "><input type="number" name="addedTaxesInput"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المضافة" class="form-control " required />  %</span>\
-                    </div>\
-                    <div class="col">\
-                        <span class="valuePadding" style="font-weight: bold; "><input type="number" name="addedTaxesInput"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المضافة" class="form-control " required />  %</span>\
-                    </div>\
-                    <div class="col">\
-                        <span class="valuePadding" style="font-weight: bold; "><input type="number" name="addedTaxesInput"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المضافة" class="form-control " required />  %</span>\
-                    </div>\
-                    <div class="col">\
-                        <span class="valuePadding" style="font-weight: bold; "><input type="number" name="addedTaxesInput"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المضافة" class="form-control " required />  %</span>\
-                    </div>\
-                    <div class="col">\
-                        <span class="valuePadding" style="font-weight: bold; "><input type="number" name="addedTaxesInput"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المضافة" class="form-control " required />  %</span>\
-                    </div>\
-                </div>\
-                ');
-            }
-            else{
-                alert("else - " + selectedType);
-            } --}}

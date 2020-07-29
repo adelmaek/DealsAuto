@@ -33,6 +33,7 @@
                                     <tr>
                                         <th>item</th>
                                         <th class="text-center">Chassis Number</th>
+                                        <th class="text-center">Color</th>
                                         <th class="text-center">Unit Cost</th>
                                     </tr>
                                 </thead>
@@ -42,6 +43,7 @@
                                         <tr>
                                             <td>{{$item->name}}</td>
                                             <td class="text-center">{{$item->chassisNumber}}</td>
+                                            <td class="text-center">{{$item->color}}</td>
                                             <td class="text-center"> {{$item->unitCost}}</td>                                        
                                         </tr>
                                     @endforeach                                  

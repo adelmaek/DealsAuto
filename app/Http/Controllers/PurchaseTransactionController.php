@@ -131,8 +131,11 @@ class PurchaseTransactionController extends Controller
         {
             if(!strcmp($trans->type,'local'))
                 $trans->type = 'محلي';
-            else
+            else if(!strcmp($trans->type,'imported'))
                 $trans->type = 'مستورد';
+            else
+            $trans->type = 'مستعمل';
+            
             if($trans->bill_number == -1)
                 $trans->bill_number ="لا يوجد";
         }

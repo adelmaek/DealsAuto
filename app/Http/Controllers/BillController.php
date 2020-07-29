@@ -30,12 +30,13 @@ class BillController extends Controller
                 'name' => $request['item_name'][$i],
                 'chassisNumber' => $request['item_chassis_number'][$i],
                 'unitCost' =>$request['item_cost'][$i],
+                'color'=>$request['item_color'][$i],
                 'invoice_number' => $request['invoiceNumberInput']
             ]);
                 // $totalItemsCost = $totalItemsCost + $request['item_cost'][$i] * $request['item_quantity'][$i];
                 $totalItemsCost = $totalItemsCost + $request['item_cost'][$i] ;
         }
-        if(!strcmp($request['typeInput'],'local'))
+        if(!strcmp($request['typeInput'],'local')|| !strcmp($request['typeInput'],'used') )
             Bill::insert([
                 'number'=>$request['invoiceNumberInput'],
                 'supplier_name'=>$request['supplierInput'],

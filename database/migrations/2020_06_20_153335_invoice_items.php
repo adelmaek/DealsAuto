@@ -17,6 +17,7 @@ class InvoiceItems extends Migration
             $table->bigIncrements('id');
             $table->string('name');
             $table->string('chassisNumber');
+            $table->string('color');
             $table->double('unitCost',40,3)->default(0);
             $table->bigInteger('invoice_number');
         });

@@ -36,6 +36,7 @@
                                             <option value="" disabled selected>النوع</option>
                                             <option value="local">محلي</option>
                                             <option value="imported">مستورد</option>
+                                            <option value="used">مستعمل</option>
                                         </select>
                                     </td>
                                     <td>
@@ -85,8 +86,10 @@
                                 <tr>
                                     @if(!strcmp($trans->type,"local"))
                                         <td scope="row" class="text-center">محلي</td>
-                                    @else
+                                    @elseif(!strcmp($trans->type,"imported"))
                                         <td scope="row" class="text-center">مستورد</td>
+                                    @else
+                                        <td scope="row" class="text-center">مستعمل</td>
                                     @endif
                                     <td class="text-center">{{$trans->value}}</td>
                                     <td class="text-center">{{$trans->date}}</td>
