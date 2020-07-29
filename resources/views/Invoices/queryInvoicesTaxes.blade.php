@@ -65,18 +65,20 @@ Invoices Taxes
                 <th scope="col" class="text-left" >رقم الفاتورة</th>
                 <th scope="col" class="text-left" >المورد</th> 
                 <th scope="col" class="text-left">التاريخ</th>
-                <th scope="col" class="text-left">القيمة المضافة</th>
                 <th scope="col" class="text-left">القيمة المقبولة</th>
                 <th scope="col" class="text-left">مصروفات مشتريات</th>
                 <th scope="col" class="text-left">مصروفات بنكية</th>
                 <th scope="col" class="text-left">جمارك</th>  
+                <th scope="col" class="text-left">الاجمالي</th>
+                <th scope="col" class="text-left">القيمة المضافة</th>
                 <th scope="col" class="text-left">جاري مصلحة الضرائب</th>
+      
             </tr>
         </thead>
         <tbody>
         </tbody>
         <tfoot >
-            <tr><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>
+            <tr><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th><th></th></tr>
         </tfoot>
     </table>
 </div>

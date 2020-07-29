@@ -73,6 +73,12 @@ $(document).ready(function(){
                 .data()
                 .reduce( function (a, b) {
                     return intVal(a) + intVal(b);
+                }, 0 );    
+                var totalValue9 = api
+                .column( 9)
+                .data()
+                .reduce( function (a, b) {
+                    return intVal(a) + intVal(b);
                 }, 0 );                     
                     
                 // Update footer by showing the total with the reference of the column index 
@@ -83,6 +89,7 @@ $(document).ready(function(){
             $( api.column( 6 ).footer() ).html(totalValue6);
             $( api.column( 7 ).footer() ).html(totalValue7);
             $( api.column( 8).footer() ).html(totalValue8);
+            $( api.column( 9).footer() ).html(totalValue9);
         },
             "displayLength": 25,
             "processing": true,
@@ -91,12 +98,14 @@ $(document).ready(function(){
                 { "data": "number" },
                 { "data": "supplier_name" },
                 { "data": "date" },
-                { "data": "addValueTaxes" },
                 { "data": "importedTaxes1" },
                 { "data": "importedTaxes2" },
                 { "data": "importedTaxes3" },
                 { "data": "importedTaxes4" },
+                { "data": "local_imported_total" },
+                { "data": "addValueTaxes" },
                 { "data": "importedTaxes5" }
+
             ],
             "ajax": "queiredInvoices/"+ supplier + ',' + fromDate + ',' + toDate,
 

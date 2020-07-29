@@ -209,17 +209,15 @@ class BillController extends Controller
             $items = DB::table('invoice_items')->where('invoice_number',$bill->number)->get();
             foreach($items as $item)
             {
-                // $total_number_items = $total_number_items + $item->quantity;
                 $total_number_items = $total_number_items + 1;
             }
-            // $totalTaxesValue = $bill->totalTaxes();
             $totalValueWithTaxes = $bill->totalValueWithTaxes();
-        
             $bill->setAttribute('total_items_number', $total_number_items);
-            // $bill->setAttribute('totalTaxesValue', $totalTaxesValue);
             $bill->setAttribute('totalValueWithTaxes', $totalValueWithTaxes);
-            
         }
+        $bills = Bill::different_total_taxes_for_local_vs_imported($bills);
+        $bills = Bill::change_addedValue_from_ratio_to_value($bills);
+        // Log::debug($bills);
         return Datatables::of($bills)->make(true);
     }
 
