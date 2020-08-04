@@ -15,8 +15,10 @@
                     <table class="table color-bordered-table table-striped full-color-table full-dark-table hover-table ">
                         <thead>
                             <tr>
-                                <th scope="col" class="text-center" >المورد</th>
+                                <th scope="col" class="text-center" >المورد</th>                                
                                 <th scope="col" class="text-center" >التاريخ</th>
+                                <th scope="col" class="text-center" >العملية</th>
+                                <th scope="col" class="text-center" >مصدر التمويل</th>
                                 <th scope="col" class="text-center">القيمة</th>
                                 <th scope="col" class="text-center" >البيان</th>
                                 <th scope="col" class="text-center">اضافة</th>
@@ -31,11 +33,26 @@
                                             @foreach($suppliers as $supplier)
                                                 <option value="{{$supplier->name}}">{{$supplier->name}}</option>
                                             @endforeach
-                                        </select>
-                                                                                
+                                        </select>                                           
                                     </td>
                                     <td class="text-center">
-                                        <input type="date" id="dateInput" name="dateInput" style="height: 38px;" required>
+                                        <input type="date" class="form-control" id="dateInput" name="dateInput" style="height: 38px;" required>
+                                    </td>
+                                    <td class="text-center">
+                                        <select class="form-control" style="height: 38px;" id="typeInput" name="typeInput" required>
+                                            <option value="sub" selected>توريد</option>
+                                            <option value="add">تمويل</option>
+                                        </select>                                           
+                                    </td>
+                                    <td class="text-center">
+                                        <select class="form-control" style="height: 38px;" id="sourceInput" name="sourceInput" required>
+                                            <option value="none" selected>لا يوجد</option>
+                                            @foreach($banks as $bank)
+                                                <option value="{{$bank->accountNumber}}">{{$bank->bankName}}:{{$bank->accountNumber}}</option>
+                                            @endforeach
+                                            <option value="normalCash">الخزنة</option>
+                                            <option value="custodyCash">خزنة العهدة</option>
+                                        </select>                                           
                                     </td>
                                     <td class="text-center">
                                         <input type="number" class="form-control" id="valueInput" name="valueInput" placeholder="القيمة" required style="min-width: 100px;" >
@@ -70,7 +87,8 @@
                             <tr>
                                 <th scope="col" class="text-center" >المورد</th> 
                                 <th scope="col" class="text-center">التاريخ</th>
-                                <th scope="col" class="text-center">القيمة</th>
+                                <th scope="col" class="text-center">قيمة التوريد</th>
+                                <th scope="col" class="text-center">قيمة التمويل</th>
                                 <th scope="col" class="text-center">الاجمالي الحالي للمورد</th>
                                 <th scope="col" class="text-center">البيان</th>
                                 <th scope="col" class="text-center">مسح</th>
@@ -82,7 +100,8 @@
                                 <tr>
                                     <td scope="row" class="text-center">{{\App\Supplier::where('id',$trans->supplier_id)->first()->name}}</td>
                                     <td class="text-center">{{$trans->date}}</td>
-                                    <td class="text-center">{{$trans->value}}</td>
+                                    <td class="text-center">{{$trans->value_add}}</td>
+                                    <td class="text-center">{{$trans->value_sub}}</td>
                                     <td class="text-center">{{$trans->currentSupplierTotal}}</td>
                                     <td class="text-center">{{$trans->note}}</td>
                                     <td style="text-align:center">
@@ -111,14 +130,9 @@ $('#suppliersTable').DataTable({
             extend: 'excel',
             title: 'Deals-Auto',
             footer: true,
-        },
-        {
-            extend: 'print',
-            title: 'Deals-Auto',
-            footer: true,
         }
     ]   
 });
-$(' .buttons-print,.buttons-excel').addClass('btn btn-primary mr-1');
+$('.buttons-excel').addClass('btn btn-primary mr-1');
 </script>
 @endsection

@@ -21,7 +21,7 @@ class Bill extends Model
     {
         foreach($bills as $bill)
         {
-            if(!strcmp($bill->type,"local"))
+            if(!strcmp($bill->type,"local") || !strcmp($bill->type,"used"))
             {
                 //el qeema el modafa bas
                 $total_local = $bill->value + ($bill->value * ($bill->addValueTaxes/100));

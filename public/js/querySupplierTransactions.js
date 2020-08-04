@@ -28,7 +28,8 @@ $(document).ready(function(){
             "columns": [
                 { "data": "supplier_name" },
                 { "data": "date" },
-                { "data": "value" },
+                { "data": "value_add" },
+                { "data": "value_sub" },
                 { "data": "bill_number" },
                 { "data": "currentSupplierTotal" },
                 { "data": "note" }

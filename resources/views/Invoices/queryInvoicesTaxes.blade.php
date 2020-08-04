@@ -62,16 +62,16 @@ Invoices Taxes
     <table id="invoicesTaxesTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
         <thead>
             <tr>
-                <th scope="col" class="text-left" >رقم الفاتورة</th>
-                <th scope="col" class="text-left" >المورد</th> 
-                <th scope="col" class="text-left">التاريخ</th>
-                <th scope="col" class="text-left">القيمة المقبولة</th>
-                <th scope="col" class="text-left">مصروفات مشتريات</th>
-                <th scope="col" class="text-left">مصروفات بنكية</th>
-                <th scope="col" class="text-left">جمارك</th>  
-                <th scope="col" class="text-left">الاجمالي</th>
-                <th scope="col" class="text-left">القيمة المضافة</th>
-                <th scope="col" class="text-left">جاري مصلحة الضرائب</th>
+                <th scope="col" class="text-center" >رقم الفاتورة</th>
+                <th scope="col" class="text-center" >المورد</th> 
+                <th scope="col" class="text-center">التاريخ</th>
+                <th scope="col" class="text-center">القيمة المقبولة</th>
+                <th scope="col" class="text-center">مصروفات مشتريات</th>
+                <th scope="col" class="text-center">مصروفات بنكية</th>
+                <th scope="col" class="text-center">جمارك</th>  
+                <th scope="col" class="text-center">الاجمالي</th>
+                <th scope="col" class="text-center">القيمة المضافة</th>
+                <th scope="col" class="text-center">جاري مصلحة الضرائب</th>
       
             </tr>
         </thead>

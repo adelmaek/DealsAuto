@@ -22,6 +22,7 @@ class CreateSupplierTransactionsTable extends Migration
             $table->string('note');
             $table->date('date');
             $table->string('supplier_name');
+            $table->string('type')->default('sub');
         });
     }
 

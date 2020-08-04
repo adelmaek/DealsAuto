@@ -78,12 +78,13 @@
                     <table id="supplierTransTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
-                                <th scope="col" class="text-left" >المورد</th> 
-                                <th scope="col" class="text-left">التاريخ</th>
-                                <th scope="col" class="text-left">القيمة</th>
-                                <th scope='col' class='text-left' >الفاتورة الملحقة</th>
-                                <th scope="col" class="text-left">الرصيد</th>
-                                <th scope="col" class="text-left">البيان</th>
+                                <th scope="col" class="text-center" >المورد</th> 
+                                <th scope="col" class="text-center">التاريخ</th>
+                                <th scope="col" class="text-center">قيمة التوريد</th>
+                                <th scope="col" class="text-center">قيمة التمويل</th>
+                                <th scope='col' class='text-center' >الفاتورة الملحقة</th>
+                                <th scope="col" class="text-center">الرصيد</th>
+                                <th scope="col" class="text-center">البيان</th>
                             </tr>
                         </thead>
                         <tbody>

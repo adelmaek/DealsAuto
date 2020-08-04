@@ -62,14 +62,14 @@ Partners Transactions
         <table id="partnersTransTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
             <thead>
                 <tr>
-                    <th scope="col" class="text-left" >نوع المعاملة</th>
-                    <th scope="col" class="text-left" >اسم الشريك</th>
-                    <th scope="col" class="text-left">قيمة الايداع</th>
-                    <th scope="col" class="text-left">قيمة السحب</th>
-                    <th scope="col" class="text-left" >التاريخ</th>
-                    <th scope="col" class="text-left" >البيان</th>
-                    <th scope="col" class="text-left">رصيد الشريك</th>
-                    <th scope="col" class="text-left">رصيد الشركاء</th>
+                    <th scope="col" class="text-center" >نوع المعاملة</th>
+                    <th scope="col" class="text-center" >اسم الشريك</th>
+                    <th scope="col" class="text-center">قيمة الايداع</th>
+                    <th scope="col" class="text-center">قيمة السحب</th>
+                    <th scope="col" class="text-center" >التاريخ</th>
+                    <th scope="col" class="text-center" >البيان</th>
+                    <th scope="col" class="text-center">رصيد الشريك</th>
+                    <th scope="col" class="text-center">رصيد الشركاء</th>
                 </tr>
             </thead>
             <tbody>

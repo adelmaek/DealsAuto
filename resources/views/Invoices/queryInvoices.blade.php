@@ -66,14 +66,14 @@ Suppliers Invoices
     <table id="invoicesTransTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
         <thead>
             <tr>
-                <th scope="col" class="text-left" >رقم الفاتورة</th>
-                <th scope="col" class="text-left" >المورد</th> 
-                <th scope="col" class="text-left">التاريخ</th>
-                <th scope="col" class="text-left">عدد السيارات</th>
-                <th scope="col" class="text-left">البيان</th>
-                <th scope="col" class="text-left">الاجمالي</th>
-                {{-- <th scope="col" class="text-left">اجمالي الضرائب</th> --}}
-                <th scope="col" class="text-left">اجمالي الفاتورة</th>  
+                <th scope="col" class="text-center" >رقم الفاتورة</th>
+                <th scope="col" class="text-center" >المورد</th> 
+                <th scope="col" class="text-center">التاريخ</th>
+                <th scope="col" class="text-center">عدد السيارات</th>
+                <th scope="col" class="text-center">البيان</th>
+                <th scope="col" class="text-center">الاجمالي</th>
+                {{-- <th scope="col" class="text-center">اجمالي الضرائب</th> --}}
+                <th scope="col" class="text-center">اجمالي الفاتورة</th>  
             </tr>
         </thead>
         <tbody>
