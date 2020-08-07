@@ -74,7 +74,7 @@ Banks Transactions
                 <th scope='col' class='text-center' >العملة</th>
                 <th scope='col' class='text-center' >نوع المعاملة</th>  
                 <th scope='col' class='text-center' >رصيد الحساب</th>
-                <th scope='col' class='text-center' >رصيد البنوك</th>
+                {{-- <th scope='col' class='text-center' >رصيد البنوك</th> --}}
                 <th scope='col' class='text-center' >البيان</th>
             </tr>
         </thead>

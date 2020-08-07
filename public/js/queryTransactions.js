@@ -34,7 +34,7 @@ $(document).ready(function(){
                 { "data": "currency" },
                 { "data": "type" },
                 { "data": "currentBankBalance" },
-                { "data": "currentAllBanksBalance" },
+                // { "data": "currentAllBanksBalance" },
                 { "data": "note" }
             ],
             "ajax": "getQueriedTrans/"+ bank + ',' + fromDate + ',' + toDate,

@@ -16,8 +16,8 @@ class BankTransactionController extends Controller
         $banks = Bank::all();
         $bankTransactions = BankTransaction::orderBy('date', 'ASC')->get();
         $bankTransactions = generalTransaction::separate_add_from_sub ($bankTransactions);
-        $transactions = bankTransaction::update_all_banks_total_before_showing($bankTransactions);
-        return view('transactions/addTransaction',['banks'=>$banks,'transactions'=>$transactions]);
+        // $transactions = bankTransaction::update_all_banks_total_before_showing($bankTransactions);
+        return view('transactions/addTransaction',['banks'=>$banks,'transactions'=>$bankTransactions]);
     }
     
     
@@ -206,7 +206,7 @@ class BankTransactionController extends Controller
             }
         }
         $transactions = generalTransaction::separate_add_from_sub($transaction);
-        $transactions = bankTransaction::update_all_banks_total_before_showing($transactions);
+        // $transactions = bankTransaction::update_all_banks_total_before_showing($transactions);
         $transactions = BankTransaction::add_currency_field($transactions);
         return Datatables::of($transactions)->make(true);
     }
