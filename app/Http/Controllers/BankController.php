@@ -30,7 +30,16 @@ class BankController extends Controller
     {
         $banks = Bank::all();
         $currencies = currency::all();
-        return view('banks/addBank',['banks'=>$banks,"currencies"=>$currencies]);
+        $totalBalances = 0;
+        foreach($banks as $bank)
+        {
+            if(!strcmp($bank->currency,"egp"))
+                $currencyRate = 1;
+            else
+                $currencyRate = currency::where('name',$bank->currency)->first()->rate;
+            $totalBalances = $totalBalances + ($bank->currentBalance * $currencyRate);
+        }
+        return view('banks/addBank',['banks'=>$banks,"currencies"=>$currencies,'totalBalances'=>$totalBalances]);
     }
     public function getShowBank($accountNumber)
     {

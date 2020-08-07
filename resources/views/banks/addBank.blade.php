@@ -58,7 +58,7 @@
                 <div class="card-body">
                     @if(count($banks)>0 )
                         <div class="table-responsive-sm">
-                            <table class="table">
+                            <table class="table color-bordered-table table-striped full-color-table full-info-table hover-table">
                                 <thead>
                                     <tr>
                                     <th scope="col">رقم الحساب</th>
@@ -70,13 +70,20 @@
                                 <tbody>
                                 @foreach ($banks as $bank)
                                     <tr>
-                                        <th scope="row">{{$bank->accountNumber}}</th>
+                                        <td scope="row">{{$bank->accountNumber}}</td>
                                         <td>{{$bank->bankName}}</td>
                                         <td>{{$bank->currentBalance}}</td>
                                         <td>{{$bank->currency}}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
+                            <tfoot>
+                                <tr>
+                                  <td>Total Balances</td>
+                                  <td></td>
+                                  <td>{{$totalBalances}} egp</td>
+                                </tr>
+                              </tfoot>
                             </table>
                         </div>
                     @else
