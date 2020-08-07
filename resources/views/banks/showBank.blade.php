@@ -20,7 +20,7 @@
                                 <th scope='col' class='text-center' >قيمة السحب</th>
                                 <th scope='col' class='text-center' >نوع المعاملة</th>
                                 <th scope='col' class='text-center' >رصيد الحساب</th>
-                                <th scope='col' class='text-center' >رصيد البنوك</th>
+                                {{-- <th scope='col' class='text-center' >رصيد البنوك</th> --}}
                                 <th scope='col' class='text-center' >البيان</th>
                             </tr>
                         </thead>
@@ -35,7 +35,7 @@
                                 <td style="text-align:center">{{$transaction->type}}</td>
                                 {{-- <td style="text-align:center">{{$transaction->value}}</td> --}}
                                 <td style="text-align:center">{{$transaction->currentBankBalance}}</td>
-                                <td style="text-align:center">{{$transaction->currentAllBanksBalance}} egp</td>
+                                {{-- <td style="text-align:center">{{$transaction->currentAllBanksBalance}} egp</td> --}}
                                 <td style="text-align:center">{{$transaction->note}}</td>
                             </tr>
                             @endforeach
