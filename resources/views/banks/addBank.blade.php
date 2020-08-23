@@ -20,7 +20,7 @@
                     <form id="Bank-form" class="form"action="{{route('insertBank')}}" method="post" >
                         <div class="form-group">
                         <label for="accountNumberInput" class="arabicLabel" >رقم الحساب</label>
-                        <input type="number" class="form-control" id="accountNumberInput" name="accountNumberInput" placeholder="ادخل رقم الحساب" required>
+                        <input type="text" class="form-control" id="accountNumberInput" name="accountNumberInput" placeholder="ادخل رقم الحساب" required>
                         {{-- <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small> --}}
                         </div>
                         <div class="form-group">
