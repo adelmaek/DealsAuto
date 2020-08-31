@@ -27,7 +27,7 @@
                                         <input type="text" class="form-control" id="nameInput" name="nameInput" placeholder="اسم المورد" required style="min-width: 100px;text-align: center;" >
                                     </td>
                                     <td style="text-align:center">
-                                        <input type="number" class="form-control" id="totalTransInput" name="totalTransInput" required placeholder="قيمة التعاملات الحالية" style="min-width: 100px;text-align: center;" >
+                                        <input type="number" step=0.01 class="form-control" id="totalTransInput" name="totalTransInput" required placeholder="قيمة التعاملات الحالية" style="min-width: 100px;text-align: center;" >
                                     </td>
                                     <td style="text-align:center">
                                         <input type="submit" name="submit" class="btn btn-info btn-md" value="اضف">
