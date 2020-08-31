@@ -26,7 +26,7 @@ class SupplierController extends Controller
     }
     public function getDelSupplier($supplier_id)
     {
-        Supplier::where('id',$supplier_id,)->first()->delete();
+        Supplier::where('id',$supplier_id)->first()->delete();
         SupplierTransaction::where('supplier_id',$supplier_id)->delete();
         return redirect()->back();
     }
