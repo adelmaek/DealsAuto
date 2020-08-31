@@ -39,7 +39,7 @@
                         </div>
                         <div class="form-group">
                             <label for="balanceInput" class="arabicLabel">الحساب الحالي</label>
-                            <input type="number" class="form-control" id="balanceInput" name="balanceInput" placeholder="ادخل الحساب الحالي" required>
+                            <input type="number" step=0.01 class="form-control" id="balanceInput" name="balanceInput" placeholder="ادخل الحساب الحالي" required>
                         </div>
                         <input type="submit" name="submit" class="btn btn-info btn-md" value="اضف الحساب">
                         <input type="hidden" name="_token" value="{{Session::token()}}">
