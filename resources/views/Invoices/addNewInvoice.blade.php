@@ -65,7 +65,7 @@
                                                         </td>
                                                         <td><input type="text" name="item_chassis_number[]" placeholder="Enter chassis number " class="form-control  item_chassis_number_list" style="height:36px;" required /></td> 
                                                         <td><input type="text" name="item_color[]" placeholder="Enter item color" class="form-control  item_color_list" style="height:36px;" required /></td> 
-                                                        <td><input type="number" name="item_cost[]" placeholder="Enter item cost" class="form-control item_cost_list" required /></td> 
+                                                        <td><input type="number" step=0.01 name="item_cost[]" placeholder="Enter item cost" class="form-control item_cost_list" required /></td> 
                                                         <td><button type="button" name="add" id="add" class="btn btn-success" >+</button></td>  
                                                     </tr>  
                                                 </table> 
