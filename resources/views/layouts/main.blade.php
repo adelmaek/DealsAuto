@@ -27,7 +27,7 @@
     {{-- <link href="{{ asset('node_modules/sweetalert/sweetalert.css}')}}" rel="stylesheet" type="text/css"> --}}
 </head>
 
-<body>
+<body class="skin-default-dark">
 <!-- ============================================================== -->
     <!-- Preloader - style you can find in spinners.css -->
     <!-- ============================================================== -->
@@ -50,7 +50,7 @@
                 <!-- ============================================================== -->
                 <!-- Logo -->
                 <!-- ============================================================== -->
-                <div class="navbar-header">
+                <div class="navbar-header" >
                     <a class="navbar-brand" href="home">
                         <span>
                             <h2 style="margin-top:18px;margin-left: 8px;">Deals Auto</h2> 
@@ -111,7 +111,7 @@
                     </div>
                 </div>
                 <!-- Sidebar navigation-->
-                <nav class="sidebar-nav">
+                <nav class="sidebar-nav" >
                     <ul id="sidebarnav">
                         <li class="nav-small-cap">--- Deals Auto</li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-home"></i><span class="hide-menu">البنوك </span></a>
