@@ -7,6 +7,7 @@ use App\BankTransaction;
 use App\currency;
 use Illuminate\Http\Request;
 use DB;
+use Log;
 use App\generalTransaction;
 class BankController extends Controller
 {
@@ -39,6 +40,8 @@ class BankController extends Controller
                 $currencyRate = currency::where('name',$bank->currency)->first()->rate;
             $totalBalances = $totalBalances + ($bank->currentBalance * $currencyRate);
         }
+        // $x = DB::select('select max(id) from bank_transactions where date = (select max(date) from bank_transactions)');
+        // Log::debug($x);
         return view('banks/addBank',['banks'=>$banks,"currencies"=>$currencies,'totalBalances'=>$totalBalances]);
     }
     public function getShowBank($accountNumber)

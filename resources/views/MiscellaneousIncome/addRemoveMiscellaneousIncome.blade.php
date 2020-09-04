@@ -39,7 +39,7 @@
                                         </select>
                                     </td>
                                     <td>
-                                        <input type="number" class="form-control" id="valueInput" name="valueInput" placeholder="القيمة" required style="min-width: 100px;" >
+                                        <input type="number" step ="0.01" class="form-control" id="valueInput" name="valueInput" placeholder="القيمة" required style="min-width: 100px;" >
                                     </td>
                                     <td>
                                         <input type="date" class="form-control" id="dateInput" name="dateInput" style="height: 42px;" required>     

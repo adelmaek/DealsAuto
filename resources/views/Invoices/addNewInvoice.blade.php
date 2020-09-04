@@ -136,7 +136,7 @@
          var i=1;  
          $('#add').click(function(){  
               i++;  
-              $('#dynamic_field').append('<tr id="row'+i+'"><td><select class="select2 form-control custom-select" name="item_name[]" style="width: 100%;height:36px;" required><option>Select Item</option>@foreach($models as $model)<option value="{{$model->BRND_NAME}}-{{$model->MODL_NAME}}-{{$model->MODL_YEAR}}-{{$model->MODL_CATG}}">{{$model->BRND_NAME}}-{{$model->MODL_NAME}}-{{$model->MODL_YEAR}}-{{$model->MODL_CATG}}</option>@endforeach</select></td><td><input type="text" name="item_chassis_number[]" placeholder="Enter item chassis number" class="form-control item_chassis_number_list" /></td> <td><input type="text" name="item_color[]" placeholder="Enter item color" class="form-control item_color_list" /></td> <td><input type="number" name="item_cost[]" placeholder="Enter item cost" class="form-control item_cost_list" required /></td> <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
+              $('#dynamic_field').append('<tr id="row'+i+'"><td><select class="select2 form-control custom-select" name="item_name[]" style="width: 100%;height:36px;" required><option>Select Item</option>@foreach($models as $model)<option value="{{$model->BRND_NAME}}-{{$model->MODL_NAME}}-{{$model->MODL_YEAR}}-{{$model->MODL_CATG}}">{{$model->BRND_NAME}}-{{$model->MODL_NAME}}-{{$model->MODL_YEAR}}-{{$model->MODL_CATG}}</option>@endforeach</select></td><td><input type="text" name="item_chassis_number[]" placeholder="Enter item chassis number" class="form-control item_chassis_number_list" /></td> <td><input type="text" name="item_color[]" placeholder="Enter item color" class="form-control item_color_list" /></td> <td><input type="number" step="0.01" name="item_cost[]" placeholder="Enter item cost" class="form-control item_cost_list" required /></td> <td><button type="button" name="remove" id="'+i+'" class="btn btn-danger btn_remove">X</button></td></tr>');  
               
             // Switchery
             var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
@@ -252,19 +252,19 @@
             {
                $('<div class="row align-items-start" id="importedTaxes" name="importedTaxes" style="padding-top:10px;">'+
                     '<div class="col">' +
-                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes1Input"  id="importedTaxes1Input" style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المقبولة" class="form-control " required />  </span>'+
+                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" step ="0.01" name="importedTaxes1Input"  id="importedTaxes1Input" style="height: 38px;width:110px; margin-left: 17px;" placeholder="القيمة المقبولة" class="form-control " required />  </span>'+
                     '</div>'+
                     '<div class="col">' +
-                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes2Input"  id="importedTaxes2Input"  style="height: 38px;width:140px; margin-left: 17px;" placeholder="مصروفات مشتريات" class="form-control " required />  </span>'+
+                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" step ="0.01" name="importedTaxes2Input"  id="importedTaxes2Input"  style="height: 38px;width:140px; margin-left: 17px;" placeholder="مصروفات مشتريات" class="form-control " required />  </span>'+
                     '</div>'+
                     '<div class="col">' +
-                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes3Input"  id="importedTaxes3Input"  style="height: 38px;width:140px; margin-left: 17px;" placeholder="مصروفات بنكية" class="form-control " required />  </span>'+
+                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" step ="0.01" name="importedTaxes3Input"  id="importedTaxes3Input"  style="height: 38px;width:140px; margin-left: 17px;" placeholder="مصروفات بنكية" class="form-control " required />  </span>'+
                     '</div>'+
                     '<div class="col">' +
-                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes4Input"  id="importedTaxes4Input"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="جمارك" class="form-control " required />  </span>'+
+                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" step ="0.01" name="importedTaxes4Input"  id="importedTaxes4Input"  style="height: 38px;width:110px; margin-left: 17px;" placeholder="جمارك" class="form-control " required />  </span>'+
                     '</div>'+
                     '<div class="col">' +
-                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" name="importedTaxes5Input"  id="importedTaxes5Input"  style="height: 38px;width:150px; margin-left: 17px;" placeholder="جاري مصلحة الضرائب" class="form-control " required />  </span>'+
+                        '<span class="valuePadding" style="font-weight: bold; "><input type="number" step ="0.01" name="importedTaxes5Input"  id="importedTaxes5Input"  style="height: 38px;width:150px; margin-left: 17px;" placeholder="جاري مصلحة الضرائب" class="form-control " required />  </span>'+
                     '</div>'+
                 '</div>').insertAfter('#localTaxes');
                 $('#addedValueTaxesInput').val('');
