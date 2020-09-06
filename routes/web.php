@@ -407,6 +407,27 @@ Route::group(['middleware'=>['web']],function(){
     //================================================================================================
     // end taxesTransactions
     //================================================================================================
+    //================================================================================================
+    // ClientsTransactions
+    //================================================================================================
+    Route::get('/clientsTrans',[
+        'uses' => 'ClientTransactionController@getAddClientTrans',
+        'as'=> 'clientsTrans',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/clientsTrans',[
+        'uses' => 'ClientTransactionController@postAddClientTrans',
+        'as'=> 'clientsTrans',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/delClientTransaction/{trans_id}',[
+        'uses' => 'ClientTransactionController@getDelClientTrans',
+        'as'=> 'delClientTransaction',
+        'middleware' => 'auth'
+    ]);
+    //================================================================================================
+    // end ClientsTransactions
+    //================================================================================================
 });
 
 

@@ -181,6 +181,16 @@
                                 <li><a href="taxAuth">جاري مصلحة الضرائب</a></li>
                             </ul>
                         </li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-files"></i><span class="hide-menu">العملاء</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="clientsTrans">اضافة معاملة</a></li>
+                            </ul>
+                        </li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-files"></i><span class="hide-menu">المبيعات</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="#">اضافة معاملة</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

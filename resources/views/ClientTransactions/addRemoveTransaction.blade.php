@@ -6,7 +6,7 @@
         <br>
         <div class="card border-dark">
             <div class="card-header bg-dark">
-                <h4 class="m-b-0 text-white">Add Suppliers Transactions</h4>
+                <h4 class="m-b-0 text-white">Add Clients Transactions</h4>
             </div>
             <div class="card-body" style="
             width: auto;
@@ -15,10 +15,8 @@
                     <table class="table color-bordered-table table-striped full-color-table full-dark-table hover-table ">
                         <thead>
                             <tr>
-                                <th scope="col" class="text-center" >المورد</th>                                
-                                <th scope="col" class="text-center" >التاريخ</th>
                                 <th scope="col" class="text-center" >العملية</th>
-                                <th scope="col" class="text-center" >مصدر التمويل</th>
+                                <th scope="col" class="text-center" >التاريخ</th>
                                 <th scope="col" class="text-center">القيمة</th>
                                 <th scope="col" class="text-center" >البيان</th>
                                 <th scope="col" class="text-center">اضافة</th>
@@ -26,33 +24,15 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <form id="transaction-form" class="form"action="{{route('insertSupplierTrans')}}" method="post">
+                                <form id="transaction-form" class="form"action="{{route('clientsTrans')}}" method="post">
                                     <td class="text-center">
-                                        <select class="form-control" style="height: 38px;" id="supplierNameInput" name="supplierNameInput" required>
-                                            <option value="" disabled selected>اسم المورد</option>
-                                            @foreach($suppliers as $supplier)
-                                                <option value="{{$supplier->name}}">{{$supplier->name}}</option>
-                                            @endforeach
+                                        <select class="form-control" style="height: 38px;" id="typeInput" name="typeInput" required>
+                                            <option value="add" selected>ايداع</option>
+                                            <option value="sub">سحب</option>
                                         </select>                                           
                                     </td>
                                     <td class="text-center">
                                         <input type="date" class="form-control" id="dateInput" name="dateInput" style="height: 38px;" required>
-                                    </td>
-                                    <td class="text-center">
-                                        <select class="form-control" style="height: 38px;" id="typeInput" name="typeInput" required>
-                                            <option value="sub" selected>توريد</option>
-                                            <option value="add">تمويل</option>
-                                        </select>                                           
-                                    </td>
-                                    <td class="text-center">
-                                        <select class="form-control" style="height: 38px;" id="sourceInput" name="sourceInput" required>
-                                            <option value="none" selected>لا يوجد</option>
-                                            @foreach($banks as $bank)
-                                                <option value="{{$bank->accountNumber}}">{{$bank->bankName}}:{{$bank->accountNumber}}</option>
-                                            @endforeach
-                                            <option value="normalCash">الخزنة</option>
-                                            <option value="custodyCash">خزنة العهدة</option>
-                                        </select>                                           
                                     </td>
                                     <td class="text-center">
                                         <input type="number" step ="0.01" class="form-control" id="valueInput" name="valueInput" placeholder="القيمة" required style="min-width: 100px;" >
@@ -78,34 +58,34 @@
     <div class="col">
         <div class="card border-dark">
             <div class="card-header bg-info">
-                <h4 class="m-b-0 text-white">Suppliers Transactions</h4>
+                <h4 class="m-b-0 text-white">Clients Transactions</h4>
             </div>
             <div class="card-body" style="width: auto;white-space: nowrap;">
                 <div class="table-responsive-sm">
-                    <table id="suppliersTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
+                    <table id="clientsTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
-                                <th scope="col" class="text-center" >المورد</th> 
-                                <th scope="col" class="text-center">التاريخ</th>
-                                <th scope="col" class="text-center">قيمة التوريد</th>
-                                <th scope="col" class="text-center">قيمة التمويل</th>
-                                <th scope="col" class="text-center">الاجمالي الحالي للمورد</th>
-                                <th scope="col" class="text-center">البيان</th>
+                                <th scope="col" class="text-center" >العملية</th>
+                                <th scope="col" class="text-center" >التاريخ</th>
+                                <th scope="col" class="text-center">قيمة الايداع</th>
+                                <th scope="col" class="text-center">قيمة السحب</th>
+                                <th scope="col" class="text-center">الرصيد</th>
+                                <th scope="col" class="text-center" >البيان</th>
                                 <th scope="col" class="text-center">مسح</th>
                                 
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($suppliersTransactions as $trans)
+                            @foreach ($clientsTransactions as $trans)
                                 <tr>
-                                    <td scope="row" class="text-center">{{\App\Supplier::where('id',$trans->supplier_id)->first()->name}}</td>
+                                    <td class="text-center">{{$trans->type}}</td>
                                     <td class="text-center">{{$trans->date}}</td>
                                     <td class="text-center">{{$trans->value_add}}</td>
                                     <td class="text-center">{{$trans->value_sub}}</td>
-                                    <td class="text-center">{{$trans->currentSupplierTotal}}</td>
+                                    <td class="text-center">{{$trans->currentTotalBalance}}</td>
                                     <td class="text-center">{{$trans->note}}</td>
                                     <td style="text-align:center">
-                                        <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delSupplierTrans',['transaction_id'=>$trans->id])}}" role="button">Delete</a>
+                                        <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delClientTransaction',['trans_id'=>$trans->id])}}" role="button">Delete</a>
                                     </td>
                                 </tr>
                             @endforeach
@@ -120,7 +100,7 @@
 
 @section('extraJS')
 <script>
-$('#suppliersTable').DataTable({
+$('#clientsTable').DataTable({
         "displayLength": 25,
         "processing": true,
         dom: 'Bfrtip',
