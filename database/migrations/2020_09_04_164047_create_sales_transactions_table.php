@@ -14,8 +14,13 @@ class CreateSalesTransactionsTable extends Migration
     public function up()
     {
         Schema::create('sales_transactions', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->bigIncrements('id');
+            $table->string("note");
+            $table->string("action");
+            $table->string("type");
+            $table->double("value",40,3);
+            $table->double("currentTotalBalance",40,3);
+            $table->date("date");
         });
     }
 

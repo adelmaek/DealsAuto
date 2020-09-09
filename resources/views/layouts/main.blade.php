@@ -188,7 +188,12 @@
                         </li>
                         <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-files"></i><span class="hide-menu">المبيعات</span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="#">اضافة معاملة</a></li>
+                                <li><a href="salesTrans">اضافة معاملة</a></li>
+                            </ul>
+                        </li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-files"></i><span class="hide-menu">مصروفات التشغيل</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="operatingExpenses">اضافة معاملة</a></li>
                             </ul>
                         </li>
                     </ul>

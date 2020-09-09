@@ -428,6 +428,50 @@ Route::group(['middleware'=>['web']],function(){
     //================================================================================================
     // end ClientsTransactions
     //================================================================================================
+    //================================================================================================
+    // salesTransactions
+    //================================================================================================
+    Route::get('/salesTrans',[
+        'uses' => 'salesTransactionController@getAddsalesTrans',
+        'as'=> 'salesTrans',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/salesTrans',[
+        'uses' => 'salesTransactionController@postAddSalesTrans',
+        'as'=> 'salesTrans',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/delSalesTransaction/{trans_id}',[
+        'uses' => 'salesTransactionController@getDelSalesTrans',
+        'as'=> 'delSalesTransaction',
+        'middleware' => 'auth'
+    ]);
+    //================================================================================================
+    // end salesTransactions
+    //================================================================================================
+    //================================================================================================
+    // operatingExpenses
+    //================================================================================================
+
+    Route::get('/operatingExpenses',[
+        'uses' => 'operatingExpensesController@getAddOperatingExpTrans',
+        'as'=> 'operatingExpenses',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/operatingExpenses',[
+        'uses' => 'operatingExpensesController@postAddOperatingExpTrans',
+        'as'=> 'operatingExpenses',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/deloperatingExpenses/{trans_id}',[
+        'uses' => 'operatingExpensesController@getDelOperatingExpTrans',
+        'as'=> 'delOperatingExpenses',
+        'middleware' => 'auth'
+    ]);
+
+    //================================================================================================
+    // end operatingExpenses
+    //================================================================================================
 });
 
 
