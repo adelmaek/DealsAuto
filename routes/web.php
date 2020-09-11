@@ -472,6 +472,29 @@ Route::group(['middleware'=>['web']],function(){
     //================================================================================================
     // end operatingExpenses
     //================================================================================================
+    //================================================================================================
+    // Distributions 
+    //================================================================================================
+
+    Route::get('/distributions',[
+        'uses' => 'DistributionsTransactionController@getAddDistributionsTransaction',
+        'as'=> 'distributions',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/distributions',[
+        'uses' => 'DistributionsTransactionController@postAddDistributionsTransaction',
+        'as'=> 'distributions',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/delDistTrans/{trans_id}',[
+        'uses' => 'DistributionsTransactionController@getDelDistributionsTransaction',
+        'as'=> 'delDistTrans',
+        'middleware' => 'auth'
+    ]);
+
+    //================================================================================================
+    // end Distributions 
+    //================================================================================================
 });
 
 

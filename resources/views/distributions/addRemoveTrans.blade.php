@@ -12,7 +12,7 @@
         <br>
         <div class="card border-dark">
             <div class="card-header bg-dark">
-                <h4 class="m-b-0 text-white">Add Partner Transaction</h4>
+                <h4 class="m-b-0 text-white">Add Distributions Transaction</h4>
             </div>
             <div class="card-body" style="
             width: auto;
@@ -22,7 +22,7 @@
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center" >اسم الشريك</th>
-                                <th scope="col" class="text-center" >المصدر\الوجهة</th>
+                                <th scope="col" class="text-center" >مصدر التغذية</th>
                                 <th scope="col" class="text-center" >التاريخ</th>
                                 <th scope="col" class="text-center" >نوع المعاملة</th>
                                 <th scope="col" class="text-center">القيمة</th>
@@ -32,10 +32,10 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <form id="transaction-form" class="form"action="{{route('addPartnerTrans')}}" method="post">
+                                <form id="transaction-form" class="form"action="{{route('distributions')}}" method="post">
                                     <td>
                                         <select class="form-control" style="height: 43px;" id="partnerInput" name="partnerInput" required>
-                                            <option value="" disabled selected>اسم الشريك</option>
+                                            <option value="none" selected>لا يوجد</option>
                                             @foreach($partners as $partner)
                                                 <option value="{{$partner->name}}">{{$partner->name}}</option>
                                             @endforeach
@@ -59,7 +59,7 @@
                                     <td>
                                         <select class="form-control" style="height: 45px;width: 150px;" id="typeInput" name="typeInput" required>
                                             <option value="" disabled selected>نوع المعاملة</option>
-                                            <option value="add">ايداع</option>
+                                            <option value="add">تغذية</option>
                                             <option value="sub">سحب</option>
                                         </select>
                                     </td>
@@ -87,13 +87,13 @@
         <br>
         <div class="card border-dark">
             <div class="card-header bg-info">
-                <h4 class="m-b-0 text-white">Partners Transactions</h4>
+                <h4 class="m-b-0 text-white">Distributions Transactions</h4>
             </div>
             <div class="card-body" style="
             width: auto;
             white-space: nowrap;">
                 <div class="table-responsive-sm">
-                    <table id="partnerTransTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
+                    <table id="distTransTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table" data-display-length='-1' data-order="[]" >
                         <thead>
                             <tr>
                                 <th scope="col" class="text-center" >اسم الشريك</th>
@@ -102,8 +102,7 @@
                                 <th scope="col" class="text-center">قيمة الايداع</th>
                                 <th scope="col" class="text-center">قيمة السحب</th>
                                 <th scope="col" class="text-center" >البيان</th>
-                                <th scope="col" class="text-center" >رصيد الشريك</th>
-                                <th scope="col" class="text-center" >رصيد الشركاء</th>
+                                <th scope="col" class="text-center" >رصيد التوزيعات</th>
                                 <th scope="col" class="text-center">مسح</th>
                             </tr>
                         </thead>
@@ -116,10 +115,9 @@
                                 <td style="text-align:center">{{$transaction->value_add}}</td>
                                 <td style="text-align:center">{{$transaction->value_sub}}</td>
                                 <td style="text-align:center">{{$transaction->note}}</td>
-                                <td style="text-align:center">{{$transaction->currentPartnerTotal}}</td>
-                                <td style="text-align:center">{{$transaction->currentAllPartnersTotal}}</td>
+                                <td style="text-align:center">{{$transaction->currentDistributionsTotal}}</td>
                                 <td style="text-align:center">
-                                    <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delPartnerTrans',['trans_id'=>$transaction->id])}}" role="button">Delete</a>
+                                    <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delDistTrans',['trans_id'=>$transaction->id])}}" role="button">Delete</a>
                                 </td>
                             </tr>
                             @endforeach
@@ -134,7 +132,7 @@
 
 @section('extraJS')
 <script>
-$('#partnerTransTable').DataTable({
+$('#distTransTable').DataTable({
         "displayLength": 25,
         "processing": true,
         dom: 'frtip'
