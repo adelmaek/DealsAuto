@@ -26,7 +26,7 @@ class SupplierTransactionController extends Controller
     public function postInsertTransaction(Request $request)
     {
         $supplier = Supplier::where('name', $request['supplierNameInput'])->first();
-        Log::debug($supplier);
+        
         $prevTransaction = SupplierTransaction::where('supplier_id',$supplier->id)->whereDate('date', '<=', $request['dateInput'])->orderBy('date','Desc')->first();
         if(!empty($prevTransaction))
             $prevTransaction = SupplierTransaction::where('supplier_id',$supplier->id)->whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
@@ -61,7 +61,7 @@ class SupplierTransactionController extends Controller
             Supplier::where('name', $request['supplierNameInput'])->increment('currentBalance',$request['valueInput']);
 
         $accumulatedBalance = $currentSupplierTotalInput;
-        Log::debug($followingTransactions);
+        
         foreach($followingTransactions as $trans)
         {
             if(!strcmp($trans->type,"sub")) 
@@ -73,13 +73,14 @@ class SupplierTransactionController extends Controller
         //insert transaction to source
         if(!strcmp($request['typeInput'],"add"))
         {
+            $cashNoteInput = $request['noteInput'] . " - " . $request['supplierNameInput'];
             if(!strcmp($request['sourceInput'],"normalCash"))
             {
-                cashTransaction::insert_transaction($request['valueInput'],$request['dateInput'], 'sub',$request['noteInput'], 'normalCash');
+                cashTransaction::insert_transaction($request['valueInput'],$request['dateInput'], 'sub', $cashNoteInput, 'normalCash');
             }
             else if(!strcmp($request['sourceInput'],"custodyCash"))
             {
-                cashTransaction::insert_transaction($request['valueInput'],$request['dateInput'], 'sub',$request['noteInput'], 'custodyCash');
+                cashTransaction::insert_transaction($request['valueInput'],$request['dateInput'], 'sub', $cashNoteInput, 'custodyCash');
             }
             else if(!strcmp($request['sourceInput'],"none"))
             {
@@ -88,6 +89,7 @@ class SupplierTransactionController extends Controller
             else
             {
                 //bank account
+                $noteInput = $request['noteInput'] . " - " . $request['supplierNameInput'];
                 $bank = DB::table('banks')->where('accountNumber', $request['sourceInput'])->first();    
                 $currencyName = $bank->currency;
                 if(!strcmp($currencyName,"egp"))
@@ -95,7 +97,7 @@ class SupplierTransactionController extends Controller
                 else
                     $currencyRate = currency::where('name',$currencyName)->first()->rate;
                 
-                BankTransaction::insert_transaction($request['sourceInput'], 'sub', $request['dateInput'], $request['valueInput'] / $currencyRate, $request['noteInput'], $request['dateInput']);
+                BankTransaction::insert_transaction($request['sourceInput'], 'sub', $request['dateInput'], $request['valueInput'] / $currencyRate, $noteInput, $request['dateInput']);
             }
         }
         return redirect()->back();

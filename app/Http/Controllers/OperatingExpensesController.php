@@ -20,7 +20,10 @@ class OperatingExpensesController extends Controller
     {
         OperatingExpenses::insert_transaction($request['typeInput'], $request['noteInput'], $request['valueInput'],$request['dateInput']);
         if(!strcmp($request['sourceInput'],'custodyCash'))
-            cashTransaction::insert_transaction($request['valueInput'], $request['dateInput'], 'sub', $request['noteInput'], 'custodyCash');
+        {
+            $cashNoteInput = $request['noteInput'] . " - " . "مصروفات تشغيل";
+            cashTransaction::insert_transaction($request['valueInput'], $request['dateInput'], 'sub', $cashNoteInput, 'custodyCash');
+        }
         return redirect()->back();
     }
 

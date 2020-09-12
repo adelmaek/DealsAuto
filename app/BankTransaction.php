@@ -200,20 +200,23 @@ class BankTransaction extends Model
         {
             $currentBalanceInput = BankTransaction::updateCurrentTotal_bank($bank, $dateInput,$valueInput, 'add');
             // $currentAllBalanceInput = BankTransaction::updateCurrentTotal_AllBanks($dateInput,$valueInput, 'add');
-            CashTransaction::insert_transaction($valueInput * $currencyRate,$dateInput,'sub',$noteInput,'normalCash');
+            $cashNoteInput = $noteInput . " - " . $accountNumberInput;
+            CashTransaction::insert_transaction($valueInput * $currencyRate,$dateInput,'sub',$cashNoteInput,'normalCash');
 
         }
         elseif(!strcmp($typeInput,'subToNormalCash'))
         {
             $currentBalanceInput = BankTransaction::updateCurrentTotal_bank($bank, $dateInput,$valueInput, 'sub');
             // $currentAllBalanceInput = BankTransaction::updateCurrentTotal_AllBanks($dateInput,$valueInput, 'sub');
-            CashTransaction::insert_transaction($valueInput * $currencyRate ,$dateInput,'add',$noteInput,'normalCash');
+            $cashNoteInput = $noteInput . " - " . $accountNumberInput;
+            CashTransaction::insert_transaction($valueInput * $currencyRate ,$dateInput,'add',$cashNoteInput,'normalCash');
         }   
         elseif(!strcmp($typeInput,'subToCustodyCash'))
         {
             $currentBalanceInput = BankTransaction::updateCurrentTotal_bank($bank, $dateInput,$valueInput, 'sub');
             // $currentAllBalanceInput = BankTransaction::updateCurrentTotal_AllBanks($dateInput,$valueInput, 'sub');
-            CashTransaction::insert_transaction($valueInput * $currencyRate,$dateInput,'add',$noteInput,'custodyCash');
+            $cashNoteInput = $noteInput . " - " . $accountNumberInput;
+            CashTransaction::insert_transaction($valueInput * $currencyRate,$dateInput,'add',$cashNoteInput,'custodyCash');
         }
         elseif(!strcmp($typeInput,'personalSub'))
         {

@@ -21,7 +21,10 @@ class GeneralExpensesTransactionController extends Controller
     {
         GeneralExpensesTransaction::insert_transaction($request['typeInput'], $request['noteInput'], $request['valueInput'],$request['dateInput']);
         if(!strcmp($request['sourceInput'],'custodyCash'))
+        {
+            $cashNoteInput = $request['noteInput'] . " - " . "مصروفات عامة";
             cashTransaction::insert_transaction($request['valueInput'], $request['dateInput'], 'sub', $request['noteInput'], 'custodyCash');
+        }
         return redirect()->back();
     }
 

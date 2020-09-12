@@ -34,13 +34,15 @@ class TaxesController extends Controller
         {
             if(!strcmp($request["sourceInput"],"normalCash"))
             {
+                $cashNoteInput = $request["noteInput"] . " - " . "ضرائب";
                 taxes::insert_transaction($request["typeInput"], $request["taxInput"],$request['valueInput'],$request["dateInput"],$request["noteInput"],"sub",$request["sourceInput"]);
                 cashTransaction::insert_transaction($request['valueInput'], $request["dateInput"], "sub", $request["noteInput"], "normalCash");
             }
             else
             {
+                $noteInput = $request['noteInput'] . " - " . "ضرائب";
                 taxes::insert_transaction($request["typeInput"], $request["taxInput"],$request['valueInput'],$request["dateInput"],$request["noteInput"],"sub",$request["sourceInput"]);
-                BankTransaction::insert_transaction($request["sourceInput"], "sub", $request["dateInput"], $request['valueInput'], $request["noteInput"], $request["dateInput"]);
+                BankTransaction::insert_transaction($request["sourceInput"], "sub", $request["dateInput"], $request['valueInput'], $noteInput, $request["dateInput"]);
             }
         }
         return redirect()->back();
