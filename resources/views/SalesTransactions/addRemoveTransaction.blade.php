@@ -15,7 +15,7 @@
                     <table class="table color-bordered-table table-striped full-color-table full-dark-table hover-table ">
                         <thead>
                             <tr>
-                                <th scope="col" class="text-center" >الفاتوره</th>
+                                <th scope="col" class="text-center" >العملية</th>
                                 <th scope="col" class="text-center" >التاريخ</th>
                                 <th scope="col" class="text-center">القيمة</th>
                                 <th scope="col" class="text-center" >البيان</th>
@@ -70,6 +70,7 @@
                                 <th scope="col" class="text-center">قيمة الايداع</th>
                                 <th scope="col" class="text-center">قيمة السحب</th>
                                 <th scope="col" class="text-center">الرصيد</th>
+                                <th scope="col" class="text-center" >الفاتوره</th>
                                 <th scope="col" class="text-center" >البيان</th>
                                 <th scope="col" class="text-center">مسح</th>
                                 
@@ -83,6 +84,7 @@
                                     <td class="text-center">{{$trans->value_add}}</td>
                                     <td class="text-center">{{$trans->value_sub}}</td>
                                     <td class="text-center">{{$trans->currentTotalBalance}}</td>
+                                    <td class="text-center">{{$trans->invoice}}</td>
                                     <td class="text-center">{{$trans->note}}</td>
                                     <td style="text-align:center">
                                         <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delSalesTransaction',['trans_id'=>$trans->id])}}" role="button">Delete</a>
