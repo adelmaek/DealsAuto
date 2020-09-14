@@ -15,7 +15,7 @@
                     <table class="table color-bordered-table table-striped full-color-table full-dark-table hover-table ">
                         <thead>
                             <tr>
-                                <th scope="col" class="text-center" >العملية</th>
+                                <th scope="col" class="text-center" >الفاتوره</th>
                                 <th scope="col" class="text-center" >التاريخ</th>
                                 <th scope="col" class="text-center">القيمة</th>
                                 <th scope="col" class="text-center" >البيان</th>

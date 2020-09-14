@@ -135,7 +135,14 @@
 $('#distTransTable').DataTable({
         "displayLength": 25,
         "processing": true,
-        dom: 'frtip'
+        dom: 'Bfrtip',
+        buttons: [
+                {
+                extend: 'excel',
+                title: 'Deals-Auto',
+                footer: true,
+            }
+            ] 
     });
     $('.buttons-copy, .buttons-csv, .buttons-print, .buttons-pdf, .buttons-excel').addClass('btn btn-primary mr-1');
 </script>
