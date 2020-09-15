@@ -432,17 +432,17 @@ Route::group(['middleware'=>['web']],function(){
     // salesTransactions
     //================================================================================================
     Route::get('/salesTrans',[
-        'uses' => 'salesTransactionController@getAddsalesTrans',
+        'uses' => 'SalesTransactionController@getAddsalesTrans',
         'as'=> 'salesTrans',
         'middleware' => 'auth'
     ]);
     Route::post('/salesTrans',[
-        'uses' => 'salesTransactionController@postAddSalesTrans',
+        'uses' => 'SalesTransactionController@postAddSalesTrans',
         'as'=> 'salesTrans',
         'middleware' => 'auth'
     ]);
     Route::get('/delSalesTransaction/{trans_id}',[
-        'uses' => 'salesTransactionController@getDelSalesTrans',
+        'uses' => 'SalesTransactionController@getDelSalesTrans',
         'as'=> 'delSalesTransaction',
         'middleware' => 'auth'
     ]);
