@@ -454,17 +454,17 @@ Route::group(['middleware'=>['web']],function(){
     //================================================================================================
 
     Route::get('/operatingExpenses',[
-        'uses' => 'operatingExpensesController@getAddOperatingExpTrans',
+        'uses' => 'OperatingExpensesController@getAddOperatingExpTrans',
         'as'=> 'operatingExpenses',
         'middleware' => 'auth'
     ]);
     Route::post('/operatingExpenses',[
-        'uses' => 'operatingExpensesController@postAddOperatingExpTrans',
+        'uses' => 'OperatingExpensesController@postAddOperatingExpTrans',
         'as'=> 'operatingExpenses',
         'middleware' => 'auth'
     ]);
     Route::get('/deloperatingExpenses/{trans_id}',[
-        'uses' => 'operatingExpensesController@getDelOperatingExpTrans',
+        'uses' => 'OperatingExpensesController@getDelOperatingExpTrans',
         'as'=> 'delOperatingExpenses',
         'middleware' => 'auth'
     ]);
