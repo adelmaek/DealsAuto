@@ -91,7 +91,7 @@ class MiscellaneousIncome extends Model
     }
     public static function del_transaction($MITransaction_id)
     {
-        $transaction = MiscellaneousIncome::where('id',$MITransaction_id,)->first();
+        $transaction = MiscellaneousIncome::where('id',$MITransaction_id)->first();
         $transaction->delete();
         MiscellaneousIncome::del_updateCurrentTotal($transaction);
     }
