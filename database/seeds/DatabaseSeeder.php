@@ -19,10 +19,10 @@ class DatabaseSeeder extends Seeder
         //     'mobNumber' => "01115260757",
         // ]);
         DB::table('acc_users')->insert([
-            'username' => "wessam",
-            'fullname' => 'Wessam El Masry',
-            'password' => bcrypt('0000'),
-            'mobNumber' => "01009831632",
+            'username' => "admin",
+            'fullname' => 'Admin',
+            'password' => bcrypt('12341234'),
+            'mobNumber' => "012",
         ]);
     }
 }
