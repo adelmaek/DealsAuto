@@ -15,7 +15,7 @@ class BankController extends Controller
     public function postInsertBank(Request $request)
     {
         $this->validate($request,[
-            'accountNumberInput' => 'required',
+            'accountNumberInput' => 'required|unique:banks,accountNumber',
             'bankNameInput' => 'required'
         ]);
         DB::table('banks')->insert([
