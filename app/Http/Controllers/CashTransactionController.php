@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\cashTransaction;
+use App\CashTransaction;
 use DB;
 use Illuminate\Http\Request;
 use Log;
@@ -13,38 +13,38 @@ class CashTransactionController extends Controller
 {
     // public function getCashContent()
     // {
-    //     $cashContent = cashTransaction::orderBy('date','Asc')->get();
+    //     $cashContent = CashTransaction::orderBy('date','Asc')->get();
     //     return view('cash/cashContent',['cashContent'=>$cashContent]);
     // }
 
     public function getAddRemoveCash()
     {
-        $cashTransactions = cashTransaction::orderBy('date','Asc')->get();
-        $cashTransactions = generalTransaction::separate_add_from_sub($cashTransactions);
-        return view('cash/addRemoveCash',['cashTransactions'=>$cashTransactions]);
+        $CashTransactions = CashTransaction::orderBy('date','Asc')->get();
+        $CashTransactions = generalTransaction::separate_add_from_sub($CashTransactions);
+        return view('cash/addRemoveCash',['CashTransactions'=>$CashTransactions]);
     }
 
     public function postAddRemoveCash(Request $request)
     {
         if(!strcmp($request['typeInput'],"fromNormalCashToCustodyCash"))
         {
-            cashTransaction::insert_transaction($request['valueInput'],$request['dateInput'],'sub', $request['noteInput'],"normalCash");
-            cashTransaction::insert_transaction($request['valueInput'],$request['dateInput'],"add", $request['noteInput'],"custodyCash");
+            CashTransaction::insert_transaction($request['valueInput'],$request['dateInput'],'sub', $request['noteInput'],"normalCash");
+            CashTransaction::insert_transaction($request['valueInput'],$request['dateInput'],"add", $request['noteInput'],"custodyCash");
         }
         else
-            cashTransaction::insert_transaction($request['valueInput'],$request['dateInput'],$request['typeInput'], $request['noteInput'],$request['nameInput']);
+            CashTransaction::insert_transaction($request['valueInput'],$request['dateInput'],$request['typeInput'], $request['noteInput'],$request['nameInput']);
         return redirect()->back();
     }
 
-    public function getDelCashTransaction($cashTransaction_id)
+    public function getDelCashTransaction($CashTransaction_id)
     {
-        cashTransaction::del_transaction($cashTransaction_id);
+        CashTransaction::del_transaction($CashTransaction_id);
         return redirect()->back();
     }
     
     public function getQueryCashTransaction()
     {
-        $currencies = cashTransaction::all();
+        $currencies = CashTransaction::all();
         return view('cash/queryCashTransactions',['currencies'=>$currencies]);
     }
 
@@ -53,22 +53,22 @@ class CashTransactionController extends Controller
         if(!strcmp($fromDate,"empty")&&!strcmp($toDate,"empty"))
         { 
             Log::debug('in getquered');
-            $transaction = cashTransaction::all();
+            $transaction = CashTransaction::all();
         
         }
         elseif (!strcmp($toDate,"empty"))
         {            
-            $transaction = cashTransaction::whereDate('date','>=',$fromDate)->orderBy('date', 'DESC')->get();          
+            $transaction = CashTransaction::whereDate('date','>=',$fromDate)->orderBy('date', 'DESC')->get();          
         }
         elseif (!strcmp($fromDate,"empty"))
         {
 
-                $transaction = cashTransaction::whereDate('date','<=',$toDate)->orderBy('date', 'DESC')->get();
+                $transaction = CashTransaction::whereDate('date','<=',$toDate)->orderBy('date', 'DESC')->get();
            
         }
         else
         {
-            $transaction = cashTransaction::whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'DESC')->get(); 
+            $transaction = CashTransaction::whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'DESC')->get(); 
         }
         foreach($transaction as $trans)
         {

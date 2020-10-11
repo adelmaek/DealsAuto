@@ -5,16 +5,16 @@ use DB;
 use Log;
 use Illuminate\Database\Eloquent\Model;
 
-class cashTransaction extends Model
+class CashTransaction extends Model
 {
     public $timestamps = false;
     public static function insertion_update_currentCashTotal($nameInput,$dateInput,$valueInput,$typeInput)
     {
-        $prevTransaction = cashTransaction::where('name', $nameInput)->whereDate('date','<=',$dateInput)->orderBy('date','Desc')->first();
+        $prevTransaction = CashTransaction::where('name', $nameInput)->whereDate('date','<=',$dateInput)->orderBy('date','Desc')->first();
         if(!empty($prevTransaction))
-            $prevTransaction = cashTransaction::where('name', $nameInput)->whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
+            $prevTransaction = CashTransaction::where('name', $nameInput)->whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
 
-        $followingTransactions = cashTransaction::where('name', $nameInput)->whereDate('date','>',$dateInput)->orderBy('date','Asc')->get();
+        $followingTransactions = CashTransaction::where('name', $nameInput)->whereDate('date','>',$dateInput)->orderBy('date','Asc')->get();
 
 
         if(!empty($prevTransaction))
@@ -36,18 +36,18 @@ class cashTransaction extends Model
                 $accumulatedBalance = $accumulatedBalance + $trans->value;
             else
                 $accumulatedBalance = $accumulatedBalance - $trans->value;
-            cashTransaction::where('id', $trans->id)-> update(['currentCashNameTotal'=>$accumulatedBalance]);
+            CashTransaction::where('id', $trans->id)-> update(['currentCashNameTotal'=>$accumulatedBalance]);
         }
         return $currentBalanceInput;
     }
 
     public static function insertion_update_currentAllCashTotal($dateInput,$valueInput,$typeInput)
     {
-        $prevTransaction = cashTransaction::whereDate('date','<=',$dateInput)->orderBy('date','Desc')->first();
+        $prevTransaction = CashTransaction::whereDate('date','<=',$dateInput)->orderBy('date','Desc')->first();
         if(!empty($prevTransaction))
-            $prevTransaction = cashTransaction::whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
+            $prevTransaction = CashTransaction::whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
 
-        $followingTransactions = cashTransaction::whereDate('date','>',$dateInput)->orderBy('date','Asc')->get();
+        $followingTransactions = CashTransaction::whereDate('date','>',$dateInput)->orderBy('date','Asc')->get();
 
 
         if(!empty($prevTransaction))
@@ -69,15 +69,15 @@ class cashTransaction extends Model
                 $accumulatedBalance = $accumulatedBalance + $trans->value;
             else
                 $accumulatedBalance = $accumulatedBalance - $trans->value;
-            cashTransaction::where('id', $trans->id)-> update(['currentAllCashTotal'=>$accumulatedBalance]);
+            CashTransaction::where('id', $trans->id)-> update(['currentAllCashTotal'=>$accumulatedBalance]);
         }
         return $currentBalanceInput;
     }
 
     public static function insert_transaction($valueInput, $dateInput, $typeInput, $noteInput, $nameInput)
     {
-        $currentBalanceInput = cashTransaction::insertion_update_currentCashTotal($nameInput, $dateInput, $valueInput, $typeInput);
-        $currentAllBalancesInput = cashTransaction::insertion_update_currentAllCashTotal($dateInput, $valueInput, $typeInput);
+        $currentBalanceInput = CashTransaction::insertion_update_currentCashTotal($nameInput, $dateInput, $valueInput, $typeInput);
+        $currentAllBalancesInput = CashTransaction::insertion_update_currentAllCashTotal($dateInput, $valueInput, $typeInput);
         Log::debug("$currentAllBalancesInput");
         if(!strcmp($typeInput,"add") )
         {
@@ -112,10 +112,10 @@ class cashTransaction extends Model
 
     public static function del_update_currentCashTotal($transaction)
     {
-        $prevTransaction = cashTransaction::where('name', $transaction->name)->whereDate('date','<',$transaction->date)->orderBy('date','Desc')->first();
+        $prevTransaction = CashTransaction::where('name', $transaction->name)->whereDate('date','<',$transaction->date)->orderBy('date','Desc')->first();
         if(!empty($prevTransaction))
-            $prevTransaction = cashTransaction::where('name', $transaction->name)->whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
-        $followingTransactions = cashTransaction::where('name', $transaction->name)->whereDate('date','>=',$transaction->date)->orderBy('date','Asc')->get();
+            $prevTransaction = CashTransaction::where('name', $transaction->name)->whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
+        $followingTransactions = CashTransaction::where('name', $transaction->name)->whereDate('date','>=',$transaction->date)->orderBy('date','Asc')->get();
         
         if(!empty($prevTransaction))
             $currentBalance = $prevTransaction->currentCashNameTotal;
@@ -128,15 +128,15 @@ class cashTransaction extends Model
             else
                 $currentBalance = $currentBalance - $trans->value;
             
-            cashTransaction::where('id', $trans->id)-> update(['currentCashNameTotal'=>$currentBalance]);
+            CashTransaction::where('id', $trans->id)-> update(['currentCashNameTotal'=>$currentBalance]);
         }
     }
     public static function del_update_currentAllCashesTotal($transaction)
     {
-        $prevTransaction = cashTransaction::whereDate('date','<',$transaction->date)->orderBy('date','Desc')->first();
+        $prevTransaction = CashTransaction::whereDate('date','<',$transaction->date)->orderBy('date','Desc')->first();
         if(!empty($prevTransaction))
-            $prevTransaction = cashTransaction::whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
-        $followingTransactions = cashTransaction::whereDate('date','>=',$transaction->date)->orderBy('date','Asc')->get();
+            $prevTransaction = CashTransaction::whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
+        $followingTransactions = CashTransaction::whereDate('date','>=',$transaction->date)->orderBy('date','Asc')->get();
         
         if(!empty($prevTransaction))
             $currentBalance = $prevTransaction->currentAllCashTotal;
@@ -149,16 +149,16 @@ class cashTransaction extends Model
             else
                 $currentBalance = $currentBalance - $trans->value;
             
-            cashTransaction::where('id', $trans->id)-> update(['currentAllCashTotal'=>$currentBalance]);
+            CashTransaction::where('id', $trans->id)-> update(['currentAllCashTotal'=>$currentBalance]);
         }
     }
-    public static function del_transaction($cashTransaction_id)
+    public static function del_transaction($CashTransaction_id)
     {
-        $transaction = cashTransaction::where('id',$cashTransaction_id)->first();
+        $transaction = CashTransaction::where('id',$CashTransaction_id)->first();
         $transaction->delete();
 
-        cashTransaction::del_update_currentCashTotal($transaction);
-        cashTransaction::del_update_currentAllCashesTotal($transaction);
+        CashTransaction::del_update_currentCashTotal($transaction);
+        CashTransaction::del_update_currentAllCashesTotal($transaction);
         
     }
 }

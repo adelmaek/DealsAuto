@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\BankTransaction;
-use App\cashTransaction;
+use App\CashTransaction;
 use Illuminate\Http\Request;
 use App\taxes;
 use App\Bank;
@@ -36,7 +36,7 @@ class TaxesController extends Controller
             {
                 $cashNoteInput = $request["noteInput"] . " - " . "ضرائب";
                 taxes::insert_transaction($request["typeInput"], $request["taxInput"],$request['valueInput'],$request["dateInput"],$request["noteInput"],"sub",$request["sourceInput"]);
-                cashTransaction::insert_transaction($request['valueInput'], $request["dateInput"], "sub", $request["noteInput"], "normalCash");
+                CashTransaction::insert_transaction($request['valueInput'], $request["dateInput"], "sub", $request["noteInput"], "normalCash");
             }
             else
             {

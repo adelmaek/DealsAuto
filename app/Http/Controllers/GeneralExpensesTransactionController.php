@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\GeneralExpensesTransaction;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redis;
-use App\cashTransaction;
+use App\CashTransaction;
 use App\generalTransaction;
 
 class GeneralExpensesTransactionController extends Controller
@@ -23,7 +23,7 @@ class GeneralExpensesTransactionController extends Controller
         if(!strcmp($request['sourceInput'],'custodyCash'))
         {
             $cashNoteInput = $request['noteInput'] . " - " . "مصروفات عامة";
-            cashTransaction::insert_transaction($request['valueInput'], $request['dateInput'], 'sub', $request['noteInput'], 'custodyCash');
+            CashTransaction::insert_transaction($request['valueInput'], $request['dateInput'], 'sub', $request['noteInput'], 'custodyCash');
         }
         return redirect()->back();
     }

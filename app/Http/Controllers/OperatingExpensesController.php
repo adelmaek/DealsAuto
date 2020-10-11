@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\generalTransaction;
-use App\cashTransaction;
+use App\CashTransaction;
 use  App\OperatingExpenses;
 
 class OperatingExpensesController extends Controller
@@ -22,7 +22,7 @@ class OperatingExpensesController extends Controller
         if(!strcmp($request['sourceInput'],'custodyCash'))
         {
             $cashNoteInput = $request['noteInput'] . " - " . "مصروفات تشغيل";
-            cashTransaction::insert_transaction($request['valueInput'], $request['dateInput'], 'sub', $cashNoteInput, 'custodyCash');
+            CashTransaction::insert_transaction($request['valueInput'], $request['dateInput'], 'sub', $cashNoteInput, 'custodyCash');
         }
         return redirect()->back();
     }

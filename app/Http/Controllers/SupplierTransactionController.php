@@ -10,7 +10,7 @@ use App\Bill;
 use Illuminate\Http\Request;
 use App\Bank;
 use App\BankTransaction;
-use App\cashTransaction;
+use App\CashTransaction;
 use App\currency;
 class SupplierTransactionController extends Controller
 {
@@ -76,11 +76,11 @@ class SupplierTransactionController extends Controller
             $cashNoteInput = $request['noteInput'] . " - " . $request['supplierNameInput'];
             if(!strcmp($request['sourceInput'],"normalCash"))
             {
-                cashTransaction::insert_transaction($request['valueInput'],$request['dateInput'], 'sub', $cashNoteInput, 'normalCash');
+                CashTransaction::insert_transaction($request['valueInput'],$request['dateInput'], 'sub', $cashNoteInput, 'normalCash');
             }
             else if(!strcmp($request['sourceInput'],"custodyCash"))
             {
-                cashTransaction::insert_transaction($request['valueInput'],$request['dateInput'], 'sub', $cashNoteInput, 'custodyCash');
+                CashTransaction::insert_transaction($request['valueInput'],$request['dateInput'], 'sub', $cashNoteInput, 'custodyCash');
             }
             else if(!strcmp($request['sourceInput'],"none"))
             {
