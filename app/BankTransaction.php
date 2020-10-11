@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 use DB;
 use Log;
 use App\PartnerTransaction;
-use App\CashTransaction;
 use App\MiscellaneousIncome;
 use App\currency;
 use App\Bank;
