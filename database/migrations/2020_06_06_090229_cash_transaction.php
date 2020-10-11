@@ -35,6 +35,6 @@ class CashTransaction extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('cash_transactions');
     }
 }

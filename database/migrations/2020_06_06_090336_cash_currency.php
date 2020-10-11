@@ -28,6 +28,6 @@ class CashCurrency extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('cash_currency');
     }
 }
