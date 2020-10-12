@@ -93,7 +93,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach ($cashTransactions as $cashTransaction)
+                            @foreach ($CashTransactions as $cashTransaction)
                                 <tr>
                                     <td  class="text-center">{{$cashTransaction->type}}</td>
                                     @if(!strcmp('normalCash', $cashTransaction->name))
