@@ -114,15 +114,15 @@
                 <nav class="sidebar-nav" >
                     <ul id="sidebarnav">
                         <li class="nav-small-cap">--- Deals Auto</li>
-                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-home"></i><span class="hide-menu"> <strong> البنوك </strong></span></a>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-home"></i><span class="hide-menu">البنوك </span></a>
                             <ul aria-expanded="false" class="collapse">
-                                <li><a href="addBank"><strong>اضافة و عرض الحسابات بنكية </strong></a></li>
-                                <li><a href="addTransaction"><strong>اضافة تعامل بنكي</strong></a></li>
-                                <li><a href="queryTrans"><strong>عرض التعاملات</strong></a></li>
-                                <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><span class="hide-menu"><strong>الحسابات البنكية </strong></span></a>
+                                <li><a href="addBank">اضافة و عرض الحسابات بنكية </a></li>
+                                <li><a href="addTransaction">اضافة تعامل بنكي</a></li>
+                                <li><a href="queryTrans">عرض التعاملات</a></li>
+                                <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><span class="hide-menu">الحسابات البنكية </span></a>
                                     <ul aria-expanded="false" class="collapse">
                                         @foreach ($banks as $bank)
-                                        <li><strong><a href="{{route('showBank',['accountNumber'=>$bank->accountNumber])}}">{{$bank->bankName}} </strong></a></li>    
+                                        <li><a href="{{route('showBank',['accountNumber'=>$bank->accountNumber])}}">{{$bank->bankName}} </a></li>    
                                         
                                         @endforeach
                                     </ul>
