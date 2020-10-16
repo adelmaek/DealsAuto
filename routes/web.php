@@ -495,6 +495,28 @@ Route::group(['middleware'=>['web']],function(){
     //================================================================================================
     // end Distributions 
     //================================================================================================
+    //================================================================================================
+    // Fore Payments 
+    //================================================================================================
+
+    Route::get('/forePayment',[
+        'uses' => 'ForePaymentController@getAddForePayment',
+        'as'=> 'forePayment',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/forePayment',[
+        'uses' => 'ForePaymentController@postAddForePayment',
+        'as'=> 'forePayment',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/delForePayment/{trans_id}',[
+        'uses' => 'ForePaymentController@getDelForePayment',
+        'as'=> 'delForePayment',
+        'middleware' => 'auth'
+    ]);
+    //================================================================================================
+    // end fore payments 
+    //================================================================================================
 });
 
 
