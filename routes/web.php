@@ -136,7 +136,7 @@ Route::group(['middleware'=>['web']],function(){
         'middleware' => 'auth'
     ]);
 
-    Route::get('/getCashQueriedTrans/{fromDate},{toDate}',[
+    Route::get('/getCashQueriedTrans/{cashName},{fromDate},{toDate}',[
         'uses' => 'CashTransactionController@getQueriedTransaction',
         'as' => 'queriedTransaction',
         'middleware' => 'auth'

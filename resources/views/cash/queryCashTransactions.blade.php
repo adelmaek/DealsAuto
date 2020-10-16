@@ -9,11 +9,21 @@
 @section('queryCardBody')
 <form id="queryTrans" class="form" action="" method="get">
     <div class="row justify-content-center ">
+        <div class="col  ">
+            <label for="cashNameInput" class="arabicLabel" style="padding: 10px;">الحساب</label>
+        </div>
         <div class="col">
             <label for="currencyInput" class="arabicLabel" style="padding: 10px;">من تاريخ</label>
         </div>
     </div>
     <div class="row ">
+        <div class="col ">                     
+            <select class="form-control" style="height: 45px;float: right;" id="cashNameInput" name="cashNameInput" dir="rtl" required>
+                <option value="all" selected dir="rtl">جميع الخزن</option>
+                <option value="normalCash">الخزنة</option>
+                <option value="custodyCash">خزنة العهدة</option>
+            </select>
+        </div>
         <div class="col  ">                                
             <input type="date" class="form-control" id="fromDate" name="fromDate" style="width:665px;height: 38px;float: right;">
         </div>
@@ -25,10 +35,10 @@
     </div>
     <div class="row ">
         <div class="col ">            
-                <button type="button" class="btn waves-effect waves-light btn-dark" style="height: 38px;float: right;" id='applyCashQuery'>عرض</button>
+            <button type="button" class="btn waves-effect waves-light btn-dark" style="height: 38px;float: right;" id='applyCashQuery'>عرض</button>
         </div>
         <div class="col ">
-                <input type="date" class="form-control" id="toDate" name="toDate" style="width:665px;height: 38px;float: right;">
+            <input type="date" class="form-control" id="toDate" name="toDate" style="width:665px;height: 38px;float: right;">
         </div>
     </div>
 </form>
@@ -71,6 +81,7 @@ $(document).ready(function(){
         
         var fromDate = $('#fromDate').val();
         var toDate = $('#toDate').val();
+        var cashName = $('#cashNameInput').val();
         if(!fromDate)
         {
             fromDate ='empty';
@@ -98,7 +109,7 @@ $(document).ready(function(){
                 { "data": "currentCashNameTotal" },
                 { "data": "currentAllCashTotal" }
             ],
-            "ajax": "getCashQueriedTrans/" + fromDate + ',' + toDate,
+            "ajax": "getCashQueriedTrans/"+ cashName+ ',' + fromDate + ',' + toDate,
             dom: 'Bfrtip',
             buttons: [
                  {

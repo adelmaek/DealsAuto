@@ -48,27 +48,53 @@ class CashTransactionController extends Controller
         return view('cash/queryCashTransactions',['currencies'=>$currencies]);
     }
 
-    public function getQueriedTransaction( $fromDate, $toDate)
+    public function getQueriedTransaction($cashName, $fromDate, $toDate)
     {
+        Log::debug($cashName);
         if(!strcmp($fromDate,"empty")&&!strcmp($toDate,"empty"))
         { 
-            Log::debug('in getquered');
-            $transaction = CashTransaction::all();
+            if(!strcmp($cashName,"all"))
+            {
+                $transaction = CashTransaction::orderBy('date', 'ASC')->get();
+            }
+            else
+            {
+                $transaction = CashTransaction::where('name',$cashName)->get();
+            }
         
         }
         elseif (!strcmp($toDate,"empty"))
         {            
-            $transaction = CashTransaction::whereDate('date','>=',$fromDate)->orderBy('date', 'DESC')->get();          
+            if(!strcmp($cashName,"all"))
+            {
+                $transaction = CashTransaction::orderBy('date', 'ASC')->get();
+            }
+            else
+            {
+                $transaction = CashTransaction::where('name',$cashName)->get();
+            }
         }
         elseif (!strcmp($fromDate,"empty"))
         {
-
-                $transaction = CashTransaction::whereDate('date','<=',$toDate)->orderBy('date', 'DESC')->get();
-           
+            if(!strcmp($cashName,"all"))
+            {
+                $transaction = CashTransaction::orderBy('date', 'ASC')->get();
+            }
+            else
+            {
+                $transaction = CashTransaction::where('name',$cashName)->get();
+            }  
         }
         else
         {
-            $transaction = CashTransaction::whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'DESC')->get(); 
+            if(!strcmp($cashName,"all"))
+            {
+                $transaction = CashTransaction::orderBy('date', 'ASC')->get();
+            }
+            else
+            {
+                $transaction = CashTransaction::where('name',$cashName)->get();
+            }
         }
         foreach($transaction as $trans)
         {
