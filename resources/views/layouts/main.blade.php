@@ -206,6 +206,13 @@
                                 <li><a href="forePayment">اضافة معاملة</a></li>
                             </ul>
                         </li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="icon-people"></i><span class="hide-menu">الحسابات المتنوعة</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="miscelAccount">اضافة حساب</a></li>
+                                <li><a href="addMiscelAccountTrans">اضافة معاملة</a></li>
+                                <li><a href="queryMiscelAccountTrans">عرض التعاملات</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->

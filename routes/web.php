@@ -517,6 +517,52 @@ Route::group(['middleware'=>['web']],function(){
     //================================================================================================
     // end fore payments 
     //================================================================================================
+    //================================================================================================
+    // Miscellaneous Accounts
+    //================================================================================================
+    Route::get('/miscelAccount',[
+        'uses' => 'MiscelAccountController@getAddAccounts',
+        'as'=> 'miscelAccount',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/miscelAccount',[
+        'uses' => 'MiscelAccountController@postAddAccount',
+        'as'=> 'miscelAccount',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/delMiscelAccount/{account_id}',[
+        'uses' => 'MiscelAccountController@getDelAccount',
+        'as'=> 'delMiscelAccount',
+        'middleware' => 'auth'
+    ]);
+   Route::get('addMiscelAccountTrans',[
+       "uses" => 'MiscelAccountTransactionController@getaddTrans',
+       'as' => 'addMiscelAccountTrans',
+       'middleware' => 'auth'
+   ]);
+   Route::post('addMiscelAccountTrans',[
+        "uses" => 'MiscelAccountTransactionController@postaddTrans',
+        'as' => 'addMiscelAccountTrans',
+        'middleware' => 'auth'
+   ]);
+   Route::get('delMiscelAccountTrans/{transaction_id}',[
+    "uses" => 'MiscelAccountTransactionController@getDelTrans',
+    'as' => 'delMiscelAccountTrans',
+    'middleware' => 'auth'
+    ]);
+    Route::get('queryMiscelAccountTrans',[
+        "uses" => 'MiscelAccountTransactionController@getQueryTrans',
+        'as' => 'queryMiscelAccountTrans',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/getQueriedMiscelTrans/{account},{fromDate},{toDate}',[
+        'uses' => 'MiscelAccountTransactionController@getQueriedTrans',
+        'as' => 'getQueriedMiscelTrans',
+        'middleware' => 'auth'
+    ]);
+//================================================================================================
+// end Miscellaneous Accounts
+//================================================================================================
 });
 
 
