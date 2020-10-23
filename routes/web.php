@@ -563,6 +563,45 @@ Route::group(['middleware'=>['web']],function(){
 //================================================================================================
 // end Miscellaneous Accounts
 //================================================================================================
+//================================================================================================
+// Payment Papers
+//================================================================================================
+    Route::get('/PaymentPapers',[
+        'uses' => 'PaymentPaperController@getAddPaper',
+        'as'=> 'PaymentPapers',
+        'middleware' => 'auth'
+    ]);
+    Route::post('/PaymentPapers',[
+        'uses' => 'PaymentPaperController@postAddPaper',
+        'as'=> 'PaymentPapers',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/settlePaper',[
+        'uses' => 'PaymentPaperController@getSettledPapers',
+        'as'=> 'settlePaper',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/settlePaper/{trans_id}',[
+        'uses' => 'PaymentPaperController@postSettlePaper',
+        'as'=> 'settlePaper',
+        'middleware' => 'auth'
+    ]);
+    Route::get('/delPaper/{trans_id}',[
+        'uses' => 'PaymentPaperController@geDelPaper',
+        'as'=> 'delPaper',
+        'middleware' => 'auth'
+    ]);
+
+    Route::get('/SettledPaymentPapers',[
+        'uses' => 'PaymentPaperController@getSettledPapers',
+        'as'=> 'SettledPaymentPapers',
+        'middleware' => 'auth'
+    ]);
+
+//================================================================================================
+// end Payment Papers
+//================================================================================================
+
 });
 
 

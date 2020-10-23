@@ -213,6 +213,12 @@
                                 <li><a href="queryMiscelAccountTrans">عرض التعاملات</a></li>
                             </ul>
                         </li>
+                        <li> <a class="has-arrow waves-effect waves-dark" href="javascript:void(0)" aria-expanded="false"><i class="ti-files"></i><span class="hide-menu">اوراق الدفع</span></a>
+                            <ul aria-expanded="false" class="collapse">
+                                <li><a href="PaymentPapers">اضافة</a></li>
+                                <li><a href="SettledPaymentPapers">الاوراق المصروفة</a></li>
+                            </ul>
+                        </li>
                     </ul>
                 </nav>
                 <!-- End Sidebar navigation -->
