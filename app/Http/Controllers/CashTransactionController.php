@@ -67,33 +67,33 @@ class CashTransactionController extends Controller
         {            
             if(!strcmp($cashName,"all"))
             {
-                $transaction = CashTransaction::orderBy('date', 'ASC')->get();
+                $transaction = CashTransaction::whereDate('date','>=',$fromDate)->orderBy('date', 'ASC')->get();
             }
             else
             {
-                $transaction = CashTransaction::where('name',$cashName)->get();
+                $transaction = CashTransaction::where('name',$cashName)->whereDate('date','>=',$fromDate)->orderBy('date', 'ASC')->get();
             }
         }
         elseif (!strcmp($fromDate,"empty"))
         {
             if(!strcmp($cashName,"all"))
             {
-                $transaction = CashTransaction::orderBy('date', 'ASC')->get();
+                $transaction = CashTransaction::whereDate('date','<=',$toDate)->orderBy('date', 'ASC')->get();
             }
             else
             {
-                $transaction = CashTransaction::where('name',$cashName)->get();
+                $transaction = CashTransaction::where('name',$cashName)->whereDate('date','<=',$toDate)->orderBy('date', 'ASC')->get();
             }  
         }
         else
         {
             if(!strcmp($cashName,"all"))
             {
-                $transaction = CashTransaction::orderBy('date', 'ASC')->get();
+                $transaction = CashTransaction::whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'ASC')->get();
             }
             else
             {
-                $transaction = CashTransaction::where('name',$cashName)->get();
+                $transaction = CashTransaction::where('name',$cashName)->whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'ASC')->get();
             }
         }
         foreach($transaction as $trans)
