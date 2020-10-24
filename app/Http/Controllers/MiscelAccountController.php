@@ -11,7 +11,7 @@ class MiscelAccountController extends Controller
     public function getAddAccounts()
     {
         $accounts = MiscelAccount::all(); 
-        return view("MiscellaneousAccounts\addAccount",["accounts"=>$accounts]);
+        return view("MiscellaneousAccounts.addAccount",["accounts"=>$accounts]);
     }
     public function postAddAccount(Request $request)
     {
