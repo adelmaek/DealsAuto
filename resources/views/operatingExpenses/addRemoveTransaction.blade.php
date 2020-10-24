@@ -52,7 +52,14 @@
                                     <td>
                                         <input type="date" class="form-control" id="dateInput" name="dateInput" style="height: 42px;" required>     
                                     <td>
-                                        <input type="text" class="form-control" id="noteInput" name="noteInput" placeholder="البيان" required style="min-width: 100px;overflow:scroll;text-align: right;direction:RTL;">
+                                        {{-- <input type="text" class="form-control" id="noteInput" name="noteInput" placeholder="البيان" required style="min-width: 100px;overflow:scroll;text-align: right;direction:RTL;"> --}}
+                                        <input list="noteInput-list" class="form-control" id="noteInput" name="noteInput" required style="min-width: 100px;overflow:scroll;text-align: right;direction:RTL;">
+                                        <datalist id="noteInput-list">
+                                            <option value="اثاث و اجهزه"  dir="rtl">اثاث و اجهزه</option>
+                                            <option value="صيانه"  dir="rtl">صيانه</option>
+                                            <option value="بنزين سياره الشركه"  dir="rtl">بنزين سياره الشركه</option>
+                                            <option value="بنزين سيارات"  dir="rtl">بنزين سيارات</option>
+                                                                    </datalist>
                                     </td>
                                     <td>
                                         <input type="submit" name="submit" class="btn btn-info btn-md" value="اضف المعاملة">

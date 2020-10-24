@@ -468,7 +468,17 @@ Route::group(['middleware'=>['web']],function(){
         'as'=> 'delOperatingExpenses',
         'middleware' => 'auth'
     ]);
-
+    Route::get('/queryOperatingExpenses',[
+        "uses" => 'OperatingExpensesController@getQueryOperatingExpenses',
+        'as' => 'queryOperatingExpenses',
+        'middleware' => 'auth'
+    ]);
+    
+    Route::get('/getQueriedOperatingExpenses/{note},{fromDate},{toDate}',[
+        'uses' => 'OperatingExpensesController@getQueriedOperatingExpenses',
+        'as' => 'getQueriedOperatingExpenses',
+        'middleware' => 'auth'
+    ]);
     //================================================================================================
     // end operatingExpenses
     //================================================================================================

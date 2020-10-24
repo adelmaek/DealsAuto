@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\generalTransaction;
 use App\CashTransaction;
 use  App\OperatingExpenses;
+use DB;
+use DataTables;
+use Log;
 
 class OperatingExpensesController extends Controller
 {
@@ -31,5 +34,59 @@ class OperatingExpensesController extends Controller
     {
         OperatingExpenses::del_transaction($trans_id);
         return redirect()->back();
+    }
+    public function getQueryOperatingExpenses()
+    {
+        return view("operatingExpenses\queryTrans");
+    }
+    public function getQueriedOperatingExpenses($note, $fromDate, $toDate)
+    {
+        if(!strcmp($fromDate,"empty")&&!strcmp($toDate,"empty"))
+        { 
+            if(!strcmp($note,"all"))
+            {
+                $transaction = OperatingExpenses::orderBy('date', 'ASC')->get();
+            }
+            else
+            {
+                $transaction = OperatingExpenses::orderBy('date', 'desc')->where('note', 'like', '%'. $note .'%') ->get();
+            }
+        
+        }
+        elseif (!strcmp($toDate,"empty"))
+        {            
+            if(!strcmp($note,"all"))
+            {
+                $transaction = OperatingExpenses::whereDate('date','>=',$fromDate)->orderBy('date', 'ASC')->get();
+            }
+            else
+            {
+                $transaction = OperatingExpenses::whereDate('date','>=',$fromDate)->orderBy('date', 'ASC')->orderBy('date', 'desc')->where('note', 'like', '%'. $note .'%') ->get();
+            }
+        }
+        elseif (!strcmp($fromDate,"empty"))
+        {
+            if(!strcmp($note,"all"))
+            {
+                $transaction = OperatingExpenses::whereDate('date','<=',$toDate)->orderBy('date', 'ASC')->get();
+            }
+            else
+            {
+                $transaction = OperatingExpenses::where('note', 'like', '%'. $note .'%')->whereDate('date','<=',$toDate)->orderBy('date', 'ASC')->get();
+            }  
+        }
+        else
+        {
+            if(!strcmp($note,"all"))
+            {
+                $transaction = OperatingExpenses::whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'ASC')->get();
+            }
+            else
+            {
+                $transaction = OperatingExpenses::where('note', 'like', '%'. $note .'%')-> whereDate('date','>=',$fromDate)->whereDate('date','<=',$toDate)->orderBy('date', 'ASC')->get();
+            }
+        }
+        $transaction = generalTransaction::separate_add_from_sub($transaction);
+        return Datatables::of($transaction)->make(true);
     }
 }
