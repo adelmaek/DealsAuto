@@ -52,7 +52,31 @@
                                     <td>
                                         <input type="date" class="form-control" id="dateInput" name="dateInput" style="height: 42px;" required>     
                                     <td>
-                                        <input type="text" class="form-control" id="noteInput" name="noteInput" placeholder="البيان" required style="min-width: 100px;overflow:scroll;text-align: right;direction:RTL;">
+                                        {{-- <input type="text" class="form-control" id="noteInput" name="noteInput" placeholder="البيان" required style="min-width: 100px;overflow:scroll;text-align: right;direction:RTL;"> --}}
+                                        <input list="noteInput-list" class="form-control" id="noteInput" name="noteInput" required style="min-width: 100px;overflow:scroll;text-align: right;direction:RTL;">
+                                        <datalist id="noteInput-list">
+                                            <option value="عملاء"  dir="rtl">عملاء</option>
+                                            <option value="انتقالات موظفين الشركه"  dir="rtl">انتقالات موظفين الشركه</option>
+                                            <option value="مرتبات و شهريات"  dir="rtl">مرتبات و شهريات</option>
+                                            <option value="عمولات"  dir="rtl">عمولات</option>
+                                            <option value="شهادات بيانات و ترخيص سيارات"  dir="rtl">شهادات بيانات و ترخيص سيارات</option>
+                                            <option value="مصروفات احضار سيارات"  dir="rtl">مصروفات احضار سيارات</option>
+                                            <option value="كهرباء"  dir="rtl">كهرباء</option>
+                                            <option value="مياه"  dir="rtl">مياه</option>
+                                            <option value="فواتير الغاز"  dir="rtl">فواتير الغاز</option>
+                                            <option value="تليفونات ارضيه الشركه"  dir="rtl">تليفونات ارضيه الشركه</option>
+                                            <option value="رسوم و اعلانات"  dir="rtl">رسوم و اعلانات</option>
+                                            <option value="تأمينات اجتماعيه"  dir="rtl">تأمينات اجتماعيه</option>
+                                            <option value="انترنت و فواتير موبيلات"  dir="rtl">انترنت و فواتير موبيلات</option>
+                                            <option value="ادوات مكتبيه و طباعه"  dir="rtl">ادوات مكتبيه و طباعه</option>
+                                            <option value="اكراميات و هدايا"  dir="rtl">اكراميات و هدايا</option>
+                                            <option value="بوفيه موظفين"  dir="rtl">بوفيه موظفين</option>
+                                            <option value="نظافه الشركه"  dir="rtl">نظافه الشركه</option>
+                                            <option value="بوفيه الاداره"  dir="rtl">بوفيه الاداره</option>
+                                            <option value="ايداعات بنوك"  dir="rtl">ايداعات بنوك</option>
+                                            <option value="ايجار الشقه و المخزن"  dir="rtl">ايجار الشقه و المخزن</option>
+                                            <option value="صندوق"  dir="rtl">صندوق</option>
+                                        </datalist>
                                     </td>
                                     <td>
                                         <input type="submit" name="submit" class="btn btn-info btn-md" value="اضف المعاملة">

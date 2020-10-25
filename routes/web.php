@@ -370,7 +370,17 @@ Route::group(['middleware'=>['web']],function(){
         'as'=> 'delGeneralExpenses',
         'middleware' => 'auth'
     ]);
-
+    Route::get('/queryGeneralExpenses',[
+        "uses" => 'GeneralExpensesTransactionController@getQueryGeneralExpenses',
+        'as' => 'queryGeneralExpenses',
+        'middleware' => 'auth'
+    ]);
+    
+    Route::get('/getQueriedGeneralExpenses/{note},{fromDate},{toDate}',[
+        'uses' => 'GeneralExpensesTransactionController@getQueriedGeneralExpenses',
+        'as' => 'getQueriedGeneralExpenses',
+        'middleware' => 'auth'
+    ]);
     //================================================================================================
     // end GeneralExpensesTransactions
     //================================================================================================
