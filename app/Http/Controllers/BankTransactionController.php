@@ -9,6 +9,8 @@ use DB;
 use Log;
 use DataTables;
 use App\generalTransaction;
+use App\currency;
+
 class BankTransactionController extends Controller
 {
     public function getCreateTransaction()
@@ -19,7 +21,27 @@ class BankTransactionController extends Controller
         // $transactions = bankTransaction::update_all_banks_total_before_showing($bankTransactions);
         return view('transactions/addTransaction',['banks'=>$banks,'transactions'=>$bankTransactions]);
     }
-    
+
+    public function postBankToBankTransaction(Request $request)
+    {
+        BankTransaction::insert_transaction($request['fromAccountNumberInput'], "sub", $request['dateInput'], $request['valueInput'], $request['noteInput'], $request['valueDateInput']);
+        $fromBank = DB::table('banks')->where('accountNumber', $request['fromAccountNumberInput'])->first();    
+        $currencyName = $fromBank->currency;
+        if(!strcmp($currencyName,"egp"))
+            $fromBankCurrencyRate = 1;
+        else
+            $fromBankCurrencyRate = currency::where('name',$currencyName)->first()->rate;
+        $valueInEGP = $request['valueInput'] * $fromBankCurrencyRate;
+        $toBank = DB::table('banks')->where('accountNumber', $request['toAccountNumberInput'])->first();    
+        $currencyName = $toBank->currency;
+        if(!strcmp($currencyName,"egp"))
+            $toBankCurrencyRate = 1;
+        else
+            $toBankCurrencyRate = currency::where('name',$currencyName)->first()->rate;
+        $valueInToBankCurrency = $valueInEGP/$toBankCurrencyRate;
+        BankTransaction::insert_transaction($request['toAccountNumberInput'], "add", $request['dateInput'], $valueInToBankCurrency, $request['noteInput'], $request['valueDateInput']);
+        return redirect()->back();
+    }
     
     public function postCreateTransaction (Request $request)
     {
