@@ -39,6 +39,7 @@ Query
                 <option value="ايداعات بنوك"  dir="rtl">ايداعات بنوك</option>
                 <option value="ايجار الشقه و المخزن"  dir="rtl">ايجار الشقه و المخزن</option>
                 <option value="صندوق"  dir="rtl">صندوق</option>
+                <option value="صندوق"  dir="rtl">سلفة</option>
                 
                 {{-- @foreach($specialNotes as $specialNote)
                     <option value="{{$specialNote->specialNote}}"  dir="rtl">{{$specialNote->specialNote}}</option>
