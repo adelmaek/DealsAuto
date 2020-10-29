@@ -62,6 +62,9 @@ class BillController extends Controller
                 'importedTaxes5' =>$request['importedTaxes5Input']
             ]);   
 
+        $supplierTransactionValue = $totalItemsCost + ($totalItemsCost * ($request['addedValueTaxesInput']/100)) + $request['importedTaxes1Input'] + 
+                                    $request['importedTaxes2Input'] + $request['importedTaxes3Input'] + $request['importedTaxes4Input'] +
+                                    $request['importedTaxes5Input'];
         //Adding a supplier Transaction
         $supplier = Supplier::where('name', $request['supplierInput'])->first();
         $prevTransaction = SupplierTransaction::where('supplier_id',$supplier->id)->whereDate('date', '<=', $request['dateInput'])->orderBy('date','Desc')->first();
@@ -69,20 +72,20 @@ class BillController extends Controller
             $prevTransaction = SupplierTransaction::where('supplier_id',$supplier->id)->whereDate('date','=',$prevTransaction->date)->orderBy('id','Desc')->first();
         $followingTransactions = SupplierTransaction::where('supplier_id',$supplier->id)->whereDate('date','>',$request['dateInput'])->orderBy('date','Asc')->get();
         if(!empty($prevTransaction))
-            $currentSupplierTotalInput = $prevTransaction->currentSupplierTotal - $totalItemsCost;
+            $currentSupplierTotalInput = $prevTransaction->currentSupplierTotal - $supplierTransactionValue;
         else
-            $currentSupplierTotalInput = $supplier->initialBalance -$totalItemsCost;
+            $currentSupplierTotalInput = $supplier->initialBalance -$supplierTransactionValue;
 
         DB::table('supplier_transactions')->insert([
             'supplier_id'=>$supplier->id,
-            'value'=>$totalItemsCost,
+            'value'=>$supplierTransactionValue,
             'currentSupplierTotal'=>$currentSupplierTotalInput,
             'note'=>$request['noteInput'],
             'date'=>$request['dateInput'],
             'supplier_name'=>$supplier->name,
             'bill_id'=>  Bill::where('number',$request['invoiceNumberInput'])->first()->id
         ]);
-        Supplier::where('name', $request['supplierInput'])->decrement('currentBalance',$totalItemsCost);
+        Supplier::where('name', $request['supplierInput'])->decrement('currentBalance',$supplierTransactionValue);
         $accumulatedBalance = $currentSupplierTotalInput;
 
         foreach($followingTransactions as $trans)
