@@ -44,6 +44,7 @@
                                             <option value="" disabled selected>المصدر</option>
                                             <option value="none">لا يوجد</option>
                                             <option value="custodyCash">خزنة العهدة</option>
+                                            <option value="normalCash">الخزنة</option>
                                         </select>
                                     </td>
                                     <td>
