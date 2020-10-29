@@ -58,7 +58,7 @@
                 <div class="card-body">
                     @if(count($banks)>0 )
                         <div class="table-responsive-sm">
-                            <table class="table color-bordered-table table-striped full-color-table full-info-table hover-table">
+                            <table  id="banksTable" class="table color-bordered-table table-striped full-color-table full-info-table hover-table">
                                 <thead>
                                     <tr>
                                     <th scope="col">رقم الحساب</th>
@@ -82,6 +82,7 @@
                                   <td>Total Balances</td>
                                   <td></td>
                                   <td>{{$totalBalances}} egp</td>
+                                  <td></td>
                                 </tr>
                               </tfoot>
                             </table>
@@ -95,3 +96,21 @@
     </div>
 </div>
 @endsection 
+@section('extraJS')
+<script>
+$('#banksTable').DataTable({
+        "displayLength": 25,
+        "processing": true,
+        dom: 'Bfrtip',
+        buttons: [
+            
+                {
+                extend: 'excel',
+                title: 'Deals-Auto',
+                footer: true,
+            }
+        ]   
+    });
+    $('.buttons-excel').addClass('btn btn-primary mr-1');
+</script>
+@endsection
