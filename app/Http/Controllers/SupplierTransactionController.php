@@ -201,7 +201,7 @@ class SupplierTransactionController extends Controller
                 $trans->setAttribute('bill_number','لا يوجد');
             else
             {
-                $bill = Bill::where('supplier_name',$trans->supplier_name)->first();
+                $bill = Bill::where('id',$trans->bill_id)->first();
                 if(!empty($bill))
                     $trans->setAttribute('bill_number',$bill->number);
                 else
