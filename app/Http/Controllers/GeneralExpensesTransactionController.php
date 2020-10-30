@@ -41,7 +41,7 @@ class GeneralExpensesTransactionController extends Controller
 
     public function getQueryGeneralExpenses()
     {
-        return view("GenExpTransactions\queryTrans");
+        return view("GenExpTransactions.queryTrans");
     }
     public function getQueriedGeneralExpenses($note, $fromDate, $toDate)
     {

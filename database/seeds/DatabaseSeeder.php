@@ -25,5 +25,12 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('0000'),
             'mobNumber' => "012",
         ]);
+        
+        DB::table('acc_users')->insert([
+            'username' => "Tarek",
+            'fullname' => 'Tarek Elanwar',
+            'password' => bcrypt('00000'),
+            'mobNumber' => "012",
+        ]);
     }
 }
