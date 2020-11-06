@@ -37,7 +37,7 @@ class OperatingExpensesController extends Controller
     }
     public function getQueryOperatingExpenses()
     {
-        return view("operatingExpenses\queryTrans");
+        return view("operatingExpenses/queryTrans");
     }
     public function getQueriedOperatingExpenses($note, $fromDate, $toDate)
     {
