@@ -116,6 +116,35 @@ class MiscelAccountTransaction extends Model
                 BankTransaction::insert_transaction($sourceInput, 'sub', $dateInput, $valueInput / $currencyRate, $noteInput, $dateInput);
             }
         }
+        elseif(!strcmp($typeInput,"sub"))
+        {
+            $cashNoteInput = $noteInput . " - " . $accountNameInput;
+            if(!strcmp($sourceInput,"normalCash"))
+            {
+                CashTransaction::insert_transaction($valueInput,$dateInput, 'add', $cashNoteInput, 'normalCash');
+            }
+            else if(!strcmp($sourceInput,"custodyCash"))
+            {
+                CashTransaction::insert_transaction($valueInput,$dateInput, 'add', $cashNoteInput, 'custodyCash');
+            }
+            else if(!strcmp($sourceInput,"none"))
+            {
+                //Do Nothing
+            }
+            else
+            {
+                //bank account
+                $noteInput = $noteInput . " - " . $accountNameInput;
+                $bank = DB::table('banks')->where('accountNumber', $sourceInput)->first();    
+                $currencyName = $bank->currency;
+                if(!strcmp($currencyName,"egp"))
+                    $currencyRate = 1;
+                else
+                    $currencyRate = currency::where('name',$currencyName)->first()->rate;
+                
+                BankTransaction::insert_transaction($sourceInput, 'add', $dateInput, $valueInput / $currencyRate, $noteInput, $dateInput);
+            }
+        }
     }
 
     public static function del_transaction($transaction_id)

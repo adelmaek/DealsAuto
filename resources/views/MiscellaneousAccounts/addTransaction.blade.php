@@ -18,7 +18,7 @@
                                 <th scope="col" class="text-center" >الحساب</th>                                
                                 <th scope="col" class="text-center" >التاريخ</th>
                                 <th scope="col" class="text-center" >العملية</th>
-                                <th scope="col" class="text-center" >مصدر السلفة</th>
+                                <th scope="col" class="text-center" >المصدر\الوجهة</th>
                                 <th scope="col" class="text-center">القيمة</th>
                                 <th scope="col" class="text-center" >البيان</th>
                                 <th scope="col" class="text-center">اضافة</th>
