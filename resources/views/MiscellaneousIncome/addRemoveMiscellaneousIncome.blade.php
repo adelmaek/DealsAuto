@@ -88,7 +88,7 @@
                                     <td class="text-center">{{$MITransaction->value_sub}}</td>
                                     <td class="text-center">{{$MITransaction->date}}</td>
                                     <td class="text-center">{{$MITransaction->note}}</td>
-                                    <td class="text-center">{{$MITransaction->currentTotal}}</td>
+                                    <td class="text-center">{{number_format((float)$MITransaction->currentTotal,2)}}</td>
                                     <td style="text-align:center">
                                         <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delMITrans',['MITransaction_id'=>$MITransaction->id])}}" role="button">Delete</a>
                                     </td>

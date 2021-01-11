@@ -25,13 +25,13 @@ class Bill extends Model
             {
                 //el qeema el modafa bas
                 $total_local = $bill->value + ($bill->value * ($bill->addValueTaxes/100));
-                $bill->setAttribute("local_imported_total",$total_local);
+                $bill->setAttribute("local_imported_total",number_format((float)$total_local,2));
             }
             else if(!strcmp($bill->type,"imported"))
             {
                 //every thing not taxes....y3ni kolo m3ada el qeema el modafa
                 $total_exported = $bill->value +$bill->importedTaxes1+ $bill->importedTaxes2 +$bill->importedTaxes3 + $bill->importedTaxes4 ;
-                $bill->setAttribute("local_imported_total", $total_exported);
+                $bill->setAttribute("local_imported_total", number_format((float)$total_exported,2));
             }
             else
                 Log::debug('unexpected bill type value');
@@ -46,7 +46,7 @@ class Bill extends Model
         foreach($bills as $bill)
         {
             Log::debug(($bill->addValueTaxes/100) * $bill->value);
-            $bill->addValueTaxes = number_format(($bill->addValueTaxes/100) * $bill->value,3);  
+            $bill->addValueTaxes = number_format((float)(($bill->addValueTaxes/100) * $bill->value),2);  
         }
         Log::debug($bills);
         Log::debug('==================');

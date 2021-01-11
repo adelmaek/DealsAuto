@@ -105,8 +105,8 @@
                                     <td class="text-center">{{$cashTransaction->value_sub}}</td>
                                     <td class="text-center">{{$cashTransaction->date}}</td>
                                     <td class="text-center">{{$cashTransaction->note}}</td>
-                                    <td class="text-center">{{$cashTransaction->currentCashNameTotal}}</td>
-                                    <td class="text-center">{{$cashTransaction->currentAllCashTotal}}</td>
+                                    <td class="text-center">{{number_format((float)$cashTransaction->currentCashNameTotal,2)}}</td>
+                                    <td class="text-center">{{number_format((float)$cashTransaction->currentAllCashTotal,2)}}</td>
                                     <td style="text-align:center">
                                         <a class="btn btn-danger delete-confirm" href="{{route('delCashTransaction',['cashTransaction_id'=>$cashTransaction->id])}}" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" role="button">Delete</a>
                                     </td>

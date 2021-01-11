@@ -83,7 +83,7 @@
                                     <td class="text-center">{{$trans->date}}</td>
                                     <td class="text-center">{{$trans->value_add}}</td>
                                     <td class="text-center">{{$trans->value_sub}}</td>
-                                    <td class="text-center">{{$trans->currentTotalBalance}}</td>
+                                    <td class="text-center">{{number_format((float)$trans->currentTotalBalance,2)}}</td>
                                     <td class="text-center">{{$trans->invoice}}</td>
                                     <td class="text-center">{{$trans->note}}</td>
                                     <td style="text-align:center">

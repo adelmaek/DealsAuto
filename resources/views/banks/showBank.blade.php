@@ -34,7 +34,7 @@
                                 <td style="text-align:center">{{$transaction->value_sub}}</td>                                                    
                                 <td style="text-align:center">{{$transaction->type}}</td>
                                 {{-- <td style="text-align:center">{{$transaction->value}}</td> --}}
-                                <td style="text-align:center">{{$transaction->currentBankBalance}}</td>
+                                <td style="text-align:center">{{number_format((float)$transaction->currentBankBalance,2)}}</td>
                                 {{-- <td style="text-align:center">{{$transaction->currentAllBanksBalance}} egp</td> --}}
                                 <td style="text-align:center">{{$transaction->note}}</td>
                             </tr>

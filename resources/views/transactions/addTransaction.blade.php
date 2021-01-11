@@ -180,7 +180,7 @@
                                 <td style="text-align:center">{{$transaction->type}}</td>
                                 {{-- <td style="text-align:center">{{$transaction->value}}</td> --}}
                                 <td style="text-align:center">{{$transaction->note}}</td>
-                                <td style="text-align:center">{{$transaction->currentBankBalance}} {{$transaction->currency}}</td>
+                                <td style="text-align:center">{{number_format((float)$transaction->currentBankBalance,2)}} {{$transaction->currency}}</td>
                                 {{-- <td style="text-align:center">{{$transaction->currentAllBanksBalance}} egp</td> --}}
                                 <td style="text-align:center">
                                     <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delTransaction',['transaction_id'=>$transaction->id, 'accNumber'=>$transaction->accountNumber])}}" role="button">Delete</a>

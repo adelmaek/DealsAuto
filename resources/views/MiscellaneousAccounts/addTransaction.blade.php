@@ -102,7 +102,7 @@
                                     <td class="text-center">{{$trans->date}}</td>
                                     <td class="text-center">{{$trans->value_add}}</td>
                                     <td class="text-center">{{$trans->value_sub}}</td>
-                                    <td class="text-center">{{$trans->currentAccountotal}}</td>
+                                    <td class="text-center">{{number_format((float)$trans->currentAccountotal,2)}}</td>
                                     <td class="text-center">{{$trans->note}}</td>
                                     <td style="text-align:center">
                                         <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delMiscelAccountTrans',['transaction_id'=>$trans->id])}}" role="button">Delete</a>

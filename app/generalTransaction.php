@@ -12,17 +12,18 @@ class generalTransaction
         {
             if(!strcmp($trans->action,"add"))
             {
-                $value_add = $trans->value;
+                $value_add = number_format((float)$trans->value,2);
                 $value_sub = "-";
             }
             else
             {
                 $value_add = "-";
-                $value_sub = $trans->value;
+                $value_sub = number_format((float)$trans->value,2);
             }
 
             $trans->setAttribute('value_add',$value_add);
             $trans->setAttribute('value_sub',$value_sub);
+            if(property_exists($trans, ''))
         }
         return $transactions;
     }

@@ -108,7 +108,7 @@
                                     <td class="text-center">{{$TaxesTransaction->value_sub}}</td>
                                     <td class="text-center">{{$TaxesTransaction->date}}</td>
                                     <td class="text-center">{{$TaxesTransaction->note}}</td>
-                                    <td class="text-center">{{$TaxesTransaction->currentBalance}}</td>
+                                    <td class="text-center">{{number_format((float)$TaxesTransaction->currentBalance,2)}}</td>
                                     <td style="text-align:center">
                                         <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delTaxesTransaction',['trans_id'=>$TaxesTransaction->id])}}" role="button">Delete</a>
                                     </td>

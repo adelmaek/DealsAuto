@@ -94,7 +94,7 @@
                                     <td class="text-center">{{$trans->value}}</td>
                                     <td class="text-center">{{$trans->date}}</td>
                                     <td class="text-center">{{$trans->note}}</td>
-                                    <td class="text-center">{{$trans->currentTotal}}</td>
+                                    <td class="text-center">{{number_format((float)$trans->currentTotal,2)}}</td>
                                     @if ($trans->bill_number != -1)
                                         <td class="text-center">{{$trans->bill_number}}</td>  
                                     @endif

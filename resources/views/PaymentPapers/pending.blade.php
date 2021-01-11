@@ -35,7 +35,7 @@
                                     <td class="text-center">{{$trans->creationDate}}</td>
                                     <td class="text-center">{{$trans->bankAccountNumber}}</td>
                                     <td class="text-center">{{$trans->settleDate}}</td>
-                                    <td class="text-center">{{$trans->value}}</td>
+                                    <td class="text-center">{{number_format((float)$trans->value,2)}}</td>
                                     <td class="text-center">{{$trans->note}}</td>
                                     <td style="text-align:center">
                                         <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delPaper',['trans_id'=>$trans->id])}}" role="button">Delete</a>

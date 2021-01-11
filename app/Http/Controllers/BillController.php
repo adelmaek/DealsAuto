@@ -216,8 +216,8 @@ class BillController extends Controller
                 $total_number_items = $total_number_items + 1;
             }
             $totalValueWithTaxes = $bill->totalValueWithTaxes();
-            $bill->setAttribute('total_items_number', $total_number_items);
-            $bill->setAttribute('totalValueWithTaxes', $totalValueWithTaxes);
+            $bill->setAttribute('total_items_number', number_format((float)$total_number_items,2));
+            $bill->setAttribute('totalValueWithTaxes', number_format((float)$totalValueWithTaxes,2));
         }
         $bills = Bill::different_total_taxes_for_local_vs_imported($bills);
         $bills = Bill::change_addedValue_from_ratio_to_value($bills);

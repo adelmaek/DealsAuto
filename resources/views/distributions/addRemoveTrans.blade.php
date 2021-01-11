@@ -115,7 +115,7 @@
                                 <td style="text-align:center">{{$transaction->value_add}}</td>
                                 <td style="text-align:center">{{$transaction->value_sub}}</td>
                                 <td style="text-align:center">{{$transaction->note}}</td>
-                                <td style="text-align:center">{{$transaction->currentDistributionsTotal}}</td>
+                                <td style="text-align:center">{{number_format((float)$transaction->currentDistributionsTotal,2)}}</td>
                                 <td style="text-align:center">
                                     <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delDistTrans',['trans_id'=>$transaction->id])}}" role="button">Delete</a>
                                 </td>

@@ -116,8 +116,8 @@
                                 <td style="text-align:center">{{$transaction->value_add}}</td>
                                 <td style="text-align:center">{{$transaction->value_sub}}</td>
                                 <td style="text-align:center">{{$transaction->note}}</td>
-                                <td style="text-align:center">{{$transaction->currentPartnerTotal}}</td>
-                                <td style="text-align:center">{{$transaction->currentAllPartnersTotal}}</td>
+                                <td style="text-align:center">{{number_format((float)$transaction->currentPartnerTotal,2)}}</td>
+                                <td style="text-align:center">{{number_format((float)$transaction->currentAllPartnersTotal,2)}}</td>
                                 <td style="text-align:center">
                                     <a class="btn btn-danger delete-confirm" style="height:25px;padding: 3px 8px;padding-bottom: 3px;" href="{{route('delPartnerTrans',['trans_id'=>$transaction->id])}}" role="button">Delete</a>
                                 </td>
