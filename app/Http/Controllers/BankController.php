@@ -46,7 +46,7 @@ class BankController extends Controller
     }
     public function getShowBank($accountNumber)
     {
-        $transaction = BankTransaction::where('accountNumber',$accountNumber)->get();
+        $transaction = BankTransaction::where('accountNumber',$accountNumber)->orderBy('date','Desc')->get();
         $transaction = generalTransaction::separate_add_from_sub($transaction);
         $transactions = bankTransaction::update_all_banks_total_before_showing($transaction);
         return view('banks/showBank',['transactions'=>$transactions]);
