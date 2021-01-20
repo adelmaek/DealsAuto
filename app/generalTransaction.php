@@ -23,7 +23,6 @@ class generalTransaction
 
             $trans->setAttribute('value_add',$value_add);
             $trans->setAttribute('value_sub',$value_sub);
-            if(property_exists($trans, ''))
         }
         return $transactions;
     }
